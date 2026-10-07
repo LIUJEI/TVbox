@@ -238,6 +238,34 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
 {
+    "key": "半日",
+    "name": "🆘┃半日┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
+    "ext": {
+    "host": "http://103.217.190.91:19987/app/bn",
+    "appkey": "24d625a8a29b4700a1a294c6f3b29e2c",
+    "versionName": "3.5.8",
+    "name": "半日闲",
+    "package": "com.yf.lelian",
+    "buildNumber": "2001",
+    "buildSignature": "A40DA80A59D170CAA950CF15C18C454D47A39B26989D8B640ECD745BA71BF5DC"}
+},
+{
+    "key": "剧圈",
+    "name": "🆘┃剧圈┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
+    "ext": {
+    "host": "http://124.221.3.182:19987/app/bn",
+    "appkey": "d1f0c269eab74d93821fffc9befdbbba",
+    "versionName": "1.2.0",
+    "name": "剧圈圈",
+    "package": "com.qingtangxiaozhuan.xyz",
+    "buildNumber": "2002",
+    "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"}
+},
+{
     "key": "csp_xBPQ_饭团",
     "name": "💞┃饭团┃影院",
     "type":3,

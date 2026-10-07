@@ -13,7 +13,7 @@
 },
 {
     "key": "WexAiY360",
-    "name": "🎬┣热门┫10.05",
+    "name": "🎬┣热门┫10.06",
     "type": 3,
     "api": "csp_Y360Amns",
     "ext": "Y360"
@@ -306,21 +306,28 @@
     "changeable": 1
 },
 {
-    "name": "🎸酷狗┃音乐",
+    "name": "🎸┃酷狗┃音乐",
     "key": "KuGou",
     "type": 3,
     "api": "csp_KuGouAmns",
     "genre": "music"
 },
 {
-    "name": "🎸酷听┃音乐",
+    "name": "🎸┃酷听┃音乐",
     "key": "Kuwo",
     "type": 3,
     "api": "csp_KuwoAmns",
     "genre": "music"
 },
 {
-    "name": "🎸蜻蜓┃电台",
+    "key": "csp_tinghyy",
+    "name": "🎸┃听海┃音乐",
+    "type": 3,
+    "api": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/TS/tinghai.js",
+    "indexs" : 0
+},
+{
+    "name": "🎸┃蜻蜓┃电台",
     "key": "QTfm",
     "type": 3,
     "api": "csp_QTfmAmns",
@@ -328,70 +335,70 @@
 },
 {
     "key": "csp_MyConfig",
-    "name": "⚙️配置┃中心",
+    "name": "💼┃配置┃中心",
     "type": 3,
     "api": "csp_AAConfigAmns",
     "indexs": 0
 },
 {
     "key": "csp_MyAll",
-    "name": "📁资源┃中心",
+    "name": "💼┃资源┃中心",
     "type": 3,
     "api": "csp_MyAllAmns",
     "indexs": 0
 },
 {
     "key": "csp_woWogg",
-    "name": "💥玩偶┃4K",
+    "name": "💯┃玩偶┃4K",
     "type": 3,
     "api": "csp_WoggAmns",
     "ext": "woWogg"
 },
 {
     "key": "csp_moWobg",
-    "name": "💥木偶┃4K",
+    "name": "💯┃木偶┃4K",
     "type": 3,
     "api": "csp_WobgAmns",
     "ext": "moWobg"
 },
 {
     "key": "csp_PanHj",
-    "name": "☁️花卷┃4K",
+    "name": "💯┃花卷┃4K",
     "type": 3,
     "api": "csp_PanHjAmns",
     "ext": "PanHj"
 },
 {
     "key": "csp_ddWobg",
-    "name": "☁️多多┃4K",
+    "name": "💯┃多多┃4K",
     "type": 3,
     "api": "csp_WobgAmns",
     "ext": "ddWobg"
 },
 {
     "key": "csp_hbWobg",
-    "name": "☁️虎斑┃4K",
+    "name": "💯┃虎斑┃4K",
     "type": 3,
     "api": "csp_WobgAmns",
     "ext": "hbWobg"
 },
 {
     "key": "csp_SheQuyd",
-    "name": "☁️逸动┃4K",
+    "name": "💯┃逸动┃4K",
     "type": 3,
     "api": "csp_SheQuydAmns",
     "changeable": 1
 },
 {
     "key": "csp_Qiwei",
-    "name": "☁️七味┃4K",
+    "name": "💯┃七味┃4K",
     "type": 3,
     "api": "csp_QiweiAmns",
     "ext": "Qiwei"
 },
 {
     "key": "csp_SheQuwon",
-    "name": "☁️蜗牛┃4K",
+    "name": "💯┃蜗牛┃4K",
     "type": 3,
     "api": "csp_SheQuwonAmns",
     "changeable": 1
@@ -400,8 +407,8 @@
     "key": "dr_腾迅",
     "name": "🆚┃騰訊┃ TV",
     "type": 3,
-    "api": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/libs/drpy2.js",
-    "ext": "https://gitee.com/lyun_1_0/TS/raw/main/TS/QQtv.js"
+    "api": "./libs/drpy2.js",
+    "ext": "/TS/QQtv.js"
 },
 {
     "key": "dr_芒果",

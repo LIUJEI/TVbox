@@ -27,7 +27,6 @@ sys.path.append('..')
 from base.spider import Spider
 from secrets import token_bytes
 
-DESC_PREFIX = "【琉🔹芸❤广告勿信👉剧情】📢"
 class Spider(Spider):
     def getName(self):
         return "APP99"
@@ -455,7 +454,7 @@ class Spider(Spider):
                 "vod_pic": v.get("pic", ""),
                 "vod_remarks": v.get("remarks", ""),
                 "vod_year": v.get("year", ""),
-                "vod_content": v.get("blurb", ""),
+                "vod_content":'【琉🔹璃❤广告勿信👉剧情】📢'+ v.get("blurb", ""),
                 "type_name": v.get("class", ""),
                 "vod_area": v.get("area", ""),
                 "vod_actor": v.get("actor", ""),
@@ -558,7 +557,7 @@ class Spider(Spider):
                 "vod_pic": d.get("pic", ""),
                 "vod_remarks": d.get("remarks", ""),
                 "vod_year": d.get("year", ""),
-                "vod_content": d.get("content", ""),
+                "vod_content":'【琉🔹璃❤广告勿信👉剧情】📢'+ d.get("content", ""),
                 "type_name": d.get("class", ""),
                 "vod_area": d.get("area", ""),
                 "vod_actor": d.get("actor", ""),

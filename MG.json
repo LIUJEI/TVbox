@@ -497,5 +497,10 @@
     "type":0,
     "url":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/芸直播.txt",
     "changeable": 0
+},
+{
+    "name": "📺咪咕",
+    "type": 0,
+    "url": "http://www.52top.com.cn:678/downloads/migu.txt"
 }],
 "ads": ["wan.51img1.com","iqiyi.hbuioo.com","vip.ffzyad.com"]}

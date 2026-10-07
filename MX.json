@@ -160,12 +160,6 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/荐片.js"
 },
 {
-    "key": "py_文才",
-    "name": "🆘┃文才┃PPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/文才.py"
-},
-{
     "key": "py_aigua",
     "name": "🆘┃爱瓜┃PPY",
     "type": 3,
@@ -235,11 +229,11 @@
     "key": "喜福短剧",
     "name": "🆘┃喜福┃短剧",
     "type": 3,
-    "api": "https://cnb.cool/luotao-dev/tvbo/-/git/raw/main/py/喜福短剧.py"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/喜福.py"
 },
 {
     "key": "牛牛",
-    "name": "🦏┃牛牛┃短剧",
+    "name": "🆘┃牛牛┃短剧",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },

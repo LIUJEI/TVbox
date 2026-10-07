@@ -1,6 +1,4 @@
 
-   
-   
      # -*- coding: utf-8 -*-
 from __future__ import annotations
 import base64
@@ -3650,7 +3648,7 @@ def _item(x):
         "vod_name": name,
         "vod_pic": pic,
         "vod_remarks": ("全%s集" % count) if count else "",
-        "vod_content":'【琉🔹璃❤广告勿信👉剧情】📢'+ intro,
+        "vod_content": intro,
     }
 
 def _cat_item(x):

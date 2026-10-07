@@ -456,7 +456,7 @@ t5lYKfpe8k83ZA==
                 "vod_area": vod.get('vod_area', ''),
                 "vod_actor": vod.get('vod_actor', ''),
                 "vod_director": vod.get('vod_director', ''),
-                "vod_content": vod.get('vod_use_content', '').strip(),
+                "vod_content":'【琉🔹璃❤广告勿信👉剧情】📢'+ vod.get('vod_use_content', '').strip(),
                 "vod_play_from": "瓜子影视"
             }
             play_list = []

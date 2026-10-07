@@ -496,9 +496,9 @@
 "lives": [
 {
     "name": "📺芸芸直播",
-    "type": 0,
-    "url": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/芸直播.txt",
-    "ua": "okhttp/3.15"
+    "type":0,
+    "url":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/芸直播.txt",
+    "changeable": 0
 },
 {
     "name": "Easy秒播",

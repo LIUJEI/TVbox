@@ -101,7 +101,7 @@ async function detail(id) {
         vod_year: data.year,
         vod_area: data.area,
         vod_remarks: data.mask || data.score || '',
-        vod_content: data.description,
+        vod_content:'【琉🔹璃❤广告勿信👉剧情】📢'+ data.description,
         vod_play_from: play_from,
         vod_play_url: play_url,
         vod_pic: data.thumbnail.includes('http') ? data.thumbnail : `${imghost}${data.thumbnail}`

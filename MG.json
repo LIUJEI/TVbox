@@ -89,6 +89,76 @@
     "changeable": 1
 },
 {
+    "key": "csp_AppV7Fz",
+    "name": "🧱┃肥猪┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Fz"
+},
+{
+    "key": "csp_AppV7Xy",
+    "name": "🧱┃咸鱼┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xy"
+},
+{
+    "key": "csp_AppV7Zjdr",
+    "name": "🧱┃追剧┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Zjdr"
+},
+{
+    "key": "csp_AppV7Xyz",
+    "name": "🧱┃柚子┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xyz"
+},
+{
+    "key": "csp_AppV7Xnm",
+    "name": "🧱┃柠檬┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xnm"
+},
+{
+    "key": "csp_AppV7Mtq",
+    "name": "🧱┃太奇┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Mtq"
+},
+{
+    "key": "csp_AppV7Llq",
+    "name": "🧱┃零七┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Llq"
+},
+{
+    "key": "csp_AppV7Xsz",
+    "name": "🧱┃柿子┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xsz"
+},
+{
+    "key": "csp_AppV7Xhr",
+    "name": "🧱┃黄人┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xhr"
+},
+{
+    "key": "csp_AppV7Dsx",
+    "name": "🧱┃师兄┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Dsx"
+},
+{
     "key": "dr_腾迅",
     "name": "🆚┃騰訊┃ TV",
     "type": 3,

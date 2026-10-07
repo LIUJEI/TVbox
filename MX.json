@@ -461,9 +461,7 @@
     "name": "🇨🇳┣☪版✿本┫信息",
     "type": 3,
     "api": "csp_Market",
-    "indexs": 0,
-    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/single.png",
-    "jar" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/JAR/MS.jar"
+    "indexs": 0
 }
 ],
 "parses": [	
@@ -499,7 +497,7 @@
 {
     "name": "📺芸芸直播",
     "type": 0,
-    "url": "http://45.192.97.170:5211/922816",
+    "url": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/芸直播.txt",
     "ua": "okhttp/3.15"
 }],
 "ads": ["wan.51img1.com","iqiyi.hbuioo.com","vip.ffzyad.com"]}

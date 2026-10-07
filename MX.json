@@ -63,6 +63,13 @@
     "https://www.cd-zj.com"]}
 },
 {
+    "key": "xcm",
+    "name": "🐻┃熊大┃秒播",
+    "type": 4,
+    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
    "key": "csp_py_duoduo",
    "name": "🆘┃多多┃PPY",
    "type": 3,
@@ -141,31 +148,6 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/飞快.py"
 },
 {
-    "key": "py_hongguo",
-    "name": "🆘┃红果┃短剧",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/红果.py"
-},
-{
-    "key": "py_WUSENG",
-    "name": "🆘┃悟圣┃短剧",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/悟圣.py"
-},
-{
-    "key": "xcm",
-    "name": "🐻┃熊大┃秒播",
-    "type": 4,
-    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key": "牛牛",
-    "name": "🦏┃牛牛┃秒播",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
-},
-{
     "key": "py_guazi",
     "name": "🆘┃瓜子┃PPY",
     "type": 3,
@@ -238,180 +220,189 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/苹果.py"
 },
 {
-    "key": "cupfox_in",
-    "name": "💞┃茶杯┃PPY",
+    "key": "py_hongguo",
+    "name": "🆘┃红果┃短剧",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/libs/drpy2.js",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XB/茶狐.js"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/红果.py"
 },
 {
-    "key": "csp_reboys",
-    "name": "💞┃农牧┃影院",
+    "key": "py_WUSENG",
+    "name": "🆘┃悟圣┃短剧",
     "type": 3,
-    "api" : "csp_XBPQ",
-    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/旺旺.php",
-    "jar" : "http://rihou.cc:88/jar/xbpq.jar"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/悟圣.py"
+},
+{
+    "key": "喜福短剧",
+    "name": "🆘┃喜福┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/luotao-dev/tvbo/-/git/raw/main/py/喜福短剧.py"
+},
+{
+    "key": "牛牛",
+    "name": "🦏┃牛牛┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
 {
     "key": "csp_xBPQ_饭团",
     "name": "💞┃饭团┃影院",
     "type":3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/饭团.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/饭团.php"
 },
 {
     "key": "csp_枫叶电影网",
     "name": "💞┃枫叶┃影院",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/枫叶.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/枫叶.php"
 }, 
 {
     "key": "csp_xBPQ_MTYY",
     "name": "💞┃麥田┃影院",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/麥田.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/麥田.php"
 },
 {
     "key": "csp_咕咚电影网",
     "name": "💞┃咕咚┃电影",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/咕咚.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/咕咚.php"
 }, 
 {
     "key": "csp_xBPQ_天狗追剧",
     "name": "💞┃天狗┃追剧",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/天狗.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/天狗.php"
 },
 {
     "key": "csp_低端",
     "name": "💞┃低端┃影视",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/低端.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/低端.php"
 },
 {
     "key": "csp_橘猫",
     "name": "💞┃橘猫┃影视",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/橘猫.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/橘猫.php"
 },
 {
     "key": "csp_皮皮",
     "name": "💞┃皮皮┃影视",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/皮皮.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/皮皮.php"
 },
 {
     "key" : "csp_菲特",
     "name" : "💞┃影視┃菲特",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/菲特.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/菲特.php"
 },
 {
     "key": "csp_金鹰",
     "name": "💞┃影視┃金鹰",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/金鹰.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/金鹰.php"
 },
 {
     "key": "csp_蜂鸟",
     "name": "💞┃影視┃蜂鸟",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/蜂鸟.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/蜂鸟.php"
 },
 {
     "key" : "csp_侠客",
     "name" : "💞┃影視┃侠客",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/侠客.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/侠客.php"
 }, 
 {
     "key" : "csp_观威",
     "name" : "💞┃影視┃观影",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/观影.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/观影.php"
 },
 {
     "key": "csp_水牛",
     "name": "💞┃影視┃水牛",
     "type": 3,
     "api": "csp_XBPQ",
-    "ext": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/水牛.php"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/水牛.php"
 },
 {
     "key" : "csp_云播",
     "name" : "💞┃影視┃云播",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/云播.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/云播.php"
 },
 {
     "key" : "csp_闪电影院",
     "name" : "💞┃影視┃闪电",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/闪电.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/闪电.php"
 },
 {
     "key" : "csp_蘑菇",
     "name" : "💞┃影視┃蘑菇",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/蘑菇.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/蘑菇.php"
 },
 {
     "key" : "csp_飞马",
     "name" : "💞┃影視┃飞马",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/飞马.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/飞马.php"
 },
 {
     "key" : "csp_极光",
     "name" : "💞┃影視┃极光",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/极光.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/极光.php"
 },
 {
     "key" : "csp_享乐",
     "name" : "💞┃影視┃享乐",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/享乐.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/享乐.php"
 },
 {
     "key" : "csp_光棍",
     "name" : "💞┃影視┃光棍",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/光棍.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/光棍.php"
 },
 {
     "key" : "csp_豪格",
     "name" : "💞┃影視┃豪格",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/豪格.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/豪格.php"
 },
 {
     "key" : "csp_零零七",
     "name" : "💞┃影視┃零七",
     "type" : 3,
     "api" : "csp_XBPQ",
-    "ext" : "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/XYQ/零七.php"
+    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/零七.php"
 },
 {
     "key": "nangua",

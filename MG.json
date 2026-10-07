@@ -4,62 +4,7 @@
   "danmaku": "http://127.0.0.1:2525/danmu?name={name}&epid={episode}",
   "wallpaper": "http://127.0.0.1:9978/proxy?do=AowuWapper&mode=2",
   "sites": [
-{
-    "key": "WexAiDouban",
-    "name": "🎬┣豆瓣┫首页",
-    "type": 3,
-    "api": "csp_DoubanAmns",
-    "ext": "Douban"
-},
-{
-    "key": "WexAiY360",
-    "name": "🎬┣热门┫10.05",
-    "type": 3,
-    "api": "csp_Y360Amns",
-    "ext": "Y360"
-},
-{
-    "key": "WexAiYueYue",
-    "name": "🚀┃悦月┃秒播",
-    "type": 3,
-    "api": "csp_NewGrV2Amns",
-    "ext": "NewGrV2"
-},
-{
-    "key": "WexAiReBo",
-    "name": "⭐热播┃快速",
-    "type": 3,
-    "api": "csp_RbysAmns",
-    "ext": "Rbys"
-},
-{
-    "key": "WexAiDuBoKu",
-    "name": "⭐独播┃秒播",
-    "type": 3,
-    "api": "csp_DubkAmns",
-    "ext": "Dubk"
-},
-{
-    "key": "WexHanXiaoQuan",
-    "name": "🚀韩剧┃秒播",
-    "type": 3,
-    "api": "csp_HxqAmns",
-    "changeable": 1
-},
-{
-    "key": "WexAiGuaZi",
-    "name": "🚀瓜子┃秒播",
-    "type": 3,
-    "api": "csp_GuaziAmns",
-    "ext": "Guazi"
-},
-{
-    "key": "WexAiWenCai",
-    "name": "🚀金牌┃秒播",
-    "type": 3,
-    "api": "csp_JinPaiAmns",
-    "changeable": 1
-},
+
 {
     "key": "dr_腾迅",
     "name": "🆚┃騰訊┃ TV",

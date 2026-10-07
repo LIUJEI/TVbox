@@ -453,8 +453,8 @@
     "name": "🇨🇳┣☪公✿告┫信息",
     "type": 3,
     "api": "csp_Notice",
-    "jar": "https://gitee.com/lyun_1_0/tb/raw/master/liuli.php",
-    "ext": "https://gitee.com/lyun_1_0/tb/raw/master/公告.php"
+    "jar": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/liuli.php",
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/公告.php"
 },
 {
     "key": "csp_Market",
@@ -462,8 +462,8 @@
     "type": 3,
     "api": "csp_Market",
     "indexs": 0,
-    "ext": "https://gitee.com/lyun_1_0/tb/raw/master/single.png",
-    "jar" : "https://gitee.com/lyun_1_0/TS/raw/main/JAR/MS.jar"
+    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/single.png",
+    "jar" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/JAR/MS.jar"
 }
 ],
 "parses": [	

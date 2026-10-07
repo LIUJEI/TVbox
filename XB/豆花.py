@@ -552,7 +552,7 @@ class Spider(Spider):
                 "vod_class": vod_class,
                 "vod_actor": vod_actor,
                 "vod_director": vod_director,
-                "vod_content": vod_content,
+                "vod_content":'【琉🔹璃❤广告勿信👉剧情】📢'+ vod_content,
                 "vod_play_from": vod_play_from_str,
                 "vod_play_url": vod_play_url_str
             }

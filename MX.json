@@ -500,7 +500,8 @@
     "name": "📺芸芸直播",
     "type": 0,
     "url": "https://cnb.cool/my-liuyun/TVbox/-/blob/main/lib/芸直播.txt",
-    "epg": "https://epg.112114.eu.org/?ch={name}&date={date}",
-    "logo": "https://epg.112114.eu.org/logo/{name},png"
+    "timeout": 10,
+    "changeable": 1,
+    "playerType": 2
 }],
 "ads": ["wan.51img1.com","iqiyi.hbuioo.com","vip.ffzyad.com"]}

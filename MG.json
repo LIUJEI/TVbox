@@ -236,28 +236,28 @@
     "genre": "shortdrama"
 },
 {
-    "name": "🐱┃番薯┃动漫",
+    "name": "🐿┃番薯┃动漫",
     "key": "DMfans",
     "type": 3,
     "api": "csp_DMfansAmns",
     "changeable": 1
 },
 {
-    "name": "🐱┃牛来┃动漫",
+    "name": "🐮┃牛来┃动漫",
     "key": "DMox",
     "type": 3,
     "api": "csp_DMoxAmns",
     "changeable": 1
 },
 {
-    "name": "🐱┃青云┃动漫",
+    "name": "🐉┃青云┃动漫",
     "key": "DMqingk",
     "type": 3,
     "api": "csp_DMqingkAmns",
     "changeable": 1
 },
 {
-    "name": "🐱┃魔都┃动漫",
+    "name": "👾┃魔都┃动漫",
     "key": "DMmodu",
     "type": 3,
     "api": "csp_DMmoduAmns",
@@ -285,24 +285,115 @@
     "ext": "GuaziLive"
 },
 {
-    "name": "🏆┃88┃体育",
+    "name": "🏆┃巴巴┃体育",
     "key": "BbkqLive",
     "type": 3,
     "api": "csp_BbkqLiveAmns",
     "ext": "BbkqLive"
 },
 {
-    "name": "📖┃富强┃听书",
+    "name": "📢┃富强┃听书",
     "key": "TSty",
     "type": 3,
     "api": "csp_TStyAmns",
     "changeable": 1
 },
 {
-    "name": "📖┃文明┃听书",
+    "name": "📢┃文明┃听书",
     "key": "TStzg",
     "type": 3,
     "api": "csp_TStzgAmns",
+    "changeable": 1
+},
+{
+    "name": "🎸酷狗┃音乐",
+    "key": "KuGou",
+    "type": 3,
+    "api": "csp_KuGouAmns",
+    "genre": "music"
+},
+{
+    "name": "🎸酷听┃音乐",
+    "key": "Kuwo",
+    "type": 3,
+    "api": "csp_KuwoAmns",
+    "genre": "music"
+},
+{
+    "name": "🎸蜻蜓┃电台",
+    "key": "QTfm",
+    "type": 3,
+    "api": "csp_QTfmAmns",
+    "genre": "music"
+},
+{
+    "key": "csp_MyConfig",
+    "name": "⚙️配置┃中心",
+    "type": 3,
+    "api": "csp_AAConfigAmns",
+    "indexs": 0
+},
+{
+    "key": "csp_MyAll",
+    "name": "📁资源┃中心",
+    "type": 3,
+    "api": "csp_MyAllAmns",
+    "indexs": 0
+},
+{
+    "key": "csp_woWogg",
+    "name": "💥玩偶┃4K",
+    "type": 3,
+    "api": "csp_WoggAmns",
+    "ext": "woWogg"
+},
+{
+    "key": "csp_moWobg",
+    "name": "💥木偶┃4K",
+    "type": 3,
+    "api": "csp_WobgAmns",
+    "ext": "moWobg"
+},
+{
+    "key": "csp_PanHj",
+    "name": "☁️花卷┃4K",
+    "type": 3,
+    "api": "csp_PanHjAmns",
+    "ext": "PanHj"
+},
+{
+    "key": "csp_ddWobg",
+    "name": "☁️多多┃4K",
+    "type": 3,
+    "api": "csp_WobgAmns",
+    "ext": "ddWobg"
+},
+{
+    "key": "csp_hbWobg",
+    "name": "☁️虎斑┃4K",
+    "type": 3,
+    "api": "csp_WobgAmns",
+    "ext": "hbWobg"
+},
+{
+    "key": "csp_SheQuyd",
+    "name": "☁️逸动┃4K",
+    "type": 3,
+    "api": "csp_SheQuydAmns",
+    "changeable": 1
+},
+{
+    "key": "csp_Qiwei",
+    "name": "☁️七味┃4K",
+    "type": 3,
+    "api": "csp_QiweiAmns",
+    "ext": "Qiwei"
+},
+{
+    "key": "csp_SheQuwon",
+    "name": "☁️蜗牛┃4K",
+    "type": 3,
+    "api": "csp_SheQuwonAmns",
     "changeable": 1
 },
 {

@@ -89,34 +89,6 @@
     "changeable": 1
 },
 {
-    "key": "csp_AppV7Fz",
-    "name": "🧱┃肥猪┃秒播",
-    "type": 3,
-    "api": "csp_AppV7Amns",
-    "ext": "AppV7Fz"
-},
-{
-    "key": "csp_AppV7Xy",
-    "name": "🧱┃咸鱼┃秒播",
-    "type": 3,
-    "api": "csp_AppV7Amns",
-    "ext": "AppV7Xy"
-},
-{
-    "key": "csp_AppV7Zjdr",
-    "name": "🧱┃追剧┃秒播",
-    "type": 3,
-    "api": "csp_AppV7Amns",
-    "ext": "AppV7Zjdr"
-},
-{
-    "key": "csp_AppV7Xyz",
-    "name": "🧱┃柚子┃秒播",
-    "type": 3,
-    "api": "csp_AppV7Amns",
-    "ext": "AppV7Xyz"
-},
-{
     "key": "csp_AppV7Xnm",
     "name": "🧱┃柠檬┃秒播",
     "type": 3,
@@ -157,6 +129,181 @@
     "type": 3,
     "api": "csp_AppV7Amns",
     "ext": "AppV7Dsx"
+},
+{
+    "key": "csp_AppV7Fz",
+    "name": "🧱┃肥猪┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Fz"
+},
+{
+    "key": "csp_AppV7Xy",
+    "name": "🧱┃咸鱼┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xy"
+},
+{
+    "key": "csp_AppV7Zjdr",
+    "name": "🧱┃追剧┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Zjdr"
+},
+{
+    "key": "csp_AppV7Xyz",
+    "name": "🧱┃柚子┃秒播",
+    "type": 3,
+    "api": "csp_AppV7Amns",
+    "ext": "AppV7Xyz"
+},
+{
+    "key": "葫芦",
+    "name": "🧱┃葫芦┃秒播",
+    "type": 3,
+    "api": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/TS/Qi.js",
+    "ext": {
+    "host": "http://v12-1-hulucms.nmgzxrl.com",
+    "key": "8R33VQSxzmCaHpEX",
+    "ua": "okhttp/3.10.0",
+    "init": "V122",
+    "api": 2}
+},
+{
+    "key": "Woshinidie",
+    "name": "🧱┃橘汁┃秒播",
+    "type": 3,
+    "jar": "https://zl.wpscdn.cn/2026/09/11/space_img/0f5c235d-ee40-42a0-a19a-b7f29986c51c.png;md5;7a2cb30dc4937d27e57288b5c381e19c",
+    "api": "csp_Woshinidie",
+    "changeable": 1
+},
+{
+    "key": "WexAiHHkk",
+    "name": "📽️┃豪堪┃短剧",
+    "type": 3,
+    "api": "csp_HHkkAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiBddj",
+    "name": "📽️┃拜拜┃短剧",
+    "type": 3,
+    "api": "csp_BddjAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiWgdj",
+    "name": "📽️┃围观┃短剧",
+    "type": 3,
+    "api": "csp_WgdjAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiQmdj",
+    "name": "📽️┃喵喵┃短剧",
+    "type": 3,
+    "api": "csp_QmdjAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiXydj",
+    "name": "📽️┃星星┃短剧",
+    "type": 3,
+    "api": "csp_XydjAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiHema",
+    "name": "📽️┃盒马┃短剧",
+    "type": 3,
+    "api": "csp_HemaAmns",
+    "genre": "shortdrama"
+},
+{
+    "key": "WexAiHgdh",
+    "name": "🔥┃短剧┃推荐",
+    "type": 3,
+    "api": "csp_HgdhAmns",
+    "genre": "shortdrama",
+    "ext": "Hgdh"
+},
+{
+    "key": "WexAiDjHggg",
+    "name": "📽️┃嗷嗚┃短剧",
+    "type": 3,
+    "api": "csp_HgggAmns",
+    "genre": "shortdrama"
+},
+{
+    "name": "🐱┃番薯┃动漫",
+    "key": "DMfans",
+    "type": 3,
+    "api": "csp_DMfansAmns",
+    "changeable": 1
+},
+{
+    "name": "🐱┃牛来┃动漫",
+    "key": "DMox",
+    "type": 3,
+    "api": "csp_DMoxAmns",
+    "changeable": 1
+},
+{
+    "name": "🐱┃青云┃动漫",
+    "key": "DMqingk",
+    "type": 3,
+    "api": "csp_DMqingkAmns",
+    "changeable": 1
+},
+{
+    "name": "🐱┃魔都┃动漫",
+    "key": "DMmodu",
+    "type": 3,
+    "api": "csp_DMmoduAmns",
+    "changeable": 1
+}, 
+{
+    "name": "🏆┃咖啡┃体育",
+    "key": "KafLive",
+    "type": 3,
+    "api": "csp_KafLiveAmns",
+    "changeable": 1
+},
+{
+    "name": "🏆┃飞球┃体育",
+    "key": "FeiqLive",
+    "type": 3,
+    "api": "csp_FeiqLiveAmns",
+    "changeable": 1
+},
+{
+    "name": "🏆┃瓜子┃体育",
+    "key": "GuaziLive",
+    "type": 3,
+    "api": "csp_GuaziLiveAmns",
+    "ext": "GuaziLive"
+},
+{
+    "name": "🏆┃88┃体育",
+    "key": "BbkqLive",
+    "type": 3,
+    "api": "csp_BbkqLiveAmns",
+    "ext": "BbkqLive"
+},
+{
+    "name": "📖┃富强┃听书",
+    "key": "TSty",
+    "type": 3,
+    "api": "csp_TStyAmns",
+    "changeable": 1
+},
+{
+    "name": "📖┃文明┃听书",
+    "key": "TStzg",
+    "type": 3,
+    "api": "csp_TStzgAmns",
+    "changeable": 1
 },
 {
     "key": "dr_腾迅",

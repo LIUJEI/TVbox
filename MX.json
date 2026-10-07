@@ -363,13 +363,6 @@
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/蘑菇.php"
 },
 {
-    "key" : "csp_飞马",
-    "name" : "💞┃影視┃飞马",
-    "type" : 3,
-    "api" : "csp_XBPQ",
-    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/飞马.php"
-},
-{
     "key" : "csp_极光",
     "name" : "💞┃影視┃极光",
     "type" : 3,

@@ -890,6 +890,16 @@
 ],
 "parses": [	
 {
+    "name": "麒麟",
+    "type": 1,
+    "url": "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url="
+},
+{
+    "name": "观潮",
+    "type": 1,
+    "url": "http://zxy-th1.jsszks.dpdns.org:8090/?url="
+},
+{
     "name": "急速",
     "type": 1,
     "url": "https://test1.12321app.com/daoliansiquanjia.php?url="

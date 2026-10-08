@@ -154,6 +154,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/瓜子.py"
 },
 {
+    "key": "py_66大片网",
+    "name": "🆘┃大片┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/大片.py"
+},
+{
     "key": "csp_js_荐片",
     "name": "🆘┃荐片┃PPY",
     "type": 3,

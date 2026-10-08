@@ -12,7 +12,7 @@
 {
     "key": "py_douban",
     "name": "🎬┣豆瓣┫推荐",
-    "type": 2,
+    "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/TS/douban.js",
     "indexs": 0
 },

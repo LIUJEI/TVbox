@@ -191,10 +191,10 @@ async function init(cfg) {}
 
 async function home(filter) {
     const cateManual = {
-        ,
-        '魔盒推荐Top250': 'movie_top250''热门电影': 'hot_gaia', '热播剧集': 'tv_hot', '热门动漫': 'tv_animation',
-        '热播综艺': 'show_hot', '电影筛选': 'movie', '电视筛选': 'tv',
-        '电影榜单': 'rank_list_movie', '电视剧榜单': 'rank_list_tv'
+        
+        '魔盒推荐Top250': 'movie_top250',
+        '热门电影': 'hot_gaia', '热播剧集': 'tv_hot', '热门动漫': 'tv_animation','热播综艺': 'show_hot', 
+        '电影筛选': 'movie', '电视筛选': 'tv','电影榜单': 'rank_list_movie', '电视剧榜单': 'rank_list_tv'
     };
     const classes = [];
     for (const k in cateManual) classes.push({ type_name: k, type_id: cateManual[k] });

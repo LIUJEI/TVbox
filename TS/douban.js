@@ -192,7 +192,7 @@ async function init(cfg) {}
 async function home(filter) {
     const cateManual = {
         
-        '魔盒推荐Top': 'movie_top250',
+        '魔盒推荐👾': 'movie_top250',
         '热门电影': 'hot_gaia', '热播剧集': 'tv_hot', '热播综艺': 'show_hot', 
         '热门动漫': 'tv_animation','电影榜单': 'rank_list_movie', '电视榜单': 'rank_list_tv'
     };

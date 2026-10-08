@@ -70,11 +70,25 @@
     "indexs": 0
 },
 {
+    "key": "CO4K",
+    "name": "🆘┃咖啡┃C4K",
+    "type": 4,
+    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
     "key":"奇妙官采",
     "name":"🆘┃奇妙┃官采",
     "type":1,
     "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
     "changeable":0
+},
+{
+    "key": "皮皮虾",
+    "name": "🆘┃皮虾┃PPY",
+    "type": 3,
+    "api": "https://pan.szfx.top/down.php/540e0c721a30390c4f5d2d77b8286905.py",
+    "ext": "http://154.94.224.56:8762"
 },
 {
    "key": "csp_py_duoduo",

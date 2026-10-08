@@ -100,7 +100,7 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/厂长.js"
 },
 {
-    "key": "豆花影视",
+    "key": "csp_py_豆花",
     "name": "🆘┃豆花┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/豆花.py"
@@ -124,19 +124,19 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/星辰.js"
 },
 {
-    "key": "4K影视",
+    "key": "csp_py_4K影视",
     "name": "🆘┃蓝光┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/4K.py"
 },
 {
-    "key": "剧下饭",
+    "key": "csp_py_剧下饭",
     "name": "🆘┃下饭┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/下饭.py"
 },
 {
-    "key": "华数",
+    "key": "csp_py_华数",
     "name": "🆘┃华数┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/华数.py"
@@ -154,7 +154,7 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/瓜子.py"
 },
 {
-    "key": "荐片",
+    "key": "csp_js_荐片",
     "name": "🆘┃荐片┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/荐片.js"
@@ -184,25 +184,25 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/开端.py"
 },
 {
-    "key": "py_金牌影院",
-    "name": "🆘┃金牌┃PPY",
+    "key": "py_影探",
+    "name": "🆘┃影探┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/金牌.py"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/影探.py"
 },
 {
-    "key": "鬼片",
+    "key": "csp_py_鬼片",
     "name": "🆘┃鬼片┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/鬼片.py"
 },
 {
-    "key": "咕噜",
+    "key": "csp_py_咕噜",
     "name": "🆘┃咕噜┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/咕噜.py"
 },
 {
-    "key": "橘汁",
+    "key": "csp_py_橘汁",
     "name": "🆘┃橘汁┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/橘汁.py"
@@ -226,19 +226,19 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/悟圣.py"
 },
 {
-    "key": "喜福短剧",
+    "key": "csp_py_喜福短剧",
     "name": "🆘┃喜福┃短剧",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/喜福.py"
 },
 {
-    "key": "牛牛",
+    "key": "csp_js_牛牛",
     "name": "🆘┃牛牛┃短剧",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
 {
-    "key": "好好看",
+    "key": "csp_py_好好看",
     "name": "🆘┃好看┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/ack.js",
@@ -252,7 +252,7 @@
     "lineCount": 1}
 },
 {
-    "key": "半日",
+    "key": "csp_py_半日",
     "name": "🆘┃半日┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
@@ -266,7 +266,7 @@
     "buildSignature": "A40DA80A59D170CAA950CF15C18C454D47A39B26989D8B640ECD745BA71BF5DC"}
 },
 {
-    "key": "剧圈",
+    "key": "csp_py_剧圈",
     "name": "🆘┃剧圈┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",

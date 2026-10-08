@@ -326,14 +326,17 @@ class Spider(Spider):
             parts = id.split('$', 1)[-1].split('@')
             cid = parts[0]
             vid = parts[1] if len(parts) > 1 else ''
-            url = f"{self.host}/x/cover/{cid}/{vid}.html"
+            # 用手机版播放页 URL (m.v.qq.com) 比 PC 版更适合嗅探器
+            url = f"https://m.v.qq.com/x/m/play?cid={cid}&vid={vid}"
             return {
                 'parse': 1,
                 'url': url,
-                'jx': '1',
+                'jx': 1,
                 'header': {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36',
-                    'Referer': self.host + '/'
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
+                    'Referer': 'https://m.v.qq.com/',
+                    'Accept': '*/*',
+                    'Accept-Language': 'zh-CN,zh;q=0.9',
                 }
             }
         except Exception as e:

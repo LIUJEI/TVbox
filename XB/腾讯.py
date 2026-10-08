@@ -112,8 +112,19 @@ class Spider(Spider):
                     continue
                 filter_dict = {}
                 try:
-                    items = data['data']['module_list_datas'][-1]['module_datas'][-1]['item_data_lists']['item_datas']
-                    for item in items:
+                    # 遍历找筛选模块 (筛选+视频混合)
+                    filter_items = []
+                    for mld in data['data'].get('module_list_datas', []):
+                        for md in mld.get('module_datas', []):
+                            fitems = md.get('item_data_lists', {}).get('item_datas', [])
+                            # 过滤: 只要有 index_item_key 的就是筛选项
+                            fkey_items = [it for it in fitems if it.get('item_params', {}).get('index_item_key')]
+                            if fkey_items:
+                                filter_items = fkey_items
+                                break
+                        if filter_items:
+                            break
+                    for item in filter_items:
                         if not item.get('item_params', {}).get('index_item_key'):
                             continue
                         params = item['item_params']
@@ -194,7 +205,19 @@ class Spider(Spider):
         else:
             result['pagecount'] = int(pg)
         vlist = []
-        for its in ndata['module_list_datas'][-1]['module_datas'][-1]['item_data_lists']['item_datas']:
+        # 遍历所有 module_datas 找视频 items (API结构可能变化, 筛选+视频混合)
+        video_items = []
+        for mld in ndata.get('module_list_datas', []):
+            for md in mld.get('module_datas', []):
+                items = md.get('item_data_lists', {}).get('item_datas', [])
+                # 过滤: 只要有 cid 的就是视频
+                cid_items = [it for it in items if it.get('item_params', {}).get('cid')]
+                if cid_items:
+                    video_items = cid_items
+                    break
+            if video_items:
+                break
+        for its in video_items:
             id = its.get('item_params', {}).get('cid')
             if id:
                 p = its['item_params']

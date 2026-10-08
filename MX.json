@@ -330,36 +330,43 @@
     "changeable":0
 },
 {
+    "key": "csp_tinghyy",
+    "name": "🆘┃听海┃音乐",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/听海.js",
+    "indexs" : 0
+},
+{
     "key":"千千音乐",
-    "name":"千千音乐",
+    "name":"🆘┃千千┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/千千.py",
     "changeable":0
 },
 {
     "key":"聚合音乐",
-    "name":"聚合音乐",
+    "name":"🆘┃聚合┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/米兔.js",
     "changeable":0
 },
 {
     "key":"音乐在线",
-    "name":"音乐在线",
+    "name":"音乐┃在线",
     "type":4,
     "api":"http://jiduo.3116598.xyz/PHP/fytg.php",
     "changeable":0
 },
 {
     "key":"酷我音乐",
-    "name":"酷我音乐",
+    "name":"🆘┃酷我┃音乐",
     "type":4,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷我.php",
+    "api":"http://sspa8.top:8100/php/酷我.php",
     "changeable":0
 },
 {
     "key":"轻音乐",
-    "name":"轻音乐",
+    "name":"🆘┃箐箐┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/轻音乐.py",
     "changeable":0

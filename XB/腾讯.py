@@ -9,7 +9,11 @@ import re
 import urllib.parse
 sys.path.append('..')
 from base.spider import Spider
-from pyquery import PyQuery as pq
+try:
+    from pyquery import PyQuery as pq
+except ImportError:
+    # TVBox Python 环境可能没装 pyquery, 仅 homeVideoContent 用到
+    def pq(x): return None
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -323,8 +327,8 @@ class Spider(Spider):
 
     # 解析接口列表 (按优先级排序, 逐个尝试)
     parse_apis = [
-        ('zxy', 'http://zxy-th1.jsszks.dpdns.org:8090/?url='),
         ('jxapi', 'https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url='),
+        ('zxy',   'http://zxy-th1.jsszks.dpdns.org:8090/?url='),
     ]
 
     def playerContent(self, flag, id, vipFlags):

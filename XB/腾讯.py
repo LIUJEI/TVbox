@@ -6,6 +6,7 @@ import uuid
 import copy
 import requests
 import re
+import urllib.parse
 sys.path.append('..')
 from base.spider import Spider
 from pyquery import PyQuery as pq
@@ -320,23 +321,52 @@ class Spider(Spider):
                 })
         return {'list': vlist, 'page': pg}
 
+    # 解析接口列表 (按优先级排序, 逐个尝试)
+    parse_apis = [
+        ('zxy', 'http://zxy-th1.jsszks.dpdns.org:8090/?url='),
+        ('jxapi', 'https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url='),
+    ]
+
     def playerContent(self, flag, id, vipFlags):
         try:
-            # 先按 $ 分割取后半部分 (cid@vid)，再按 @ 分割
+            # 先按 $ 分割取后半部分 (cid@vid), 再按 @ 分割
             parts = id.split('$', 1)[-1].split('@')
             cid = parts[0]
             vid = parts[1] if len(parts) > 1 else ''
-            # 用手机版播放页 URL (m.v.qq.com) 比 PC 版更适合嗅探器
-            url = f"https://m.v.qq.com/x/m/play?cid={cid}&vid={vid}"
+            cover_url = f"{self.host}/x/cover/{cid}/{vid}.html"
+
+            # 依次尝试解析接口拿直链
+            for name, api_base in self.parse_apis:
+                try:
+                    api_url = api_base + urllib.parse.quote(cover_url, safe='')
+                    r = requests.get(api_url, timeout=8, headers={'User-Agent': 'Mozilla/5.0'})
+                    if r.status_code == 200:
+                        data = r.json()
+                        play_url = data.get('url', '')
+                        # 确认返回的是视频直链 (m3u8/mp4)
+                        if play_url and ('.m3u8' in play_url or '.mp4' in play_url):
+                            print(f"  [playerContent] {name} 解析成功: {play_url[:80]}...")
+                            return {
+                                'parse': 0,
+                                'url': play_url,
+                                'header': {
+                                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36',
+                                    'Referer': cover_url,
+                                }
+                            }
+                except Exception as e:
+                    print(f"  [playerContent] {name} 解析失败: {e}")
+                    continue
+
+            # 所有接口都失败, fallback 到嗅探模式
+            print(f"  [playerContent] 所有解析接口失败, fallback 到嗅探模式")
             return {
                 'parse': 1,
-                'url': url,
+                'url': cover_url,
                 'jx': 1,
                 'header': {
-                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
-                    'Referer': 'https://m.v.qq.com/',
-                    'Accept': '*/*',
-                    'Accept-Language': 'zh-CN,zh;q=0.9',
+                    'User-Agent': self.headers.get('User-Agent', 'Mozilla/5.0'),
+                    'Referer': self.host + '/',
                 }
             }
         except Exception as e:

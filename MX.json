@@ -360,14 +360,14 @@
     "key":"聚合音乐",
     "name":"🆘┃聚合┃音乐",
     "type": 3,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/米兔.py",
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/聚合[听].js",
     "changeable":0
 },
 {
     "key":"音乐在线",
-    "name":"🆘┃枫叶┃音乐┃",
+    "name":"🆘┃枫叶┃音乐",
     "type":4,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/丰业.py",
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶i.py",
     "changeable":0
 },
 {

@@ -18,7 +18,7 @@
 },
 {
     "key": "js_mohe",
-    "name": "🎬┣魔盒┫首页",
+    "name": "🎬┣魔盒┫热门",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/mohe.js",
     "indexs": 0

@@ -290,6 +290,18 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
 },
 {
+    "key": "csp_py_txvm",
+    "name": "🆘┃腾讯┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/腾讯.py"
+},
+{
+    "key": "csp_py_MGtv",
+    "name": "🆘┃芒果┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芒果.py"
+},
+{
     "key": "csp_py_好好看",
     "name": "🆘┃好看┃PPY",
     "type": 3,

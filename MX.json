@@ -226,49 +226,10 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/苹果.py"
 },
 {
-    "key": "py_hongguo",
-    "name": "🆘┃红果┃短剧",
+    "key":"py_看戏影视",
+    "name":"🆘┃看戏┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/红果.py"
-},
-{
-    "key": "py_WUSENG",
-    "name": "🆘┃悟圣┃短剧",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/悟圣.py"
-},
-{
-    "key": "csp_py_喜福短剧",
-    "name": "🆘┃喜福┃短剧",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/喜福.py"
-},
-{
-    "key": "csp_js_牛牛",
-    "name": "🆘┃牛牛┃短剧",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
-},
-{
-    "key": "xcm",
-    "name": "🐻┃熊大┃秒播",
-    "type": 4,
-    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key": "CO4K",
-    "name": "🆘┃咖啡┃C4K",
-    "type": 4,
-    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key":"奇妙官采",
-    "name":"🆘┃奇妙┃官采",
-    "type":1,
-    "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
-    "changeable":0
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看戏.py"
 },
 {
     "key": "csp_py_皮皮虾",
@@ -300,6 +261,108 @@
     "name": "🆘┃芒果┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芒果.py"
+},
+{
+    "key": "py_hongguo",
+    "name": "🆘┃红果┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/红果.py"
+},
+{
+    "key": "py_WUSENG",
+    "name": "🆘┃悟圣┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/悟圣.py"
+},
+{
+    "key": "csp_py_喜福短剧",
+    "name": "🆘┃喜福┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/喜福.py"
+},
+{
+    "key": "csp_js_牛牛",
+    "name": "🆘┃牛牛┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
+},
+{
+    "key":"csp_影探",
+    "name":"🆘┃影探┃C4K",
+    "type":4,
+    "api":"http://8.134.205.252:39466/pz/sx4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"csp_奇迹",
+    "name":"🆘┃奇迹┃C4K",
+    "type":1,
+    "api":"http://cmsyun2.qijiyun.vip/api.php/provide/vod/",
+    "indexs": 0
+},
+{
+    "key": "csp_xcm",
+    "name": "🐻┃熊大┃C4K",
+    "type": 4,
+    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"csp_未来",
+    "name":"🐻┃未来┃C4K",
+    "type":1,
+    "api":"http://110.42.66.100:12678/api.php",
+    "playUrl":"json:http://110.42.66.100:5666/api/?key=c31bfd818ac47875ab4922f03834afcc&url=",
+    "indexs": 0
+},
+{
+    "key": "csp_CO4K",
+    "name": "🆘┃咖啡┃官采",
+    "type": 4,
+    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"奇妙官采",
+    "name":"🆘┃奇妙┃官采",
+    "type":1,
+    "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
+    "changeable":0
+},
+{
+    "key":"千千音乐",
+    "name":"千千音乐",
+    "type": 3,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/千千.py",
+    "changeable":0
+},
+{
+    "key":"聚合音乐",
+    "name":"聚合音乐",
+    "type": 3,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/米兔.js",
+    "changeable":0
+},
+{
+    "key":"音乐在线",
+    "name":"音乐在线",
+    "type":4,
+    "api":"http://jiduo.3116598.xyz/PHP/fytg.php",
+    "changeable":0
+},
+{
+    "key":"酷我音乐",
+    "name":"酷我音乐",
+    "type":4,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷我.php",
+    "changeable":0
+},
+{
+    "key":"轻音乐",
+    "name":"轻音乐",
+    "type": 3,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/轻音乐.py",
+    "changeable":0
 },
 {
     "key": "csp_py_好好看",
@@ -358,6 +421,7 @@
     "buildNumber": "2001",
     "buildSignature": "03DD38CE4C3D62D0F0DEFACC06768D14EB382C7BD77A05B2EBF4D66E154A0D47"}
 },
+
 {
     "key": "csp_xBPQ_饭团",
     "name": "💞┃饭团┃影院",

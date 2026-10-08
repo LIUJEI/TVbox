@@ -1,4 +1,4 @@
-// 豆瓣 douban —— 由 douban.py 移植为 qjs 单文件
+// 豆瓣 douban.js 单文件
 // 纯 frodo.douban.com 接口 + apikey 硬编码；detail/search/player 空实现
 const DOUBAN_API = 'https://frodo.douban.com/api/v2';
 const API_KEY = '0ac44ae016490db2204ce0a042db2916';
@@ -258,15 +258,99 @@ async function category(tid, pg, filter, extend) {
     return JSON.stringify({ list: videos, page: page, pagecount: 9999, limit: 20, total: 999999 });
 }
 
-async function search(wd, quick, pg) {
-    return JSON.stringify({ list: [], page: 1, pagecount: 1, limit: 0, total: 0 });
+// ---------- detail: 拉豆瓣 subject 详情 ----------
+async function detail(id) {
+    try {
+        const url = DOUBAN_API + '/subject/' + id + '?apikey=' + API_KEY;
+        const d = await apiGet(url);
+        if (!d || !d.title) return JSON.stringify({ list: [] });
+
+        const picUrl = d.cover_url || (d.cover && d.cover.url) || '';
+        const rating = (d.rating && d.rating.value) ? String(d.rating.value) : '';
+        const year = d.year || '';
+        const regions = (d.countries && d.countries.join('/')) || '';
+        const genres = (d.genres && d.genres.join(', ')) || '';
+        const directors = (d.directors && d.directors.map(x => x.name).join(', ')) || '';
+        const actors = (d.actors && d.actors.map(x => x.name).slice(0, 8).join(', ')) || '';
+        const intro = d.intro || '';
+
+        // TV 显示集数，movie 显示时长
+        let remarks = '';
+        if (d.is_tv || d.type === 'tv') {
+            const ec = d.episodes_count || (d.episodes_info && d.episodes_info.replace(/[^\d]/g, '')) || '';
+            remarks = ec ? ec + '集' : '';
+        } else {
+            const dur = (d.durations && d.durations.join('/')) || '';
+            remarks = dur;
+        }
+        if (rating) remarks = (remarks ? remarks + ' · ' : '') + '豆瓣 ' + rating;
+
+        // 播放来源: 豆瓣只有 info_url / sharing_url，本身无 m3u8 播放链接
+        // 用 info_url 让用户看详情页，实际播放需配第三方解析或嗅探
+        const playFrom = '豆瓣详情';
+        const playUrl = '豆瓣详情页$' + (d.info_url || d.sharing_url || d.url || '');
+
+        return JSON.stringify({
+            list: [{
+                vod_id: String(d.id || id),
+                vod_name: d.title,
+                vod_pic: picUrl,
+                vod_remarks: remarks,
+                vod_year: year,
+                vod_area: regions,
+                vod_actor: actors,
+                vod_director: directors,
+                vod_content: '【琉🔹璃❤广告勿信👉剧情】📢' + intro,
+                vod_play_from: playFrom,
+                vod_play_url: playUrl,
+                type_name: genres
+            }]
+        });
+    } catch (e) { return JSON.stringify({ list: [] }); }
 }
 
-async function detail(id) {
-    return JSON.stringify({ list: [] });
+// ---------- search: 综合搜索 ----------
+async function search(wd, quick, pg) {
+    try {
+        const page = parseInt(pg || 1, 10) || 1;
+        const start = (page - 1) * 20;
+        const url = DOUBAN_API + '/search?q=' + encodeURIComponent(wd) + '&apikey=' + API_KEY + '&start=' + start + '&count=20';
+        const d = await apiGet(url);
+        const rawItems = (d && d.subjects && d.subjects.items) || [];
+        const list = [];
+        for (const item of rawItems) {
+            if (item.layout !== 'subject') continue;
+            const t = item.target || {};
+            const title = t.title || '';
+            if (!title) continue;
+            const cardSub = t.card_subtitle || '';
+            const picUrl = t.cover_url || '';
+            // 类型判断用顶层 target_type / type_name，不是 target.type（豆瓣 search 里没有）
+            let typeName = '';
+            const tn = item.type_name || '';
+            const tt = item.target_type || '';
+            if (tn.indexOf('电影') >= 0 || tt.indexOf('movie') >= 0) typeName = '电影';
+            else if (tn.indexOf('剧') >= 0 || tt.indexOf('tv') >= 0) typeName = '剧集';
+            else if (tn.indexOf('综艺') >= 0 || tt.indexOf('show') >= 0) typeName = '综艺';
+            else if (tn) typeName = tn;
+            list.push({
+                vod_id: String(t.id || item.target_id || ''),
+                vod_name: title,
+                vod_pic: picUrl,
+                vod_remarks: typeName + (cardSub ? ' | ' + cardSub : '')
+            });
+        }
+        // subjects.total 是 None，用 list.length 当 total，分页只能一页或用 /search/movie 等专用
+        const total = (d && d.subjects && d.subjects.total) || list.length;
+        const pagecount = Math.max(1, Math.min(99, Math.ceil((total || list.length) / 20)));
+        return JSON.stringify({ list: list, page: page, pagecount: pagecount, limit: 20, total: total });
+    } catch (e) {
+        return JSON.stringify({ list: [], page: 1, pagecount: 1, limit: 0, total: 0 });
+    }
 }
 
 async function play(flag, id, vipFlags) {
+    // 豆瓣无 m3u8 播放源；详情里给的 info_url 可被 TVBox 自动嗅探或配第三方解析
     return JSON.stringify({ parse: 0, url: '', header: {} });
 }
 

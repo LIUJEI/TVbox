@@ -63,34 +63,6 @@
     "https://www.cd-zj.com"]}
 },
 {
-    "key": "xcm",
-    "name": "🐻┃熊大┃秒播",
-    "type": 4,
-    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key": "CO4K",
-    "name": "🆘┃咖啡┃C4K",
-    "type": 4,
-    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key":"奇妙官采",
-    "name":"🆘┃奇妙┃官采",
-    "type":1,
-    "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
-    "changeable":0
-},
-{
-    "key": "皮皮虾",
-    "name": "🆘┃皮虾┃PPY",
-    "type": 3,
-    "api": "https://pan.szfx.top/down.php/540e0c721a30390c4f5d2d77b8286905.py",
-    "ext": "http://154.94.224.56:8762"
-},
-{
    "key": "csp_py_duoduo",
    "name": "🆘┃多多┃PPY",
    "type": 3,
@@ -230,6 +202,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/鬼片.py"
 },
 {
+    "key": "Acfun",
+    "name": "🆘┃慢剧┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/Acfun.py"
+},
+{
     "key": "csp_py_咕噜",
     "name": "🆘┃咕噜┃PPY",
     "type": 3,
@@ -270,6 +248,46 @@
     "name": "🆘┃牛牛┃短剧",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
+},
+{
+    "key": "xcm",
+    "name": "🐻┃熊大┃秒播",
+    "type": 4,
+    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key": "CO4K",
+    "name": "🆘┃咖啡┃C4K",
+    "type": 4,
+    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"奇妙官采",
+    "name":"🆘┃奇妙┃官采",
+    "type":1,
+    "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
+    "changeable":0
+},
+{
+    "key": "csp_py_皮皮虾",
+    "name": "🆘┃皮虾┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/皮虾.py",
+    "ext": "http://154.94.224.56:8762"
+},
+{
+    "key": "csp_py_爱奇艺",
+    "name": "🆘┃奇艺┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.py"
+},
+{
+    "key": "csp_py_YK",
+    "name": "🆘┃优酷┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
 },
 {
     "key": "csp_py_好好看",

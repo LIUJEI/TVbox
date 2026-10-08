@@ -4,6 +4,8 @@ import json
 import sys
 import uuid
 import copy
+import requests
+import re
 sys.path.append('..')
 from base.spider import Spider
 from pyquery import PyQuery as pq
@@ -45,6 +47,44 @@ class Spider(Spider):
         'origin': host,
         'referer': f'{host}/'
     }
+
+    def fetch(self, url, headers=None, params=None):
+        if headers is None:
+            headers = self.headers
+        try:
+            if params:
+                response = requests.get(url, headers=headers, params=params, timeout=15)
+            else:
+                response = requests.get(url, headers=headers, timeout=15)
+            response.raise_for_status()
+            return response
+        except Exception as e:
+            print(f"GET 请求失败: {url}, 错误: {e}")
+            return None
+
+    def post(self, url, json=None, data=None, headers=None, params=None):
+        if headers is None:
+            headers = self.headers
+        try:
+            if json:
+                response = requests.post(url, json=json, headers=headers, params=params, timeout=15)
+            elif data:
+                response = requests.post(url, data=data, headers=headers, params=params, timeout=15)
+            else:
+                response = requests.post(url, headers=headers, params=params, timeout=15)
+            response.raise_for_status()
+            return response
+        except Exception as e:
+            print(f"POST 请求失败: {url}, 错误: {e}")
+            return None
+
+    def cleanText(self, text):
+        if text is None:
+            return ''
+        text = re.sub(r'<script[^>]*>.*?</script>', '', text, flags=re.DOTALL)
+        text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL)
+        return text.strip()
+
 
     def homeContent(self, filter):
         cdata = {

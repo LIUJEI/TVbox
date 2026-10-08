@@ -2,6 +2,7 @@
 # by @6666
 import sys
 import time
+import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 sys.path.append('..')
 from base.spider import Spider
@@ -38,6 +39,21 @@ class Spider(Spider):
         'origin': rhost,
         'referer': f'{rhost}/'
     }
+
+    def fetch(self, url, headers=None, params=None):
+        if headers is None:
+            headers = self.headers
+        try:
+            if params:
+                response = requests.get(url, headers=headers, params=params, timeout=15)
+            else:
+                response = requests.get(url, headers=headers, timeout=15)
+            response.raise_for_status()
+            return response
+        except Exception as e:
+            print(f"GET 请求失败: {url}, 错误: {e}")
+            return None
+
 
     def homeContent(self, filter):
         result = {}

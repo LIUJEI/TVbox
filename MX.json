@@ -238,6 +238,20 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
 {
+    "key": "好好看",
+    "name": "🆘┃好看┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/ack.js",
+    "ext": {
+    "appid": "hkan",
+    "channelid": "c300000",
+    "versionName": "3.3.9",
+    "host": "https://vcache.shkjbd.com",
+    "package": "com.hkanC300000V250930.T120445",
+    "sort": "dujia1,dujia",
+    "lineCount": 1}
+},
+{
     "key": "半日",
     "name": "🆘┃半日┃PPY",
     "type": 3,

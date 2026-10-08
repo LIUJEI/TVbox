@@ -12,14 +12,14 @@
 {
     "key": "py_douban",
     "name": "🎬┣豆瓣┫推荐",
-    "type": 3,
+    "type": 2,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/TS/douban.js",
     "indexs": 0
 },
 {
-    "key": "js_Douban",
+    "key": "js_mohe",
     "name": "🎬┣魔盒┫首页",
-    "type": 3,
+    "type": 2,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/魔盒.js",
     "indexs": 0
 },

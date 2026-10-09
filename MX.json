@@ -239,6 +239,12 @@
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看戏.py"
 },
 {
+    "key": "py_爱电影",
+    "name": "🍑爱电影[影][PY]",
+    "type": 3,
+    "api": "./py/html/爱电影.py"
+},
+{
     "key": "csp_py_爱奇艺",
     "name": "🆘┃奇艺┃PPY",
     "type": 3,
@@ -286,6 +292,10 @@
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
+{"key": "py_星星短剧[短]","name": "🥝星星短剧[短][PY]","type": 3,"api": "./py/短/星星短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
+{"key": "py_七猫短剧[短]","name": "🥝七猫短剧[短][PY]","type": 3,"api": "./py/短/七猫短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
+{"key": "py_西饭短剧[短]","name": "🥝西饭短剧[短][PY]","type": 3,"api": "./py/短/西饭短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
+{"key": "py_妞妞短剧[短]","name": "🥝妞妞短剧[短][PY]","type": 3,"api": "./py/短/妞妞短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
 {
     "key": "csp_py_皮皮虾",
     "name": "🆘┃皮虾┃PPY",
@@ -297,7 +307,7 @@
     "key": "py_欣欣影视",
     "name": "🆘┃欣欣┃PPY",
     "type": 3,
-    "api": "./py/模板/XinJie.py",
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/新界.py",
     "ext": {
     "host": "usv46c9uRCE/PugcvJY1Pc/BM6KQv8vKYzpgVFmTPv8wdb18jQRMx9ElUPtnlHCd",
     "key": "505cab36b1111416",

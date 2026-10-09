@@ -62,7 +62,7 @@
     "key": "py_maple",
     "name": "🆘┃枫叶┃PPY",
     "type": 3,
-    "api": "https://gitee.com/lyun_1_0/TS/raw/main/XB/%E6%9E%AB%E5%8F%B6.py",
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.py",
     "ext": {
     "sites": [
     "https://www.zzztool.com",
@@ -595,6 +595,26 @@
     "type" : 3,
     "api" : "csp_XBPQ",
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/零七.php"
+},
+{
+    "key": "66dapianwang",
+    "name": "💕 66大乙💕 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"66dapianwang\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"66大乙\"}",
+    "searchable": 1,
+    "quickSearch": 1,
+    "filterable": 1
+},
+{
+    "key": "baihuayingyuan",
+    "name": "💕 枫斗十一线💕 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"baihuayingyuan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十一线\"}",
+    "searchable": 1,
+    "quickSearch": 1,
+    "filterable": 1
 },
 {
     "key": "nangua",

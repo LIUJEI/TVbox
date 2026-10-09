@@ -383,7 +383,7 @@
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看客.py",
     "ext": {
-    "host": "https://kankelm.cn:2024/appdomain.txt",
+    "host": "https://kanke.kankelm.cn:2024",
     "key": "ygcnbcvybqqckwqy",
     "iv": "1583560747143708"}
 },

@@ -32,7 +32,7 @@
 },
 {
     "key":"csp_未来",
-    "name":"🐻┃未来┃C4K",
+    "name":"🆘┃未来┃C4K",
     "type":1,
     "api":"http://110.42.66.100:12678/api.php",
     "playUrl":"json:http://110.42.66.100:5666/api/?key=c31bfd818ac47875ab4922f03834afcc&url=",
@@ -237,6 +237,12 @@
     "name":"🆘┃看戏┃PPY",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看戏.py"
+},
+{
+    "key": "py_壹影视",
+    "name": "🆘┃壹影┃PPY",
+    "type": 3,
+    "api": "https://gitee.com/lyun_1_0/TS/raw/main/XB/壹影.py"
 },
 {
     "key": "csp_py_爱奇艺",

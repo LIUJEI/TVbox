@@ -307,20 +307,13 @@ async function detail(id) {
         // 附目录提示: 让用户知道这部剧/电影在其他爬虫里搜什么关键词
         remarks += ' · 搜索关键词: ' + (d.title || '');
 
-        // 构建多播放源 —— vod_play_url 只放纯 URL，不要任何前缀
+        // 构建多播放源 —— 按稳妥度排序
+        // vod_play_url 只放纯 URL，不要任何前缀
         // TVBox play(flag, id) 里的 flag 就是这里的纯 URL 值
         const playFromList = [];
         const playUrlList = [];
 
-        // 1. 正片源: linewatches/vendors → 视频网站播放页 URL
-        const mainHref = extractMainHref(d);
-        if (mainHref) {
-            const srcName = getMainSourceName(d) || '正片';
-            playFromList.push(srcName);
-            playUrlList.push(mainHref);
-        }
-
-        // 2. 预告片直链: trailers.video_url 是 mp4 直链 (parse:0 秒播)
+        // 1. 预告片直链 —— parse:0 秒播（最稳妥）
         const trailers = d.trailers || [];
         for (const t of trailers.slice(0, 2)) {
             if (t.video_url) {
@@ -329,7 +322,15 @@ async function detail(id) {
             }
         }
 
-        // 3. 豆瓣详情页 (parse:1 让 TVBox 内置嗅探)
+        // 2. 正片源: linewatches/vendors → 视频网站播放页 (parse:1 嗅探)
+        const mainHref = extractMainHref(d);
+        if (mainHref) {
+            const srcName = getMainSourceName(d) || '正片';
+            playFromList.push(srcName);
+            playUrlList.push(mainHref);
+        }
+
+        // 3. 豆瓣详情页 (parse:1 嗅探兜底)
         const infoUrl = d.info_url || d.sharing_url || d.url || '';
         if (infoUrl) {
             playFromList.push('豆瓣详情');
@@ -443,11 +444,9 @@ async function search(wd, quick, pg) {
     }
 }
 
-// 解析 API（2026-10-09 健康检查后只留活着的）
-// zxy 是唯一能出 m3u8 的，但只对部分片源有效
-const PARSE_APIS = [
-    'http://zxy-th1.jsszks.dpdns.org:8090/?url=',     // 唯一活的（部分片源）
-];
+// 2026-10-09 健康检查: 9 个解析 API 8 个 DNS/404，唯一活的 zxy 对新片返回 {code:404}
+// 解析 API 生态基本死掉，直接 parse:1 不浪费时间
+// const PARSE_APIS = []; // 保留占位，未来有活的再加
 
 // play(flag, id) — TVBox 直接把 vod_play_url 里的**纯 URL** 传过来
 // flag 不带任何前缀，就是 URL 本身
@@ -464,32 +463,13 @@ async function play(flag, id, vipFlags) {
             });
         }
 
-        // === 类型 2: 豆瓣相关 URL — parse:1 让 TVBox 内置嗅探 ===
-        if (url.indexOf('douban.com') >= 0) {
-            return JSON.stringify({ parse: 1, url: url, header: {} });
-        }
-
-        // === 类型 3: 视频网站播放页 — 送第三方解析 API ===
-        const isVideoSite = url.match(/v\.qq\.com|iqiyi\.com|youku\.com|mgtv\.com|bilibili\.com|le\.com|sohu\.com|tudou\.com/i);
-        if (isVideoSite) {
-            for (const api of PARSE_APIS) {
-                try {
-                    const parseUrl = api + encodeURIComponent(url);
-                    const pr = await apiGet(parseUrl);
-                    if (pr && pr.url && typeof pr.url === 'string' && pr.url.indexOf('http') === 0) {
-                        return JSON.stringify({
-                            parse: 0, url: pr.url,
-                            header: { 'User-Agent': 'Mozilla/5.0', 'Referer': url }
-                        });
-                    }
-                } catch (e) { /* 下一个 API */ }
-            }
-            // 全部解析 API 挂了 — 降级 parse:1 让 TVBox 尝试嗅探原播放页
-            return JSON.stringify({ parse: 1, url: url, header: {} });
-        }
-
-        // === 类型 4: 未知 URL — 嗅探 ===
-        return JSON.stringify({ parse: 1, url: url, header: {} });
+        // === 类型 2: 视频网站播放页 / 豆瓣详情 — parse:1 让 TVBox 内置嗅探 ===
+        // 腾讯/爱奇艺/优酷 等是 SPA + 强防盗链，QuickJS 里搞不定 m3u8 直链
+        // 解析 API 全部挂了，直接 parse:1 不浪费时间
+        return JSON.stringify({ parse: 1, url: url, header: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+            'Referer': url.indexOf('douban') >= 0 ? 'https://movie.douban.com/' : 'https://v.qq.com/'
+        }});
 
     } catch (e) {
         return JSON.stringify({ parse: 0, url: '', header: {} });

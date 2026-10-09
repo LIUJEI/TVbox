@@ -258,7 +258,12 @@ async function category(tid, pg, filter, extend) {
     return JSON.stringify({ list: videos, page: page, pagecount: 9999, limit: 20, total: 999999 });
 }
 
-// ---------- detail: 拉豆瓣 subject 详情 ----------
+// ---------- detail: 豆瓣当目录 + 多播放源 ----------
+// 策略:
+//  1. 正片解析源: linewatches/vendors → 播放页 URL → 送解析 API
+//  2. 预告片直链: trailers.video_url → mp4 直链 parse:0 秒播
+//  3. 豆瓣详情嗅探: info_url → parse:1 让 TVBox 嗅探
+//  4. 目录提示: vod_remarks 里带 "请切换其他爬虫搜「标题」" 的关键词
 async function detail(id) {
     try {
         const url = DOUBAN_API + '/subject/' + id + '?apikey=' + API_KEY;
@@ -274,7 +279,6 @@ async function detail(id) {
         const actors = (d.actors && d.actors.map(x => x.name).slice(0, 8).join(', ')) || '';
         const intro = d.intro || '';
 
-        // TV 显示集数，movie 显示时长
         let remarks = '';
         if (d.is_tv || d.type === 'tv') {
             const ec = d.episodes_count || (d.episodes_info && d.episodes_info.replace(/[^\d]/g, '')) || '';
@@ -284,11 +288,37 @@ async function detail(id) {
             remarks = dur;
         }
         if (rating) remarks = (remarks ? remarks + ' · ' : '') + '豆瓣 ' + rating;
+        // 附目录提示: 让用户知道这部剧/电影在其他爬虫里搜什么关键词
+        remarks += ' · 搜索关键词: ' + (d.title || '');
 
-        // 播放来源: 豆瓣只有 info_url / sharing_url，本身无 m3u8 播放链接
-        // 用 info_url 让用户看详情页，实际播放需配第三方解析或嗅探
-        const playFrom = '豆瓣详情';
-        const playUrl = '豆瓣详情页$' + (d.info_url || d.sharing_url || d.url || '');
+        // 构建多播放源
+        const playFromList = [];
+        const playUrlList = [];
+
+        // 1. 正片源: 从 linewatches/vendors 提取的播放页 URL
+        const mainHref = extractMainHref(d);
+        if (mainHref) {
+            const srcName = (getMainSourceName(d) || '正片');
+            playFromList.push(srcName + '解析');
+            playUrlList.push('正片$' + mainHref);
+        }
+
+        // 2. 预告片直链: trailers.video_url 是 mp4 直链
+        const trailers = d.trailers || [];
+        for (const t of trailers.slice(0, 2)) {
+            if (t.video_url) {
+                const label = (t.title || '预告片').replace(/[\r\n]/g, '').slice(0, 20);
+                playFromList.push('预告片');
+                playUrlList.push(label + '$' + t.video_url);
+            }
+        }
+
+        // 3. info_url 嗅探兜底
+        const infoUrl = d.info_url || d.sharing_url || d.url || '';
+        if (infoUrl) {
+            playFromList.push('豆瓣详情嗅探');
+            playUrlList.push('嗅探$' + infoUrl);
+        }
 
         return JSON.stringify({
             list: [{
@@ -301,12 +331,60 @@ async function detail(id) {
                 vod_actor: actors,
                 vod_director: directors,
                 vod_content: '【琉🔹璃❤广告勿信👉剧情】📢' + intro,
-                vod_play_from: playFrom,
-                vod_play_url: playUrl,
+                vod_play_from: playFromList.join('$$$'),
+                vod_play_url: playUrlList.join('$$$'),
                 type_name: genres
             }]
         });
     } catch (e) { return JSON.stringify({ list: [] }); }
+}
+
+// 从 linewatches + vendors 提取主播放页 URL 和源名
+function extractMainHref(d) {
+    const linewatches = d.linewatches || [];
+    const vendors = d.vendors || [];
+
+    for (const lw of linewatches) {
+        const uri = lw.source_uri || '';
+        let m = uri.match(/cid[=\/]([a-zA-Z0-9]+)/);
+        let vid = uri.match(/vid[=\/]([a-zA-Z0-9]+)/);
+        if (m && vid) return 'https://v.qq.com/x/cover/' + m[1] + '/' + vid[1] + '.html';
+        if (m) return 'https://v.qq.com/x/cover/' + m[1] + '.html';
+        m = uri.match(/showid[=\/]([a-zA-Z0-9]+)/);
+        if (m) return 'https://v.youku.com/v_show/id_' + m[1] + '.html';
+        m = uri.match(/albumId[=\/]([a-zA-Z0-9]+)/);
+        if (m) return 'https://www.iqiyi.com/v_' + m[1] + '.html';
+        m = uri.match(/https?:\/\/[^&\s]+/);
+        if (m) return m[0];
+    }
+
+    for (const v of vendors) {
+        const cts = v.click_trackings || [];
+        for (const ct of cts) {
+            const m = ct.match(/source=([^&]+)/);
+            const vmid = ct.match(/video_id=([^&]+)/);
+            if (!m || !vmid) continue;
+            const src = m[1];
+            if (src === 'qq') return 'https://v.qq.com/x/cover/' + vmid[1] + '.html';
+            if (src === 'iqiyi') return 'https://www.iqiyi.com/v_' + vmid[1] + '.html';
+            if (src === 'youku') return 'https://v.youku.com/v_show/id_' + vmid[1] + '.html';
+        }
+    }
+    return '';
+}
+
+// 获取主源名称（腾讯/优酷/爱奇艺）
+function getMainSourceName(d) {
+    const lw = (d.linewatches || [])[0];
+    if (lw && lw.source && lw.source.name) return lw.source.name;
+    const v = (d.vendors || [])[0];
+    if (v && v.app_bundle_id) {
+        const b = v.app_bundle_id;
+        if (b.indexOf('qqlive') >= 0) return '腾讯视频';
+        if (b.indexOf('youku') >= 0) return '优酷';
+        if (b.indexOf('qiyi') >= 0) return '爱奇艺';
+    }
+    return '';
 }
 
 // ---------- search: 综合搜索 ----------
@@ -349,96 +427,96 @@ async function search(wd, quick, pg) {
     }
 }
 
-// 第三方解析 API（与腾讯视频爬虫同款）
+// 第三方解析 API（遍历尝试，返回第一个有效 m3u8）
 const PARSE_APIS = [
-    'https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=',
+    'https://jxapi.net/api/?key=235638&url=',
+    'https://jx.xmflv.com/?url=',
+    'https://www.8090g.cn/?url=',
+    'https://jx.m3u8.tv/jiexi/?url=',
+    'https://jx.lol/?url=',
     'http://zxy-th1.jsszks.dpdns.org:8090/?url=',
 ];
 
 async function play(flag, id, vipFlags) {
     try {
-        // 1. 拉 subject 详情
-        const url = DOUBAN_API + '/subject/' + id + '?apikey=' + API_KEY;
-        const d = await apiGet(url);
-        if (!d) return JSON.stringify({ parse: 0, url: '', header: {} });
-
-        // 2. 从 linewatches / vendors 里提取可播放链接
-        let playHref = '';   // v.qq.com / iqiyi.com 等播放页
-        let sourceName = '';
-        const linewatches = d.linewatches || [];
-        const vendors = d.vendors || [];
-
-        // 优先从 linewatches 里拿 cid/vid
-        for (const lw of linewatches) {
-            const uri = lw.source_uri || lw.url || '';
-            // txvideo://v.qq.com/VideoDetailActivity?cid=mzc00200803dr6b&vid=c4102g9a01t
-            const cidMatch = uri.match(/cid[=\/]([a-zA-Z0-9]+)/);
-            const vidMatch = uri.match(/vid[=\/]([a-zA-Z0-9]+)/);
-            if (cidMatch && vidMatch) {
-                playHref = 'https://v.qq.com/x/cover/' + cidMatch[1] + '/' + vidMatch[1] + '.html';
-                sourceName = (lw.source && lw.source.name) || '腾讯视频';
-                break;
-            }
-            // iqiyi:// 等其他源
-            const iqMatch = uri.match(/albumId[=\/]([a-zA-Z0-9]+)/);
-            if (!playHref && iqMatch) {
-                playHref = 'https://www.iqiyi.com/v_' + iqMatch[1] + '.html';
-                sourceName = (lw.source && lw.source.name) || '爱奇艺';
-            }
+        // flag 格式: "正片$播放页URL" / "预告片名$mp4URL" / "嗅探$infoUrl"
+        // TVBox 调 play 时传的是单集 flag（从 vod_play_url 的 $$$ 里拆出来的）
+        let sourceLabel = '';
+        let targetUrl = '';
+        
+        if (flag && flag.indexOf('$') >= 0) {
+            const idx = flag.indexOf('$');
+            sourceLabel = flag.slice(0, idx);
+            targetUrl = flag.slice(idx + 1);
+        } else {
+            // 无 $ 分隔 — 从 id 重新拉 detail 兜底
+            return await playById(id);
         }
-
-        // 再试 vendors 的 click_tracking / access 链接
-        if (!playHref) {
-            for (const v of vendors) {
-                const ct = (v.click_trackings && v.click_trackings[0]) || '';
-                if (ct) {
-                    const vidMatch = ct.match(/video_id=([^&]+)/);
-                    const sourceMatch = ct.match(/source=([^&]+)/);
-                    if (vidMatch && sourceMatch) {
-                        const source = sourceMatch[1];
-                        if (source === 'qq') {
-                            playHref = 'https://v.qq.com/x/cover/' + vidMatch[1] + '.html';
-                        } else if (source === 'iqiyi') {
-                            playHref = 'https://www.iqiyi.com/v_' + vidMatch[1] + '.html';
-                        } else {
-                            playHref = ct;
-                        }
-                        sourceName = (v.app_bundle_id || source);
-                        break;
-                    }
-                }
-            }
+        
+        // === 类型 1: mp4/m3u8 直链 — 秒播 ===
+        if (targetUrl.match(/\.(mp4|m3u8)(\?|$)/i) || sourceLabel.indexOf('预告') >= 0) {
+            return JSON.stringify({
+                parse: 0, url: targetUrl,
+                header: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Referer': 'https://movie.douban.com/' }
+            });
         }
-
-        // 3. 有播放页就送第三方解析
-        if (playHref) {
+        
+        // === 类型 2: 嗅探 — parse:1 ===
+        if (sourceLabel === '嗅探' || sourceLabel.indexOf('详情') >= 0 || targetUrl.indexOf('douban.com') >= 0) {
+            return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
+        }
+        
+        // === 类型 3: 正片解析 — 遍历第三方 API ===
+        if (sourceLabel === '正片' || targetUrl.match(/v\.qq\.com|iqiyi\.com|youku\.com|mgtv\.com|bilibili\.com/i)) {
             for (const api of PARSE_APIS) {
                 try {
-                    const parseUrl = api + encodeURIComponent(playHref);
-                    const pr = await apiGet(parseUrl);
-                    if (pr && pr.url) {
+                    const pr = await apiGet(api + encodeURIComponent(targetUrl));
+                    if (pr && pr.url && typeof pr.url === 'string' && pr.url.indexOf('http') === 0) {
                         return JSON.stringify({
-                            parse: 0,
-                            url: pr.url,
-                            header: {
-                                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                                'Referer': playHref
-                            }
+                            parse: 0, url: pr.url,
+                            header: { 'User-Agent': 'Mozilla/5.0', 'Referer': targetUrl }
                         });
                     }
-                } catch (e) { /* 下一个 API */ }
+                } catch (e) {}
             }
+            // 解析 API 全部挂了 — 降级嗅探原始播放页
+            return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
         }
-
-        // 4. 实在没播放源，给 info_url 让 TVBox 嗅探（parse:1）
-        const infoUrl = d.info_url || d.sharing_url || d.url || '';
-        if (infoUrl) {
-            return JSON.stringify({ parse: 1, url: infoUrl, header: {} });
-        }
-
-        // 5. 最后：预告片（trailers 里有 video 但只有预告，不是正片）
+        
+        // 未知类型 — 直接嗅探
+        return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
+        
+    } catch (e) {
         return JSON.stringify({ parse: 0, url: '', header: {} });
+    }
+}
 
+// 从 id 兜底: 拉详情 → trailer 直链 → 正片解析 → 嗅探
+async function playById(id) {
+    try {
+        const d = await apiGet(DOUBAN_API + '/subject/' + id + '?apikey=' + API_KEY);
+        if (!d) return JSON.stringify({ parse: 0, url: '', header: {} });
+        
+        const trailers = d.trailers || [];
+        if (trailers.length && trailers[0].video_url) {
+            return JSON.stringify({ parse: 0, url: trailers[0].video_url, header: {} });
+        }
+        
+        const mainHref = extractMainHref(d);
+        if (mainHref) {
+            for (const api of PARSE_APIS) {
+                try {
+                    const pr = await apiGet(api + encodeURIComponent(mainHref));
+                    if (pr && pr.url && pr.url.indexOf('http') === 0) {
+                        return JSON.stringify({ parse: 0, url: pr.url, header: {} });
+                    }
+                } catch (e) {}
+            }
+            return JSON.stringify({ parse: 1, url: mainHref, header: {} });
+        }
+        
+        const infoUrl = d.info_url || d.sharing_url || d.url || '';
+        return JSON.stringify({ parse: infoUrl ? 1 : 0, url: infoUrl || '', header: {} });
     } catch (e) {
         return JSON.stringify({ parse: 0, url: '', header: {} });
     }

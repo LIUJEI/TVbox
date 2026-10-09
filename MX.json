@@ -271,7 +271,7 @@
 {
     "key" : "小酷短剧", 
     "name" : "小酷短剧[短]", 
-    "type" : 3, 
+    "type" : 2, 
     "api" : "https://gitee.com/lyun_1_0/TS/raw/main/TS/xiaoku.js"
 },
 {

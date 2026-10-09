@@ -275,6 +275,12 @@
     "api" : "https://gitee.com/lyun_1_0/TS/raw/main/TS/xiaoku.py"
 },
 {
+    "key" : "花生短剧", 
+    "name" : "花生短剧[短]", 
+    "type" : 3, 
+    "api" : "https://gitee.com/lyun_1_0/TS/raw/main/TS/huasheng.py"
+},
+{
     "key": "py_hongguo",
     "name": "🆘┃红果┃短剧",
     "type": 3,

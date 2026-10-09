@@ -39,10 +39,26 @@ async function apiGet(url) {
     try {
         const r = await req(url, {
             headers: { 'User-Agent': USER_AGENT, 'Referer': REFERER },
-            timeout: 5000
+            timeout: 8000
         });
         const text = (r && r.content != null) ? String(r.content) : '';
-        return text ? JSON.parse(text) : {};
+        if (!text) return {};
+        try {
+            const j = JSON.parse(text);
+            // 解析 API 可能返回 {code:404, msg:"未找到资源"} 这种业务错误
+            if (j && typeof j === 'object' && j.code != null && j.code !== 0 && j.code !== 200) {
+                return {};  // 业务错误 → 当失败处理
+            }
+            return j;
+        } catch (e) {
+            // 不是 JSON —— 如果直接就是 m3u8 内容，也当作成功
+            if (text.indexOf('#EXTM3U') >= 0 || text.match(/^https?:\/\/[^\s"']+\.m3u8/)) {
+                // 返回假对象让 play 里的 pr.url 能匹配
+                const m = text.match(/https?:\/\/[^\s"']+\.m3u8[^\s"']*/);
+                if (m) return { url: m[0] };
+            }
+            return {};
+        }
     } catch (e) { return {}; }
 }
 
@@ -291,33 +307,33 @@ async function detail(id) {
         // 附目录提示: 让用户知道这部剧/电影在其他爬虫里搜什么关键词
         remarks += ' · 搜索关键词: ' + (d.title || '');
 
-        // 构建多播放源
+        // 构建多播放源 —— vod_play_url 只放纯 URL，不要任何前缀
+        // TVBox play(flag, id) 里的 flag 就是这里的纯 URL 值
         const playFromList = [];
         const playUrlList = [];
 
-        // 1. 正片源: 从 linewatches/vendors 提取的播放页 URL
+        // 1. 正片源: linewatches/vendors → 视频网站播放页 URL
         const mainHref = extractMainHref(d);
         if (mainHref) {
-            const srcName = (getMainSourceName(d) || '正片');
-            playFromList.push(srcName + '解析');
-            playUrlList.push('正片$' + mainHref);
+            const srcName = getMainSourceName(d) || '正片';
+            playFromList.push(srcName);
+            playUrlList.push(mainHref);
         }
 
-        // 2. 预告片直链: trailers.video_url 是 mp4 直链
+        // 2. 预告片直链: trailers.video_url 是 mp4 直链 (parse:0 秒播)
         const trailers = d.trailers || [];
         for (const t of trailers.slice(0, 2)) {
             if (t.video_url) {
-                const label = (t.title || '预告片').replace(/[\r\n]/g, '').slice(0, 20);
                 playFromList.push('预告片');
-                playUrlList.push(label + '$' + t.video_url);
+                playUrlList.push(t.video_url);
             }
         }
 
-        // 3. info_url 嗅探兜底
+        // 3. 豆瓣详情页 (parse:1 让 TVBox 内置嗅探)
         const infoUrl = d.info_url || d.sharing_url || d.url || '';
         if (infoUrl) {
-            playFromList.push('豆瓣详情嗅探');
-            playUrlList.push('嗅探$' + infoUrl);
+            playFromList.push('豆瓣详情');
+            playUrlList.push(infoUrl);
         }
 
         return JSON.stringify({
@@ -427,96 +443,54 @@ async function search(wd, quick, pg) {
     }
 }
 
-// 第三方解析 API（遍历尝试，返回第一个有效 m3u8）
+// 解析 API（2026-10-09 健康检查后只留活着的）
+// zxy 是唯一能出 m3u8 的，但只对部分片源有效
 const PARSE_APIS = [
-    'https://jxapi.net/api/?key=235638&url=',
-    'https://jx.xmflv.com/?url=',
-    'https://www.8090g.cn/?url=',
-    'https://jx.m3u8.tv/jiexi/?url=',
-    'https://jx.lol/?url=',
-    'http://zxy-th1.jsszks.dpdns.org:8090/?url=',
+    'http://zxy-th1.jsszks.dpdns.org:8090/?url=',     // 唯一活的（部分片源）
 ];
 
+// play(flag, id) — TVBox 直接把 vod_play_url 里的**纯 URL** 传过来
+// flag 不带任何前缀，就是 URL 本身
 async function play(flag, id, vipFlags) {
     try {
-        // flag 格式: "正片$播放页URL" / "预告片名$mp4URL" / "嗅探$infoUrl"
-        // TVBox 调 play 时传的是单集 flag（从 vod_play_url 的 $$$ 里拆出来的）
-        let sourceLabel = '';
-        let targetUrl = '';
-        
-        if (flag && flag.indexOf('$') >= 0) {
-            const idx = flag.indexOf('$');
-            sourceLabel = flag.slice(0, idx);
-            targetUrl = flag.slice(idx + 1);
-        } else {
-            // 无 $ 分隔 — 从 id 重新拉 detail 兜底
-            return await playById(id);
-        }
-        
-        // === 类型 1: mp4/m3u8 直链 — 秒播 ===
-        if (targetUrl.match(/\.(mp4|m3u8)(\?|$)/i) || sourceLabel.indexOf('预告') >= 0) {
+        const url = String(flag || '').trim();
+        if (!url) return JSON.stringify({ parse: 0, url: '', header: {} });
+
+        // === 类型 1: mp4/m3u8 直链（trailer）— parse:0 秒播 ===
+        if (url.match(/\.(mp4|m3u8|mpd|flv)(\?|#|$)/i)) {
             return JSON.stringify({
-                parse: 0, url: targetUrl,
+                parse: 0, url: url,
                 header: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Referer': 'https://movie.douban.com/' }
             });
         }
-        
-        // === 类型 2: 嗅探 — parse:1 ===
-        if (sourceLabel === '嗅探' || sourceLabel.indexOf('详情') >= 0 || targetUrl.indexOf('douban.com') >= 0) {
-            return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
+
+        // === 类型 2: 豆瓣相关 URL — parse:1 让 TVBox 内置嗅探 ===
+        if (url.indexOf('douban.com') >= 0) {
+            return JSON.stringify({ parse: 1, url: url, header: {} });
         }
-        
-        // === 类型 3: 正片解析 — 遍历第三方 API ===
-        if (sourceLabel === '正片' || targetUrl.match(/v\.qq\.com|iqiyi\.com|youku\.com|mgtv\.com|bilibili\.com/i)) {
+
+        // === 类型 3: 视频网站播放页 — 送第三方解析 API ===
+        const isVideoSite = url.match(/v\.qq\.com|iqiyi\.com|youku\.com|mgtv\.com|bilibili\.com|le\.com|sohu\.com|tudou\.com/i);
+        if (isVideoSite) {
             for (const api of PARSE_APIS) {
                 try {
-                    const pr = await apiGet(api + encodeURIComponent(targetUrl));
+                    const parseUrl = api + encodeURIComponent(url);
+                    const pr = await apiGet(parseUrl);
                     if (pr && pr.url && typeof pr.url === 'string' && pr.url.indexOf('http') === 0) {
                         return JSON.stringify({
                             parse: 0, url: pr.url,
-                            header: { 'User-Agent': 'Mozilla/5.0', 'Referer': targetUrl }
+                            header: { 'User-Agent': 'Mozilla/5.0', 'Referer': url }
                         });
                     }
-                } catch (e) {}
+                } catch (e) { /* 下一个 API */ }
             }
-            // 解析 API 全部挂了 — 降级嗅探原始播放页
-            return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
+            // 全部解析 API 挂了 — 降级 parse:1 让 TVBox 尝试嗅探原播放页
+            return JSON.stringify({ parse: 1, url: url, header: {} });
         }
-        
-        // 未知类型 — 直接嗅探
-        return JSON.stringify({ parse: 1, url: targetUrl, header: {} });
-        
-    } catch (e) {
-        return JSON.stringify({ parse: 0, url: '', header: {} });
-    }
-}
 
-// 从 id 兜底: 拉详情 → trailer 直链 → 正片解析 → 嗅探
-async function playById(id) {
-    try {
-        const d = await apiGet(DOUBAN_API + '/subject/' + id + '?apikey=' + API_KEY);
-        if (!d) return JSON.stringify({ parse: 0, url: '', header: {} });
-        
-        const trailers = d.trailers || [];
-        if (trailers.length && trailers[0].video_url) {
-            return JSON.stringify({ parse: 0, url: trailers[0].video_url, header: {} });
-        }
-        
-        const mainHref = extractMainHref(d);
-        if (mainHref) {
-            for (const api of PARSE_APIS) {
-                try {
-                    const pr = await apiGet(api + encodeURIComponent(mainHref));
-                    if (pr && pr.url && pr.url.indexOf('http') === 0) {
-                        return JSON.stringify({ parse: 0, url: pr.url, header: {} });
-                    }
-                } catch (e) {}
-            }
-            return JSON.stringify({ parse: 1, url: mainHref, header: {} });
-        }
-        
-        const infoUrl = d.info_url || d.sharing_url || d.url || '';
-        return JSON.stringify({ parse: infoUrl ? 1 : 0, url: infoUrl || '', header: {} });
+        // === 类型 4: 未知 URL — 嗅探 ===
+        return JSON.stringify({ parse: 1, url: url, header: {} });
+
     } catch (e) {
         return JSON.stringify({ parse: 0, url: '', header: {} });
     }

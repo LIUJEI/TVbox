@@ -269,6 +269,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芒果.py"
 },
 {
+    "key" : "小酷短剧", 
+    "name" : "小酷短剧[短]", 
+    "type" : 3, 
+    "api" : "https://gitee.com/lyun_1_0/TS/raw/main/TS/xiaoku.js"
+},
+{
     "key": "py_hongguo",
     "name": "🆘┃红果┃短剧",
     "type": 3,

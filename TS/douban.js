@@ -1,4 +1,4 @@
-// 豆瓣 douban —— 由 douban.py 移植为 qjs 单文件
+// 豆瓣 douban.js 单文件
 // 纯 frodo.douban.com 接口 + apikey 硬编码；detail/search/player 空实现
 const DOUBAN_API = 'https://frodo.douban.com/api/v2';
 const API_KEY = '0ac44ae016490db2204ce0a042db2916';
@@ -208,7 +208,7 @@ async function init(cfg) {}
 async function home(filter) {
     const cateManual = {
         
-        '魔盒推荐👾': 'movie_top250',
+        '魔盒推荐': 'movie_top250',
         '热门电影': 'hot_gaia', '热播剧集': 'tv_hot', '热播综艺': 'show_hot', 
         '热门动漫': 'tv_animation','电影榜单': 'rank_list_movie', '电视榜单': 'rank_list_tv'
     };
@@ -444,36 +444,31 @@ async function search(wd, quick, pg) {
     }
 }
 
-// 2026-10-09 健康检查: 9 个解析 API 8 个 DNS/404，唯一活的 zxy 对新片返回 {code:404}
-// 解析 API 生态基本死掉，直接 parse:1 不浪费时间
-// const PARSE_APIS = []; // 保留占位，未来有活的再加
+// 全部 parse:1 嗅探，trailer mp4 直链 parse:0
 
 // play(flag, id) — TVBox 直接把 vod_play_url 里的**纯 URL** 传过来
-// flag 不带任何前缀，就是 URL 本身
 async function play(flag, id, vipFlags) {
     try {
-        const url = String(flag || '').trim();
-        if (!url) return JSON.stringify({ parse: 0, url: '', header: {} });
+        var url = String(flag || '').trim();
+        if (!url) return JSON.stringify({ parse: 0, url: '' });
 
-        // === 类型 1: mp4/m3u8 直链（trailer）— parse:0 秒播 ===
+        // mp4/m3u8/mpd/flv 直链 — parse:0 直接播
         if (url.match(/\.(mp4|m3u8|mpd|flv)(\?|#|$)/i)) {
-            return JSON.stringify({
-                parse: 0, url: url,
-                header: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Referer': 'https://movie.douban.com/' }
-            });
+            return JSON.stringify({ parse: 0, url: url });
         }
 
-        // === 类型 2: 视频网站播放页 / 豆瓣详情 — parse:1 让 TVBox 内置嗅探 ===
-        // 腾讯/爱奇艺/优酷 等是 SPA + 强防盗链，QuickJS 里搞不定 m3u8 直链
-        // 解析 API 全部挂了，直接 parse:1 不浪费时间
-        return JSON.stringify({ parse: 1, url: url, header: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Referer': url.indexOf('douban') >= 0 ? 'https://movie.douban.com/' : 'https://v.qq.com/'
-        }});
+        // 其他一律 parse:1 让 TVBox 内置嗅探
+        return JSON.stringify({ parse: 1, url: url });
 
     } catch (e) {
-        return JSON.stringify({ parse: 0, url: '', header: {} });
+        return JSON.stringify({ parse: 0, url: '' });
     }
 }
 
+// 兼容 TVBox QuickJS — 两种 export 格式都写上
+// ESM 格式
 export default { init, home, homeVod, category, detail, search, play };
+// CommonJS 格式（部分老 TVBox 需要）
+if (typeof module !== 'undefined') {
+    module.exports = { init, home, homeVod, category, detail, search, play };
+}

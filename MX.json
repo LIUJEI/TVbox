@@ -597,13 +597,6 @@
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/零七.php"
 },
 {
-    "key": "baihuayingyuan",
-    "name": "💞┃影視┃百花 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"baihuayingyuan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十一线\"}"
-},
- {
     "key": "bajieyingshi",
     "name": "💞┃影視┃八戒 ",
     "type": 3,

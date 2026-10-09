@@ -597,185 +597,82 @@
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/零七.php"
 },
 {
-    "key": "66dapianwang",
-    "name": "💕 66大乙💕 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"66dapianwang\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"66大乙\"}",
-    "searchable": 1,
-    "quickSearch": 1,
-    "filterable": 1
-},
-{
     "key": "baihuayingyuan",
-    "name": "💕 枫斗十一线💕 ",
+    "name": "💞┃影視┃百花 ",
     "type": 3,
     "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"baihuayingyuan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十一线\"}",
-    "searchable": 1,
-    "quickSearch": 1,
-    "filterable": 1
+    "ext": "{\"site\": \"baihuayingyuan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十一线\"}"
 },
  {
     "key": "bajieyingshi",
-    "name": "💕 枫斗十三线💕 ",
+    "name": "💞┃影視┃八戒 ",
     "type": 3,
     "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"bajieyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十三线\"}",
-    "searchable": 1,
-    "quickSearch": 1,
-    "filterable": 1
-},
- {
-      "key": "didayingshi",
-      "name": "💕 枫斗二十一线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"didayingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十一线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
+    "ext": "{\"site\": \"bajieyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十三线\"}"
 },
 {
-      "key": "diduanyingshi",
-      "name": "💕 枫斗二十二线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"diduanyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十二线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
+    "key": "didayingshi",
+    "name": "💞┃影視┃抵达 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"didayingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十一线\"}"
 },
 {
-      "key": "feiniuyingshi",
-      "name": "💕 枫斗二十九线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"feiniuyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十九线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
+    "key": "feiniuyingshi",
+    "name": "💞┃影視┃肥牛 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"feiniuyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十九线\"}"
 },
- {
-      "key": "hanxiaoquan",
-      "name": "💕 枫斗三十四线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"hanxiaoquan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十四线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-     {
-      "key": "haojuwu",
-      "name": "💕 号剧五💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"haojuwu\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"号剧五\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "hemajuchang",
-      "name": "💕 枫斗三十六线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"hemajuchang\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十六线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "jinpaiAPP",
-      "name": "💕 枫斗三十九线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"jinpaiAPP\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十九线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "juOK",
-      "name": "💕 枫斗四十线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"juOK\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗四十线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "juxiafan4K",
-      "name": "💕 枫斗四十三线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"juxiafan4K\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗四十三线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "kaiduanyingshi",
-      "name": "💕 枫斗四十六线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"kaiduanyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗四十六线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "kanxiyingshi",
-      "name": "💕 枫斗五十线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"kanxiyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗五十线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-     {
-      "key": "nishipin",
-      "name": "💕 枫斗五十三线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"nishipin\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗五十三线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-     {
-      "key": "yingziyinyue",
-      "name": "💕 枫斗七十五线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"yingziyinyue\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗七十五线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-     {
-      "key": "yinyuejuhe",
-      "name": "💕 枫斗七十六线💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"yinyuejuhe\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗七十六线\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-      {
-      "key": "yiqiyingshi",
-      "name": "💕 一七影视💕 ",
-      "type": 3,
-      "api": "http://xn--oev29b.top/files/py/loader.py",
-      "ext": "{\"site\": \"yiqiyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"一七影视\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
+{
+    "key": "hanxiaoquan",
+    "name": "💞┃影視┃韩圈 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"hanxiaoquan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十四线\"}"
+},
+{
+    "key": "haojuwu",
+    "name": "💞┃影視┃好剧 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"haojuwu\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"号剧五\"}"
+},
+{
+    "key": "hemajuchang",
+    "name": "💞┃影視┃河马 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"hemajuchang\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十六线\"}"
+},
+{
+    "key": "juOK",
+    "name": "💞┃影視┃剧OK ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"juOK\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗四十线\"}"
+},
+{
+    "key": "nishipin",
+    "name": "💞┃影視┃妮蘋 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"nishipin\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗五十三线\"}"
+},
+{
+    "key": "yingziyinyue",
+    "name": "💞┃影視┃影子 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"yingziyinyue\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗七十五线\"}"
+},
+{
+    "key": "yinyuejuhe",
+    "name": "💞┃影視┃聚合 ",
+    "type": 3,
+    "api": "http://xn--oev29b.top/files/py/loader.py",
+    "ext": "{\"site\": \"yinyuejuhe\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗七十六线\"}"
+},
 {
     "key": "nangua",
     "name": "🎃┃南瓜┃秒播",

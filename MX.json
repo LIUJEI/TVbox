@@ -202,13 +202,6 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/达兔.py"
 },
 {
-    "key": "py_看客TV",
-    "name": "🆘┃看客┃PPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看客.py",
-    "changeable": 0
-},
-{
     "key": "csp_py_鬼片",
     "name": "🆘┃鬼片┃PPY",
     "type": 3,
@@ -383,6 +376,16 @@
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/轻音乐.py",
     "changeable":0
+},
+{
+    "key": "py_看客TV",
+    "name": "🆘┃看客┃PPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看客.py",
+    "ext": {
+    "host": "https://kankelm.cn:2024/appdomain.txt",
+    "key": "ygcnbcvybqqckwqy",
+    "iv": "1583560747143708"}
 },
 {
     "key": "csp_py_好好看",

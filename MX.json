@@ -11,7 +11,7 @@
 "sites": [
 {
     "key": "py_douban",
-    "name": "🎬┣豆瓣┫推荐（py源需重启）",
+    "name": "🎬┣豆瓣┫推荐",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/TS/douban.js",
     "indexs": 0
@@ -239,12 +239,6 @@
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看戏.py"
 },
 {
-    "key": "py_爱电影",
-    "name": "🍑爱电影[影][PY]",
-    "type": 3,
-    "api": "./py/html/爱电影.py"
-},
-{
     "key": "csp_py_爱奇艺",
     "name": "🆘┃奇艺┃PPY",
     "type": 3,
@@ -292,10 +286,30 @@
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/牛牛.js"
 },
-{"key": "py_星星短剧[短]","name": "🥝星星短剧[短][PY]","type": 3,"api": "./py/短/星星短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
-{"key": "py_七猫短剧[短]","name": "🥝七猫短剧[短][PY]","type": 3,"api": "./py/短/七猫短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
-{"key": "py_西饭短剧[短]","name": "🥝西饭短剧[短][PY]","type": 3,"api": "./py/短/西饭短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
-{"key": "py_妞妞短剧[短]","name": "🥝妞妞短剧[短][PY]","type": 3,"api": "./py/短/妞妞短剧.py","searchable": 1,"quickSearch": 1,"filterable": 1},
+{
+    "key": "py_星星短剧[短]",
+    "name": "🆘┃嘟嘟┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/嘟嘟.py"
+},
+{
+    "key": "py_七猫短剧[短]",
+    "name": "🆘┃七猫┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/七猫.py"
+},
+{
+    "key": "py_西饭短剧[短]",
+    "name": "🆘┃西饭┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/西饭.py"
+},
+{
+    "key": "py_妞妞短剧[短]",
+    "name": "🆘┃妞妞┃短剧",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/妞妞.py"
+},
 {
     "key": "csp_py_皮皮虾",
     "name": "🆘┃皮虾┃PPY",

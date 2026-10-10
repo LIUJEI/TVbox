@@ -53,17 +53,19 @@ function mapList(j) {
 }
 
 const CLASSES = [
-    { type_id: "4", type_name: "芸制" },
+    { type_id: "all", type_name: "全部" },
+    { type_id: "3", type_name: "芸制" },
     { type_id: "2", type_name: "电影" },
     { type_id: "5", type_name: "电视剧" },
-    { type_id: "3", type_name: "纪录片" },
     { type_id: "7", type_name: "综艺" },
-    { type_id: "all", type_name: "全部" }
+    { type_id: "1", type_name: "番剧" },
+    { type_id: "4", type_name: "国创" },
+    { type_id: "timeline", type_name: "时间表" }
 ];
 
 const ALL_FILTERS = [
     { key: "tid", name: "分类", value: [
-         { n: "芸制", v: "4" }, { n: "电影", v: "2" },
+        { n: "番剧", v: "1" }, { n: "国创", v: "4" }, { n: "电影", v: "2" },
         { n: "电视剧", v: "5" }, { n: "纪录片", v: "3" }, { n: "综艺", v: "7" }] },
     { key: "order", name: "排序", value: [
         { n: "播放数量", v: "2" }, { n: "更新时间", v: "0" }, { n: "最高评分", v: "4" },
@@ -71,6 +73,7 @@ const ALL_FILTERS = [
     { key: "season_status", name: "付费", value: [
         { n: "全部", v: "-1" }, { n: "免费", v: "1" }, { n: "付费", v: "2%2C6" }, { n: "大会员", v: "4%2C6" }] }
 ];
+
 
 async function home(filter) {
     const result = { class: CLASSES };

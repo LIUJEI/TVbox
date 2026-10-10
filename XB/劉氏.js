@@ -1,4 +1,4 @@
-// ago影院 (agoys.com) - QuickJS 版 (原 ago影院.py)
+// 劉氏影院 (agoys.com) - QuickJS 版 
 const DOMAIN_CANDIDATES = ["https://agoys.com", "https://www.agoys.com"];
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 const DOMAIN_TTL = 1800000; // 域名探活缓存30分钟

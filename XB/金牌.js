@@ -1,4 +1,4 @@
-// 金牌影视 - QuickJS 版 (原 金牌.py by @嗷呜, mw-movie API, MD5+SHA1 双重签名)
+// 金牌影视 - QuickJS 版 ( mw-movie API, MD5+SHA1 双重签名)
 const DEFAULT_SITE = "https://www.jiabaide.cn";
 const SIGN_KEY = "cb808529bae6b6be45ecfab29a4889bc";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.61 Chrome/126.0.6478.61 Not/A)Brand/8  Safari/537.36";
@@ -167,7 +167,7 @@ async function apiGet(path, bizParams) {
     } catch (e) { return {}; }
 }
 
-// 多域名测速(串行GET计时, 取最快; 对应原版 host_late 并发HEAD)
+// 多域名测速(串行计时取最快): 请求金牌API路径, 仅返回JSON才算存活, 避免误选无关域名
 async function pickHost(urls) {
     const list = [];
     for (const u of urls) { const s = String(u).trim(); if (s) list.push(s); }
@@ -177,9 +177,9 @@ async function pickHost(urls) {
     for (const u of list) {
         const t0 = Date.now();
         try {
-            const r = await req(u, { headers: { "User-Agent": UA }, timeout: 3000 });
-            const c = (r && r.content) || "";
-            if (!c) continue;
+            const r = await req(u.replace(/\/+$/, "") + "/api/mw-movie/anonymous/get/filer/type", { headers: { "User-Agent": UA, "Accept": "application/json" }, timeout: 3000 });
+            const c = ((r && r.content) || "").trim();
+            if (c.charAt(0) !== "{") continue;
             const ms = Date.now() - t0;
             if (ms < bestMs) { bestMs = ms; best = u; }
         } catch (e) {}
@@ -187,14 +187,29 @@ async function pickHost(urls) {
     return best || list[0];
 }
 
-async function init(ext) {
+let siteList = [];
+let hostPicked = false;
+
+// init 必须同步: 部分 TVBox 版本的 QuickJS 绑定不等待 init 的 Promise, async init 会导致整个爬虫加载失败
+function init(ext) {
     let e = ext;
     if (typeof e === "string" && e.trim()) {
         try { e = JSON.parse(e); } catch (e2) { e = {}; }
     }
-    let sites = [];
-    if (e && typeof e === "object" && e.site) sites = String(e.site).split(",");
-    host = (await pickHost(sites)).replace(/\/+$/, "");
+    siteList = [];
+    if (e && typeof e === "object" && e.site) siteList = String(e.site).split(",");
+    const first = siteList.length ? String(siteList[0]).trim() : "";
+    host = (first || DEFAULT_SITE).replace(/\/+$/, "");
+}
+
+// 域名测速懒执行: 首次接口调用时才跑, 结果缓存
+async function ensureHost() {
+    if (hostPicked) return;
+    hostPicked = true;
+    if (siteList.length > 1) {
+        const best = await pickHost(siteList);
+        if (best) host = String(best).replace(/\/+$/, "");
+    }
 }
 
 // ---------- 字段名转换: vodId->vod_id, typeName->type_name (对应原版 convert_field_name) ----------
@@ -218,6 +233,7 @@ function getVod(arr) {
 
 // ---------- 实现 ----------
 async function homeContent(filter) {
+    await ensureHost();
     const cdata = await apiGet("/api/mw-movie/anonymous/get/filer/type");
     const fdata = await apiGet("/api/mw-movie/anonymous/v1/get/filer/list");
     const classes = [];
@@ -257,6 +273,7 @@ async function homeContent(filter) {
 }
 
 async function homeVod() {
+    await ensureHost();
     const data1 = await apiGet("/api/mw-movie/anonymous/v1/home/all/list");
     const data2 = await apiGet("/api/mw-movie/anonymous/home/hotSearch");
     const data = [];
@@ -271,6 +288,7 @@ async function homeVod() {
 }
 
 async function category(tid, pg, filter, extend) {
+    await ensureHost();
     const e = extend || {};
     const params = {
         area: e.area || "",
@@ -297,6 +315,7 @@ async function category(tid, pg, filter, extend) {
 }
 
 async function detail(ids) {
+    await ensureHost();
     const id = Array.isArray(ids) ? ids[0] : ids;
     const data = await apiGet("/api/mw-movie/anonymous/video/detail", { id: id });
     const vod = getVod([data.data])[0];
@@ -314,6 +333,7 @@ async function detail(ids) {
 }
 
 async function play(flag, id, vipFlags) {
+    await ensureHost();
     const parts = String(id).split("@@");
     const vid = parts[0] || "";
     const nid = parts[1] || "";
@@ -337,6 +357,7 @@ async function play(flag, id, vipFlags) {
 }
 
 async function search(key, quick, pg) {
+    await ensureHost();
     pg = pg || "1";
     const data = await apiGet("/api/mw-movie/anonymous/video/searchByWord", { keyword: key, pageNum: pg, pageSize: "8", sourceCode: "1" });
     const list = (data.data && data.data.result && data.data.result.list) || [];

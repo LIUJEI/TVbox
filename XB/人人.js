@@ -337,13 +337,18 @@ function makeBody(kvs, ts) {
         .concat(fldEnc(5, 2, utf8enc(f8)));
 }
 
-// 二进制POST: data传base64, buffer:2收base64
+// 二进制POST: body传Latin-1字符串(每字节一字符), Content-Type带charset=ISO-8859-1使OkHttp按latin1逐字节发送; buffer:2收base64
 async function postProto(ep, kvs) {
     try {
         const ts = Date.now();
+        const bodyBytes = makeBody(kvs, ts);
+        let bodyStr = "";
+        for (const b of bodyBytes) bodyStr += String.fromCharCode(b);
+        const headers = makeHeaders(ts);
+        headers["Content-Type"] = "application/x-protobuf; charset=ISO-8859-1";
         const r = await req(HOST + ep, {
-            method: "POST", headers: makeHeaders(ts),
-            data: b64enc(makeBody(kvs, ts)), postType: "base64",
+            method: "POST", headers: headers,
+            body: bodyStr,
             buffer: 2, timeout: 20
         });
         const c = (r && r.content) || "";

@@ -88,13 +88,13 @@
     "key": "dr_爱奇艺",
     "name": "🆘┃奇艺┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.py"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.js"
 },
 {
     "key": "dr_YK",
     "name": "🆘┃优酷┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.js"
 },
 {
     "key": "dr_txvm",

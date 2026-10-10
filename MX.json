@@ -181,22 +181,10 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/嘀嗒.js"
 },
 {
-    "key": "蝶卡影视",
-    "name": "🆘┃蝶卡┃PPY ",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/蝶卡.js"
-},
-{
     "key": "泥视频",
     "name": "🆘┃泥视┃PPY ",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/泥视.js"
-},
-{
-    "key": "壹七",
-    "name": "🆘┃壹七┃PPY ",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/壹七.js"
 },
 {
     "key": "dr_4K影视",

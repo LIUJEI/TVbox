@@ -74,21 +74,10 @@
     "ext": {"site": "https://www.sizhengxt.com,https://www.jiabaide.cn"}
 },
 {
-    "key": "dr_maple0",
-    "name": "🆘┃枫叶┃PPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
-},
-{
     "key": "dr_maple",
     "name": "🆘┃枫叶┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js",
-    "ext": {
-    "sites": [
-    "https://www.zzztool.com",
-    "https://maihaolian.com",
-    "https://www.cd-zj.com"]}
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
 },
 {
     "key": "dr_爱奇艺",

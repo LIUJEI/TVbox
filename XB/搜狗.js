@@ -214,7 +214,8 @@ async function detail(ids) {
 const JX_APIS = [
     "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
     "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
-    "https://test1.12321app.com/daoliansiquanjia.php?url="
+    "https://jx.xymp4.cc/?url=",
+    "https://yparse.ik9.cc/index.php?url="
 ];
 
 function isPlayUrl(u) {

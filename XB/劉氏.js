@@ -1,4 +1,4 @@
-// 劉氏影院 (agoys.com) - QuickJS 版 
+// ago影院 (agoys.com) - QuickJS 版 (原 ago影院.py)
 const DOMAIN_CANDIDATES = ["https://agoys.com", "https://www.agoys.com"];
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 const DOMAIN_TTL = 1800000; // 域名探活缓存30分钟
@@ -378,7 +378,7 @@ async function homeContent(filter) {
         const html = await fetchText(base + "/");
         result.list = parseGridCards(html).slice(0, 40);
     } catch (e) {}
-    return result;
+    return JSON.stringify(result);
 }
 
 async function homeVod() {
@@ -387,8 +387,8 @@ async function homeVod() {
         const base = await resolveBase();
         const html = await fetchText(base + "/");
         const cards = parseGridCards(html);
-        return { list: cards.slice(0, 12) };
-    } catch (e) { return { list: [] }; }
+        return JSON.stringify({ list: cards.slice(0, 12) });
+    } catch (e) { return JSON.stringify({ list: [] }); }
 }
 
 async function category(tid, pg, filter, extend) {
@@ -407,13 +407,13 @@ async function category(tid, pg, filter, extend) {
             for (const x of lst) { const v = jsonItem(x); if (v) vods.push(v); }
         }
     } catch (e) {}
-    return { list: vods, page: page, pagecount: vods.length ? page + 1 : page, limit: vods.length, total: vods.length };
+    return JSON.stringify({ list: vods, page: page, pagecount: vods.length ? page + 1 : page, limit: vods.length, total: vods.length });
 }
 
 async function detail(ids) {
     await ensureBase();
     const raw = String(Array.isArray(ids) ? ids[0] : ids || "");
-    if (!raw) return { list: [] };
+    if (!raw) return JSON.stringify({ list: [] });
     let pairs = [];
     if (raw.indexOf("-") >= 0) {
         const idx = raw.indexOf("-");
@@ -426,10 +426,10 @@ async function detail(ids) {
         try {
             const html = await fetchText(base + "/" + pr[0] + "/" + pr[1]);
             const vod = parseDetail(html, pr[1]);
-            if (vod) return { list: [vod] };
+            if (vod) return JSON.stringify({ list: [vod] });
         } catch (e) {}
     }
-    return { list: [] };
+    return JSON.stringify({ list: [] });
 }
 
 async function play(flag, id, vipFlags) {
@@ -444,9 +444,9 @@ async function play(flag, id, vipFlags) {
             await resolveBase();
             url = await fetchSource(sid);
         }
-        if (url && url.indexOf("http") === 0) return { parse: 0, url: url, header: header };
+        if (url && url.indexOf("http") === 0) return JSON.stringify({ parse: 0, url: url, header: header });
     } catch (e) {}
-    return { parse: 1, url: "", header: header };
+    return JSON.stringify({ parse: 1, url: "", header: header });
 }
 
 async function search(key, quick, pg) {
@@ -464,7 +464,7 @@ async function search(key, quick, pg) {
             for (const x of lst) { const v = jsonItem(x); if (v) vods.push(v); }
         }
     } catch (e) {}
-    return { list: vods, page: page, pagecount: vods.length ? page + 1 : page, limit: vods.length, total: vods.length };
+    return JSON.stringify({ list: vods, page: page, pagecount: vods.length ? page + 1 : page, limit: vods.length, total: vods.length });
 }
 
 export default {

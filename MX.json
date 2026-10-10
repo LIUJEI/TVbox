@@ -74,6 +74,12 @@
     "ext": {"site": "https://www.sizhengxt.com,https://www.jiabaide.cn"}
 },
 {
+    "key": "dr_maple0",
+    "name": "🆘┃枫叶┃PPY",
+    "type": 2,
+    "api": "https://gitee.com/lyun_1_0/TS/raw/main/TS/maple.js"
+},
+{
     "key": "dr_maple",
     "name": "🆘┃枫叶┃PPY",
     "type": 2,

@@ -103,6 +103,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
 },
 {
+    "key": "dr_人人视频",
+    "name": "🆘┃人人┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/人人.js"
+},
+{
     "key": "dr_maple",
     "name": "🆘┃枫叶┃RJS",
     "type": 3,

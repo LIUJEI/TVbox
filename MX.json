@@ -54,276 +54,275 @@
 },
 {
     "key":"spider_2097848346373787648",
-    "name":"🆘┃热播┃影视",
+    "name":"🆘┃热播┃C4T",
     "type":4,
     "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848346373787648?token=banye666",
     "filterable":0
 },
 {
     "key":"spider_2097848347502055424",
-    "name":"🆘┃天堂┃影视",
+    "name":"🆘┃天堂┃C4T",
     "type":4,
     "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848347502055424?token=banye666",
     "filterable":0
 },
 {
     "key": "dr_文才",
-    "name": "🆘┃文才┃PPY",
+    "name": "🆘┃文才┃RJS",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/金牌.py",
-    "ext": {"site": "https://www.sizhengxt.com,https://www.jiabaide.cn"}
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/金牌.js"
 },
 {
     "key": "dr_maple",
-    "name": "🆘┃枫叶┃PJS",
+    "name": "🆘┃枫叶┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
 },
 {
     "key": "dr_爱奇艺",
-    "name": "🆘┃奇艺┃PJS",
+    "name": "🆘┃奇艺┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.js"
 },
 {
     "key": "dr_txvm",
-    "name": "🆘┃腾讯┃PJS",
+    "name": "🆘┃腾讯┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/腾讯.js"
 },
 {
     "key": "dr_MGtv",
-    "name": "🆘┃芒果┃PJS",
+    "name": "🆘┃芒果┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芒果.js"
 },
 {
     "key": "dr_哔哩视频",
-    "name": "🆘┃嗶哩┃PJS",
+    "name": "🆘┃嗶哩┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/哔哩.js"
 },
 {
     "key": "dr_搜狗",
-    "name": "🆘┃搜狗┃PJS",
+    "name": "🆘┃搜狗┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/搜狗.js"
 },
 {
     "key": "dr_YK",
-    "name": "🆘┃优酷┃PPY",
+    "name": "🆘┃优酷┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
 },
 {
    "key": "dr_duoduo",
-   "name": "🆘┃多多┃PJS",
+   "name": "🆘┃多多┃RJS",
    "type": 3,
    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/多多.js"
 },  
 {
    "key": "dr_kkys",
-   "name": "🆘┃可可┃PJS",
+   "name": "🆘┃可可┃RJS",
    "type": 3,
    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/可可.js"
 },
 {
     "key": "dr_大马猴",
-    "name": "🆘┃马猴┃PJS",
+    "name": "🆘┃马猴┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/马猴.js"
 },
 {
     "key": "dr_壹起看",
-    "name": "🆘┃壹起┃PJS",
+    "name": "🆘┃壹起┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/壹起.js"
 },
 {
     "key": "dr_厂长",
-    "name": "🆘┃厂长┃PJS",
+    "name": "🆘┃厂长┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/厂长.js"
 },
 {
     "key": "dr_优夏",
-    "name": "🆘┃优夏┃PJS",
+    "name": "🆘┃优夏┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优夏.js"
 },
 {
     "key": "dr_毒舌",
-    "name": "🆘┃毒舌┃PJS",
+    "name": "🆘┃毒舌┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/毒舌.js"
 },
 {
     "key": "dr_星辰",
-    "name": "🆘┃星辰┃PJS",
+    "name": "🆘┃星辰┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/星辰.js"
 },
 {
     "key": "bajieyingshi",
-    "name": "🆘┃八戒┃PJS ",
+    "name": "🆘┃八戒┃RJS ",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/八戒.js"
 },
 {
     "key": "hanxiaoquan",
-    "name": "🆘┃韩圈┃PJS ",
+    "name": "🆘┃韩圈┃RJS ",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/韩圈.js"
 },
 {
     "key": "dida",
-    "name": "🆘┃嘀嗒┃PJS ",
+    "name": "🆘┃嘀嗒┃RJS ",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/嘀嗒.js"
 },
 {
     "key": "泥视频",
-    "name": "🆘┃泥视┃PJS ",
+    "name": "🆘┃泥视┃RJS ",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/泥视.js"
 },
 {
     "key": "dr_荐片",
-    "name": "🆘┃荐片┃PJS",
+    "name": "🆘┃荐片┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/荐片.js"
 },
 {
     "key": "dr_豆花",
-    "name": "🆘┃豆花┃PPY",
+    "name": "🆘┃豆花┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/豆花.py"
 },
 {
     "key": "dr_4K影视",
-    "name": "🆘┃蓝光┃PPY",
+    "name": "🆘┃蓝光┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/4K.py"
 },
 {
     "key": "dr_剧下饭",
-    "name": "🆘┃下饭┃PPY",
+    "name": "🆘┃下饭┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/下饭.py"
 },
 {
     "key": "dr_华数",
-    "name": "🆘┃华数┃PPY",
+    "name": "🆘┃华数┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/华数.py"
 },
 {
     "key": "dr_fk",
-    "name": "🆘┃飞快┃PPY",
+    "name": "🆘┃飞快┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/飞快.py"
 },
 {
     "key": "dr_guazi",
-    "name": "🆘┃瓜子┃PPY",
+    "name": "🆘┃瓜子┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/瓜子.py"
 },
 {
     "key": "dr_66大片网",
-    "name": "🆘┃大片┃PPY",
+    "name": "🆘┃大片┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/大片.py"
 },
 {
     "key": "dr_aigua",
-    "name": "🆘┃爱瓜┃PPY",
+    "name": "🆘┃爱瓜┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱瓜.py"
 },
 {
     "key": "dr_pianku4k",
-    "name": "🆘┃片库┃PPY",
+    "name": "🆘┃片库┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/片库.py"
 },
 {
     "key": "dr_初见",
-    "name": "🆘┃初见┃PPY",
+    "name": "🆘┃初见┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/初见.py"
 },
 {
     "key": "dr_开端",
-    "name": "🆘┃开端┃PPY",
+    "name": "🆘┃开端┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/开端.py"
 },
 {
     "key": "dr_影探",
-    "name": "🆘┃影探┃PPY",
+    "name": "🆘┃影探┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/影探.py"
 },
 {
     "key": "dr_达达兔",
-    "name": "🆘┃达兔┃PPY",
+    "name": "🆘┃达兔┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/达兔.py"
 },
 {
     "key": "dr_鬼片",
-    "name": "🆘┃鬼片┃PPY",
+    "name": "🆘┃鬼片┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/鬼片.py"
 },
 {
     "key": "dr_Acfun",
-    "name": "🆘┃慢剧┃PPY",
+    "name": "🆘┃慢剧┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/Acfun.py"
 },
 {
     "key": "dr_咕噜",
-    "name": "🆘┃咕噜┃PPY",
+    "name": "🆘┃咕噜┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/咕噜.py"
 },
 {
     "key": "dr_橘汁",
-    "name": "🆘┃橘汁┃PPY",
+    "name": "🆘┃橘汁┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/橘汁.py"
 },
 {
     "key": "dr_小苹果",
-    "name": "🆘┃苹果┃PPY",
+    "name": "🆘┃苹果┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/苹果.py"
 },
 {
     "key":"dr_看戏影视",
-    "name":"🆘┃看戏┃PPY",
+    "name":"🆘┃看戏┃RPY",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看戏.py"
 },
 {
     "key": "csp_xBPQ_MTYY",
-    "name": "🆘┃麥田┃影院",
+    "name": "🆘┃麥田┃php",
     "type": 3,
     "api": "csp_XBPQ",
     "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/麥田.php"
 },
 {
     "key": "dr_皮皮虾",
-    "name": "🆘┃皮虾┃PPY",
+    "name": "🆘┃皮虾┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/皮虾.py",
     "ext": "http://154.94.224.56:8762"
 },
 {
     "key": "dr_欣欣影视",
-    "name": "🆑┃欣欣┃PPY",
+    "name": "🆑┃欣欣┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/新界.py",
     "ext": {
@@ -333,7 +332,7 @@
 },
 {
     "key": "dr_看客TV",
-    "name": "🆑┃看客┃PPY",
+    "name": "🆑┃看客┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/看客.py",
     "ext": {
@@ -343,7 +342,7 @@
 },
 {
     "key": "dr_好好看",
-    "name": "🆑┃好看┃PPY",
+    "name": "🆑┃好看┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/ack.js",
     "ext": {
@@ -357,7 +356,7 @@
 },
 {
     "key": "dr_半日",
-    "name": "🆑┃半日┃PPY",
+    "name": "🆑┃半日┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
     "ext": {
@@ -371,7 +370,7 @@
 },
 {
     "key": "dr_剧圈",
-    "name": "🆑┃剧圈┃PPY",
+    "name": "🆑┃剧圈┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
     "ext": {
@@ -385,7 +384,7 @@
 },
 {
     "key": "dr_听心999",
-    "name": "🆑┃听心┃PPY",
+    "name": "🆑┃听心┃RPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
     "ext": {

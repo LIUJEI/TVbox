@@ -280,15 +280,13 @@
     "key": "dr_枫林影视",
     "name": "🆘┃枫林┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫林.py",
-    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫林.py"
 },
 {
     "key": "dr_FROK",
     "name": "🆘┃芙蓉┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芙蓉.py",
-    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芙蓉.py"
 },
 {
     "key": "dr_王子TV",

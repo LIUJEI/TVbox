@@ -7,9 +7,7 @@ const HEADERS = { "User-Agent": UA, "origin": HOST, "referer": HOST + "/" };
 // 解析回退链: 严格按顺序, 第一个失效才跳下一个
 const JX_APIS = [
     "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
-    "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
-    "https://test1.12321app.com/daoliansiquanjia.php?url=",
-    "https://bfq.txnp.cn/excessive?url="
+    "http://zxy-th1.jsszks.dpdns.org:8090/?url="
 ];
 
 const DBODY = {
@@ -27,10 +25,11 @@ let catBody = null;
 function init(ext) {}
 
 async function postJson(url, body) {
+    // TVBox req: 参数名必须是 data (body 不被识别, 会发空请求)
     const r = await req(url, {
         method: "POST",
         headers: HEADERS,
-        body: body,
+        data: body,
         postType: "json"
     });
     try { return JSON.parse((r && r.content) || "{}"); } catch (e) { return null; }

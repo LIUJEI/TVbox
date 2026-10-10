@@ -96,12 +96,20 @@ async function getLyric(rid) {
 }
 
 async function getUrl(rid, br) {
-    let url = `https://nmobi.kuwo.cn/mobi.s?f=web&user=0&source=kwplayer_ar_4.4.2.7_B_nuoweida_vh.apk&type=convert_url_with_sign&rid=${rid}&format=flac&br=${br}`;
+    let url = `https://nmobi.kuwo.cn/mobi.s?f=web&user=0&source=kwplayer_ar_4.4.2.7_B_nuoweida_vh.apk&type=convert_url_with_sign&rid=${rid}&format=mp3&br=${br}`;
     let html = await request(url);
     if (html) {
         let j = safeJSONParse(html);
-        return j?.data?.url?.trim() || '';
+        let u = (j.data && j.data.url || '').trim();
+        // 直链参数用$分隔，壳会把$当集名分隔符截断，必须换成&
+        return u.replace(/\$/g, '&');
     }
+    return '';
+}
+
+async function getAntiUrl(rid) {
+    let u = await request(`https://antiserver.kuwo.cn/anti.s?type=convert_url&rid=MUSIC_${rid}&format=aac|mp3&response=url`);
+    if (u && typeof u === 'string' && u.trim().startsWith('http')) return u.trim();
     return '';
 }
 
@@ -141,15 +149,29 @@ async function category(tid, pg, filter, extend) {
     if (pg <= 0 || typeof pg == 'undefined') pg = 1;
 
     if (tid === 'bang') {
-        let html = await request(`${host}/api/www/bang/index/bangList?httpsStatus=1`);
+        let html = await request(`${host}/api/pc/bang/list`);
         let res = safeJSONParse(html);
-        let data = res.data || [];
-        let videos = data.map(it => ({
-            vod_id: 'bang$' + (it.id || '') + '$' + (it.name || ''),
-            vod_name: it.name || '榜单',
-            vod_pic: hd(it.pic),
-            vod_remarks: (it.num || '') + '首 · ' + (it.pub || '')
-        }));
+        let videos = [];
+        let seen = new Set();
+        let walk = (node) => {
+            if (!node || typeof node !== 'object') return;
+            if (Array.isArray(node)) {
+                node.forEach(walk);
+                return;
+            }
+            let sid = (node.sourceid || '').toString();
+            if (/^\d+$/.test(sid) && !seen.has(sid)) {
+                seen.add(sid);
+                videos.push({
+                    vod_id: 'bang$' + sid + '$' + (node.name || node.disname || ''),
+                    vod_name: node.name || node.disname || '榜单',
+                    vod_pic: hd(node.pic || ''),
+                    vod_remarks: node.pubTime ? node.pubTime + ' 更新' : ''
+                });
+            }
+            Object.keys(node).forEach(k => walk(node[k]));
+        };
+        walk(res);
         return JSON.stringify({
             page: 1,
             pagecount: 1,
@@ -365,16 +387,13 @@ async function play(flag, id, flags) {
     }
 
     const qualities = [{
-        name: 'FLAC无损',
-        br: '2000k'
-    }, {
         name: 'HQ高品质',
         br: '320k'
     }, {
         name: '标准品质',
         br: '192k'
     }, {
-        name: 'AAC高品',
+        name: '流畅音质',
         br: '128k'
     }];
     let urls = [];
@@ -386,9 +405,14 @@ async function play(flag, id, flags) {
             let cleanUrl = url.split('?')[0];
             if (!seenUrls.has(cleanUrl)) {
                 seenUrls.add(cleanUrl);
-                urls.push(q.name, cleanUrl);
+                urls.push(q.name, url);
             }
         }
+    }
+
+    if (urls.length === 0) {
+        let anti = await getAntiUrl(songId);
+        if (anti) urls.push('流畅音质', anti);
     }
 
     let lrcPromise = getLyric(songId);

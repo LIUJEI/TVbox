@@ -349,7 +349,7 @@ async function postProto(ep, kvs) {
         const r = await req(HOST + ep, {
             method: "POST", headers: headers,
             body: bodyStr,
-            buffer: 2, timeout: 20
+            buffer: 2, timeout: 20000
         });
         const c = (r && r.content) || "";
         return c ? b64dec(c) : [];
@@ -358,7 +358,7 @@ async function postProto(ep, kvs) {
 
 async function getProto(ep) {
     try {
-        const r = await req(HOST + ep, { headers: makeHeaders(Date.now()), buffer: 2, timeout: 20 });
+        const r = await req(HOST + ep, { headers: makeHeaders(Date.now()), buffer: 2, timeout: 20000 });
         const c = (r && r.content) || "";
         return c ? b64dec(c) : [];
     } catch (e) { return []; }
@@ -522,7 +522,7 @@ async function rrCall(path, params) {
                 "x-ca-sign": sg, "t": String(ts), "aliId": dev, "umid": dev, "deviceId": dev,
                 "clientVersion": "1.0.0", "cv": "1.0.0", "clientType": "web_applet", "ct": "web_applet",
                 "uet": "9", "User-Agent": RR_UA, "Origin": RR_REF.slice(0, -1), "Referer": RR_REF
-            }, timeout: 20
+            }, timeout: 20000
         });
         const body = (r && r.content) || "";
         try {

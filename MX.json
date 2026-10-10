@@ -436,35 +436,35 @@
 },
 {
     "key":"dr_酷我音乐",
-    "name":"🉑┃酷我┃音乐",
+    "name":"🈸┃酷我┃音乐",
     "type":3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷我.js",
     "changeable":0
 },
 {
     "key": "dr_tinghyy",
-    "name": "🉑┃听海┃音乐",
+    "name": "🈸┃听海┃音乐",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/听海.js",
     "indexs" : 0
 },
 {
     "key":"dr_聚合音乐",
-    "name":"🉑┃聚合┃音乐",
+    "name":"🈸┃聚合┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/聚合[听].js",
     "changeable":0
 },
 {
     "key":"dr_千千音乐",
-    "name":"🉑┃千千┃音乐",
+    "name":"🈸┃千千┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/千千.py",
     "changeable":0
 },
 {
     "key":"dr_轻音乐",
-    "name":"🉑┃箐箐┃音乐",
+    "name":"🈸┃箐箐┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/轻音乐.py",
     "changeable":0

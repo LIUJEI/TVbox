@@ -113,12 +113,12 @@
     "name": "🆚┃嗶哩┃ TV",
     "type": 3,
     "api": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/TS/bili.js"
- },
- {
+},
+{
     "key": "dr_搜狗",
-    "name": "🆚┃搜狗┃ TV",
+    "name": "🆚┃搜狗┃PPY",
     "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/SGtv.js"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/搜狗.js"
 },
 {
    "key": "dr_duoduo",

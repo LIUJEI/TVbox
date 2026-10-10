@@ -449,10 +449,10 @@
     "changeable":0
 },
 {
-    "key":"dr_音乐在线",
-    "name":"🆘┃枫叶┃音乐",
+    "key":"dr_酷狗",
+    "name":"🆘┃酷狗┃音乐",
     "type":4,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶i.py",
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷狗.js",
     "changeable":0
 },
 {

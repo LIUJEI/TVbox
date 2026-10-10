@@ -67,19 +67,6 @@
     "filterable":0
 },
 {
-    "key": "dr_文才",
-    "name": "🆘┃文才┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/%E9%87%91%E7%89%8C.js",
-    "filterable":0
-},
-{
-    "key": "dr_maple",
-    "name": "🆘┃枫叶┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
-},
-{
     "key": "dr_爱奇艺",
     "name": "🆘┃奇艺┃RJS",
     "type": 3,
@@ -116,6 +103,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优酷.py"
 },
 {
+    "key": "dr_maple",
+    "name": "🆘┃枫叶┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
+},
+{
    "key": "dr_duoduo",
    "name": "🆘┃多多┃RJS",
    "type": 3,
@@ -146,24 +139,6 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/厂长.js"
 },
 {
-    "key": "dr_优夏",
-    "name": "🆘┃优夏┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优夏.js"
-},
-{
-    "key": "dr_毒舌",
-    "name": "🆘┃毒舌┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/毒舌.js"
-},
-{
-    "key": "dr_星辰",
-    "name": "🆘┃星辰┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/星辰.js"
-},
-{
     "key": "bajieyingshi",
     "name": "🆘┃八戒┃RJS ",
     "type": 3,
@@ -192,6 +167,31 @@
     "name": "🆘┃荐片┃RJS",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/荐片.js"
+},
+{
+    "key": "dr_优夏",
+    "name": "🆘┃优夏┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/优夏.js"
+},
+{
+    "key": "dr_毒舌",
+    "name": "🆘┃毒舌┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/毒舌.js"
+},
+{
+    "key": "dr_星辰",
+    "name": "🆘┃星辰┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/星辰.js"
+},
+{
+    "key": "dr_金牌",
+    "name": "🆘┃金牌┃RPY",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/金牌.py",
+    "ext": {"site": "https://y2s52n7.com,https://www.sizhengxt.com,https://www.tjrongze.com"}
 },
 {
     "key": "dr_豆花",

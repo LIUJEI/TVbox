@@ -306,25 +306,29 @@ async function detail(ids) {
     return JSON.stringify({ list: [buildVod(vdata, actors, plist, ylist, names)] });
 }
 
+async function checkPlayable(u) {
+    // 只深度校验 m3u8 (拉内容确认存在); mp4/flv 大文件不下载直接放行
+    if (!/\.m3u8(\?|$)/i.test(u)) return true;
+    try {
+        const r = await req(u, { headers: { "User-Agent": UA }, timeout: 5000 });
+        const c = (r && r.content) || "";
+        return c.indexOf("#EXTM3U") >= 0;
+    } catch (e) { return false; }
+}
+
 async function play(flag, id, flags) {
     const parts = String(id).split("$").pop().split("@");
     const cid = parts[0];
     const vid = parts.length > 1 ? parts[1] : "";
     const coverUrl = HOST + "/x/cover/" + cid + "/" + vid + ".html";
-    // 解析链严格顺序: 麒麟→观潮, 全失败交壳嗅探
-    for (const api of JX_APIS) {
-        try {
-            const r = await req(api + encodeURIComponent(coverUrl), { headers: { "User-Agent": UA }, timeout: 8 });
-            const j = JSON.parse((r && r.content) || "{}");
-            const u = j.url || "";
-            if (u && (/\.m3u8/.test(u) || /\.mp4/.test(u))) {
-                return JSON.stringify({
-                    parse: 0,
-                    url: u,
-                    header: { "User-Agent": UA, "Referer": coverUrl }
-                });
-            }
-        } catch (e) {}
+    // 解析链严格顺序: 麒麟→观潮, 死链跳下一个, 全失败交壳嗅探
+    const parsed = await jxFallback(coverUrl);
+    if (parsed) {
+        return JSON.stringify({
+            parse: 0,
+            url: parsed,
+            header: { "User-Agent": UA, "Referer": coverUrl }
+        });
     }
     return JSON.stringify({
         parse: 1,

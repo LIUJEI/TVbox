@@ -25,17 +25,31 @@
 },
 {
     "key":"csp_影探",
-    "name":"🆘┃影探┃C4K",
+    "name":"♾┃影探┃C4K",
     "type":4,
     "api":"http://8.134.205.252:39466/pz/sx4k.php/api.php/provide/vod/?ac=list",
     "indexs": 0
 },
 {
     "key":"csp_未来",
-    "name":"🆘┃未来┃C4K",
+    "name":"♾┃未来┃C4K",
     "type":1,
     "api":"http://110.42.66.100:12678/api.php",
     "playUrl":"json:http://110.42.66.100:5666/api/?key=c31bfd818ac47875ab4922f03834afcc&url=",
+    "indexs": 0
+},
+{
+    "key": "csp_xcm",
+    "name": "♾┃熊大┃C4K",
+    "type": 4,
+    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key": "csp_CO4K",
+    "name": "♾┃咖啡┃C4K",
+    "type": 4,
+    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
     "indexs": 0
 },
 {
@@ -555,13 +569,6 @@
     "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/低端.php"
 },
 {
-    "key": "csp_橘猫",
-    "name": "💞┃橘猫┃影视",
-    "type": 3,
-    "api": "csp_XBPQ",
-    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/橘猫.php"
-},
-{
     "key": "csp_皮皮",
     "name": "💞┃皮皮┃影视",
     "type": 3,
@@ -576,26 +583,12 @@
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/菲特.php"
 },
 {
-    "key": "csp_金鹰",
-    "name": "💞┃影視┃金鹰",
-    "type": 3,
-    "api": "csp_XBPQ",
-    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/金鹰.php"
-},
-{
     "key": "csp_蜂鸟",
     "name": "💞┃影視┃蜂鸟",
     "type": 3,
     "api": "csp_XBPQ",
     "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/蜂鸟.php"
 },
-{
-    "key" : "csp_侠客",
-    "name" : "💞┃影視┃侠客",
-    "type" : 3,
-    "api" : "csp_XBPQ",
-    "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/侠客.php"
-}, 
 {
     "key" : "csp_观威",
     "name" : "💞┃影視┃观影",
@@ -674,20 +667,6 @@
     "ext": "{\"site\": \"bajieyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十三线\"}"
 },
 {
-    "key": "didayingshi",
-    "name": "💞┃影視┃抵达 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"didayingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十一线\"}"
-},
-{
-    "key": "feiniuyingshi",
-    "name": "💞┃影視┃肥牛 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"feiniuyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗二十九线\"}"
-},
-{
     "key": "hanxiaoquan",
     "name": "💞┃影視┃韩圈 ",
     "type": 3,
@@ -695,125 +674,11 @@
     "ext": "{\"site\": \"hanxiaoquan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十四线\"}"
 },
 {
-    "key": "haojuwu",
-    "name": "💞┃影視┃好剧 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"haojuwu\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"号剧五\"}"
-},
-{
-    "key": "hemajuchang",
-    "name": "💞┃影視┃河马 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"hemajuchang\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十六线\"}"
-},
-{
-    "key": "juOK",
-    "name": "💞┃影視┃剧OK ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"juOK\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗四十线\"}"
-},
-{
-    "key": "nishipin",
-    "name": "💞┃影視┃妮蘋 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"nishipin\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗五十三线\"}"
-},
-{
-    "key": "nangua",
-    "name": "🎃┃南瓜┃秒播",
-    "type": 3,
-    "api": "csp_NanGua",
-    "jar": "https://ncstatic.clewm.net/rsrc/2025/0725/20/318ccef14687421637f5aa0ba1021e33.png;md5;939FFBC2941A28CA533F2653FA4B449E",
-    "ext": "7lj763gg0939795i017ii486k512jkihhilg9g0h96j865740113"
-},
-{
-    "key": "蝴蝶",
-    "name": "🦋┃蝴蝶┃秒播",
-    "type": 3,
-    "api": "csp_Xdai",
-    "jar": "https://ncstatic.clewm.net/rsrc/2025/0725/20/318ccef14687421637f5aa0ba1021e33.png;md5;939FFBC2941A28CA533F2653FA4B449E",
-    "ext": "7lj763gg0939791h1l239kj0g853i291lik7jk45j8i66j6l46590lkli918523h02826lh29i74948i3116h18kkgii17kki579606ik1h6kjlh2k8l36ll62h11k10g8"
-},
-{
-    "key": "csp_xcm",
-    "name": "🐻┃熊大┃C4K",
-    "type": 4,
-    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key": "csp_CO4K",
-    "name": "🆘┃咖啡┃C4K",
-    "type": 4,
-    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key":"奇妙官采",
-    "name":"🆘┃奇妙┃C4K",
-    "type":1,
-    "api":"https://cj.jusj.top/api.php/provide/vod/?ac=list",
-    "changeable":0
-},
-{
-    "key":"csp_奇迹",
-    "name":"🆘┃奇迹┃C4K",
-    "type":1,
-    "api":"http://cmsyun2.qijiyun.vip/api.php/provide/vod/",
-    "indexs": 0
-},
-{
-    "key": "耶网",
-    "name": "📻┃嗨曲┃耶网",
-    "type": 3,
-    "api": "csp_XBPQ",
-    "ext": {
-    "直接播放": "1",
-    "数组": "p:.clear-fix li",
-    "标题": "p:->title[替换:Avi-mp4->>]",
-    "图片": "p:->src",
-    "链接": "href=\"&&\"",
-    "分类": "车载视频$shipin/chezai#夜店视频$sp/yedian#热舞视频$sp/rewu#舞曲视频$sp/wuqu#写真视频$sp/xiezhen#国外视频$sp/guowai#打碟视频$sp/dadie#车模视频$sp/chemo#串烧视频$sp/chuanshao#",
-    "分类url": "https://www.djyyy.com/{cateId}/x_{catePg}.html;;D"}
-},
-{
-    "key": "评书",
-    "name": "📻┃评书┃大全",
-    "type": 3,
-    "api": "csp_XBPQ",
-    "ext": {
-    "主页url": "https://www.psmp3.com",
-    "数组二次截取": "<ul id=\"post_list_box\">&&</ul",
-    "数组": "<li class=\"www_psmp3_com post_list_li\">&&</div>",
-    "图片": "https://bkimg.cdn.bcebos.com/pic/86d6277f9e2f07084e3cb402ee24b899a901f2f3",
-    "标题": "title=\"&&\"",
-    "副标题": ">&&</a",
-    "链接": "href=\"&&\"",
-    "播放二次截取": "autoplay&&;</script>",
-    "播放数组": "\\[&&\\]",
-    "播放列表": "{&&}",
-    "播放链接": "url*\"&&\"",
-    "播放标题": "name*\"&&\"",
-    "播放副标题": "artist*\"&&\"",
-    "线路数组": "评书随身听",
-    "线路标题": "评书随身听",
-    "导演": "小米",
-    "主演": "评书明星",
-    "简介": "评书合集",
-    "分类url": "https://www.psmp3.com/{cateId}/{catePg}.html;;av",
-    "分类": "袁阔成$ykc#单田芳$stf#田连元$tly#刘兰芳$llf#连丽如$llr#张少佐$zsz#田战义$tzy"}
-},
-{
     "key": "ConfigCenter",
     "name": "🇨🇳┣☪公✿告┫信息",
     "type": 3,
     "api": "csp_Notice",
-    "jar": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/liuli.php",
-    "ext": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/lib/公告.php"
+    "ext": ""
 },
 {
     "key": "csp_Market",

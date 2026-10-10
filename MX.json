@@ -606,8 +606,7 @@
     "key": "hanxiaoquan",
     "name": "💞┃影視┃韩圈 ",
     "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"hanxiaoquan\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗三十四线\"}"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/韩圈.js"
 },
 {
     "key": "ConfigCenter",

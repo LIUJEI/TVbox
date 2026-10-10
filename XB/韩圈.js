@@ -1,13 +1,18 @@
 // 韩小圈 (jennyhow.com) - QuickJS 版
-// 源: AES加壳Python爬虫解密后移植
 const HOST = "https://www.jennyhow.com";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
 const HEADERS = { "User-Agent": UA, "Referer": HOST };
 
+// 请求带一次重试（应对CC挑战页）
 async function request(url) {
-    const r = await req(url, { headers: HEADERS });
-    return (r && r.content) || "";
+    let r = await req(url, { headers: HEADERS });
+    let html = (r && r.content) || "";
+    if (html.indexOf("页面加载中") >= 0 || html.length < 500) {
+        r = await req(url, { headers: HEADERS });
+        html = (r && r.content) || "";
+    }
+    return html;
 }
 
 function formatPic(pic) {
@@ -21,7 +26,6 @@ function stripTags(s) {
     return (s || "").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 }
 
-// 解析列表卡片（首页/分类页通用）
 function parseItems(html) {
     const list = [];
     const blocks = html.split(/<div class="module-item["\s]/);
@@ -71,7 +75,6 @@ async function homeVod() {
 }
 
 async function category(tid, pg, filter, extend) {
-    // 兼容数字 tid 与路径 tid
     const map = { "1": "/hxq/1.html", "2": "/hxq/2.html", "3": "/hxq/3.html", "4": "/hxq/4.html",
                   "20": "/hxq/1.html", "21": "/hxq/2.html", "22": "/hxq/3.html", "23": "/hxq/4.html" };
     let path = map[tid] || tid;
@@ -104,7 +107,12 @@ async function detail(ids) {
     let title = metaContent("title");
     if (!title) {
         const m = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
-        title = m ? stripTags(m[1]) : "未知名称";
+        title = m ? stripTags(m[1]) : "";
+    }
+    // 两种都没抓到：大概率是挑战页/异常页，用标题标签兜底并露出诊断信息
+    if (!title) {
+        const mt = html.match(/<title[^>]*>([\s\S]*?)<\/title>/);
+        title = mt ? stripTags(mt[1]) : "未知名称";
     }
     let pic = metaContent("image");
     if (!pic) {
@@ -114,7 +122,6 @@ async function detail(ids) {
     }
     const director = metaContent("video:director");
     const actor = metaContent("video:actor");
-    // 年份取「上映」项；简介取「剧情」项
     const infoItem = (label) => {
         const re = new RegExp(`<span class="video-info-itemtitle">${label}[：:]</span>[\\s\\S]*?<div class="video-info-item[^"]*"[^>]*>([\\s\\S]*?)</div>`);
         const m = html.match(re);
@@ -122,7 +129,6 @@ async function detail(ids) {
     };
     const year = infoItem("上映") || infoItem("年份");
     let content = infoItem("剧情") || infoItem("简介");
-    // 清洗简介里的 @广告@
     content = content.replace(/@[^@]+@/g, "").trim();
     if (!content) {
         const m = html.match(/<div class="module-info-introduction-content[^"]*"[^>]*>([\s\S]*?)<\/div>/) ||
@@ -140,9 +146,7 @@ async function detail(ids) {
         let tm;
         while ((tm = tabRe.exec(tabsArea[1])) !== null) {
             const targetId = tm[1];
-            // 线路名剥掉图标和集数小标签
             const lineName = stripTags(tm[2].replace(/<small>[\s\S]*?<\/small>/, "")) || "线路";
-            // 找对应容器
             const boxRe = new RegExp(`<div id="${targetId}"[^>]*>([\\s\\S]*?)</div>`, "");
             const box = html.match(boxRe);
             if (!box) continue;
@@ -194,12 +198,10 @@ async function play(flag, id, flags) {
     let url = id;
     if (!url.startsWith("http")) url = HOST + url;
     const html = await request(url);
-    // 直链：var now='...m3u8'
     const m = html.match(/var now=['"]([^'"]+)['"]/);
     if (m && m[1]) {
         return JSON.stringify({ parse: 0, url: m[1], header: { "User-Agent": UA, "Referer": HOST } });
     }
-    // player_aaaa JSON
     const mj = html.match(/player_aaaa\s*=\s*(\{[^}]+\})/);
     if (mj) {
         try {
@@ -209,11 +211,9 @@ async function play(flag, id, flags) {
             }
         } catch (e) {}
     }
-    // 兜底交壳嗅探
     return JSON.stringify({ parse: 1, url: url, header: { "User-Agent": UA, "Referer": HOST } });
 }
 
-// 站点搜索页(search.php/vodsearch)有CC防火墙503，直接返回空避免卡死
 async function search(wd, quick, pg) {
     return JSON.stringify({ list: [] });
 }

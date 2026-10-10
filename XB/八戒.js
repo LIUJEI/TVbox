@@ -104,23 +104,46 @@ async function home(filter) {
 
 async function homeVod() {
     const j = await apiPost("/api/v1/app/recommend/recommendList", null);
-    if (!j || !j.data) return JSON.stringify({ list: [] });
-    const tasks = [];
-    for (const item of j.data) {
-        if (!item.id) continue;
-        tasks.push(apiPost("/api/v1/app/recommend/recommendSubList",
-            { condition: item.id, pageNum: 1, pageSize: 6 }));
-    }
-    const results = await Promise.all(tasks);
-    const videos = [];
+    let videos = [];
     const seen = {};
-    for (const r of results) {
-        const recs = (r && r.data && r.data.records) || [];
-        for (const v of recs) {
-            const k = String(v.id || "");
-            if (seen[k]) continue;
-            seen[k] = 1;
-            videos.push(buildItem(v));
+    if (j && j.data && j.data.length) {
+        const tasks = [];
+        for (const item of j.data) {
+            if (!item.id) continue;
+            tasks.push(apiPost("/api/v1/app/recommend/recommendSubList",
+                { condition: item.id, pageNum: 1, pageSize: 6 }));
+        }
+        const results = await Promise.all(tasks);
+        for (const r of results) {
+            const recs = (r && r.data && r.data.records) || [];
+            for (const v of recs) {
+                const k = String(v.id || "");
+                if (seen[k]) continue;
+                seen[k] = 1;
+                videos.push(buildItem(v));
+            }
+        }
+    }
+    // 推荐接口空/失败：fallback 用分类数据填充主页
+    if (!videos.length) {
+        const hc = await apiPost("/api/v1/app/screen/screenType", null);
+        const classes = (hc && hc.data) || [];
+        const tasks = [];
+        for (const c of classes.slice(0, 4)) {
+            tasks.push(apiPost("/api/v1/app/screen/screenMovie", {
+                condition: { classify: "", region: "", sreecnTypeEnum: "NEWEST", typeId: c.id, year: "" },
+                pageNum: 1, pageSize: 8
+            }));
+        }
+        const results = await Promise.all(tasks);
+        for (const r of results) {
+            const recs = (r && r.data && r.data.records) || [];
+            for (const v of recs) {
+                const k = String(v.id || "");
+                if (seen[k]) continue;
+                seen[k] = 1;
+                videos.push(buildItem(v));
+            }
         }
     }
     return JSON.stringify({ list: videos });

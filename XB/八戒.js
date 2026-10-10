@@ -26,10 +26,12 @@ async function httpGet(url, headers) {
 }
 
 async function httpPost(url, payload) {
+    // TVBox req: postType='json' + data对象 会自动转JSON body
     const r = await req(url, {
         method: "POST",
         headers: apiHeaders(),
-        data: payload ? JSON.stringify(payload) : ""
+        data: payload || {},
+        postType: "json"
     });
     return (r && r.content) || "";
 }

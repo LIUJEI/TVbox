@@ -278,18 +278,17 @@
 },
 {
     "key": "dr_枫林影视",
-    "name": "🍊枫林影视[影][DR]",
+    "name": "🆘┃枫林┃PPY",
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫林.py",
     "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();"
 },
 {
     "key": "dr_FROK",
-    "name": "🍊FROK[影][DR]",
+    "name": "🆘┃芙蓉┃PPY",
     "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();",
-    "ext": "./js/影视/FROK影视.js"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芙蓉.py",
+    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();"
 },
 {
     "key": "dr_王子TV",

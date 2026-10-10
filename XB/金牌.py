@@ -10,8 +10,6 @@ from base.spider import Spider
 import time
 from Crypto.Hash import MD5, SHA1
 
-DESC_PREFIX = "【琉🔹芸❤广告勿信👉剧情】📢"
-
 class Spider(Spider):
     '''
     配置示例：
@@ -29,6 +27,8 @@ class Spider(Spider):
         }
     },
     '''
+    DESC_PREFIX = "【琉🔹芸❤广告勿信👉剧情】📢"
+    
     def init(self, extend=""):
         if extend:
             hosts=json.loads(extend)['site']

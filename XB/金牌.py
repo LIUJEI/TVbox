@@ -10,6 +10,8 @@ from base.spider import Spider
 import time
 from Crypto.Hash import MD5, SHA1
 
+DESC_PREFIX = "【琉🔹芸❤广告勿信👉剧情】📢"
+
 class Spider(Spider):
     '''
     配置示例：

@@ -203,7 +203,7 @@ async function detail(ids) {
             vod_remarks: (d.style || "") + " 评分:" + score + "," + (d.update_wordstr || ""),
             vod_actor: starring,
             vod_director: director,
-            vod_content: d.introduction || "",
+            vod_content:"【琉🔹璃❤广告勿信👉剧情】📢" + d.introduction || "",
             vod_play_from: playFrom.join("$$$"),
             vod_play_url: playUrl.join("$$$")
         }]
@@ -224,7 +224,7 @@ async function play(flag, id, flags) {
         rurl = playUrl;
     }
     // 交壳: 走全局 parses 解析链
-    return JSON.stringify({ parse: 1, url: rurl, header: { "User-Agent": MOBILE_UA, "Referer": VSG + "/" } });
+    return JSON.stringify({ parse: 1, jx: 1, url: rurl, header: { "User-Agent": MOBILE_UA, "Referer": VSG + "/" } });
 }
 
 async function search(wd, quick, pg) {

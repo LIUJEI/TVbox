@@ -186,28 +186,34 @@ async function category(tid, pg, filter, extend) {
         let toVideo = (it, base) => ({
             vod_id: 'artist$' + (it.ARTISTID || it.DC_TARGETID || '') + '$' + (it.ARTIST || ''),
             vod_name: it.ARTIST || '未知歌手',
-            vod_pic: it.PICPATH ? base + it.PICPATH : '',
+            vod_pic: it.hts_PICPATH || (it.PICPATH ? base + it.PICPATH : ''),
             vod_remarks: (it.SONGNUM || '0') + '首歌'
         });
         if (!prefix) {
-            // 「全部」无免鉴权接口：并发聚合 A-Z 每字母前5位歌手
-            let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-            let results = await Promise.all(letters.map(l =>
-                request(`http://search.kuwo.cn/r.s?client=kt&all=${l}&pn=0&rn=5&vipver=1&ft=artist&encoding=utf8&rformat=json&mobi=1`)
-            ));
+            // 「全部」无免鉴权热门接口：内置热门名单，并发查搜索接口取真实ID/头像
+            const hotNames = ['周杰伦', '林俊杰', '陈奕迅', 'G.E.M.邓紫棋', 'BEYOND', '张国荣', '王杰', '周传雄', '张学友', '刘德华',
+                '薛之谦', '李荣浩', '张杰', '华晨宇', '毛不易', '周深', '许嵩', '汪苏泷', '凤凰传奇', '刀郎',
+                '王菲', '那英', '蔡依林', '五月天', 'S.H.E', '萧敬腾', '张信哲', '任贤齐', '伍佰', '朴树',
+                '许巍', '汪峰', '韩红', '林忆莲', '张惠妹', '莫文蔚', '刘若英', '梁静茹', '孙燕姿', '王力宏',
+                '陶喆', '胡彦斌', '李克勤', '谭咏麟', '陈慧娴', '梅艳芳', '邓丽君', '罗大佑'];
+            // 分批并发，防止一次性48个请求触发限流
             let videos = [];
-            let seen = new Set();
-            results.forEach(h => {
-                let json = safeJSONParse((h || '').replace(/'/g, '"'));
-                let base = json.BASEPICPATH || 'http://img1.kuwo.cn/star/starheads/';
-                (json.abslist || []).forEach(it => {
-                    let aid = (it.ARTISTID || it.DC_TARGETID || '').toString();
-                    if (aid && !seen.has(aid)) {
-                        seen.add(aid);
-                        videos.push(toVideo(it, base));
+            const batchSize = 8;
+            for (let i = 0; i < hotNames.length; i += batchSize) {
+                let batch = hotNames.slice(i, i + batchSize);
+                let results = await Promise.all(batch.map(n =>
+                    request(`http://search.kuwo.cn/r.s?client=kt&all=${encodeURIComponent(n)}&pn=0&rn=5&vipver=1&ft=artist&encoding=utf8&rformat=json&mobi=1`)
+                ));
+                results.forEach((h, j) => {
+                    let json = safeJSONParse(h || '{}');
+                    let base = json.BASEPICPATH || 'http://img1.kuwo.cn/star/starheads/';
+                    let hit = (json.abslist || []).find(it => (it.ARTIST || '') === batch[j])
+                        || (json.abslist || [])[0];
+                    if (hit && hit.PICPATH) {
+                        videos.push(toVideo(hit, base));
                     }
                 });
-            });
+            }
             return JSON.stringify({
                 page: 1,
                 pagecount: 1,
@@ -218,7 +224,7 @@ async function category(tid, pg, filter, extend) {
         }
         let url = `http://search.kuwo.cn/r.s?client=kt&all=${encodeURIComponent(prefix)}&pn=${pg - 1}&rn=30&vipver=1&ft=artist&encoding=utf8&rformat=json&mobi=1`;
         let html = await request(url);
-        let json = safeJSONParse((html || '').replace(/'/g, '"'));
+        let json = safeJSONParse(html || '{}');
         let base = json.BASEPICPATH || 'http://img1.kuwo.cn/star/starheads/';
         let videos = (json.abslist || []).map(it => toVideo(it, base));
         let total = parseInt(json.TOTAL || 0);
@@ -447,7 +453,7 @@ async function search(wd, quick, pg) {
         html = await request(searchUrl);
         if (!html) await sleep(0.1);
     }
-    let json = safeJSONParse(html.replace(/'/g, '"'));
+    let json = safeJSONParse(html || '{}');
     let videos = [];
     if (json.abslist) {
         json.abslist.forEach(it => {

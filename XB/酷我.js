@@ -161,25 +161,44 @@ async function category(tid, pg, filter, extend) {
 
     if (tid === 'artist') {
         let prefix = extend?.prefix || '';
+        let toVideo = (it, base) => ({
+            vod_id: 'artist$' + (it.ARTISTID || it.DC_TARGETID || '') + '$' + (it.ARTIST || ''),
+            vod_name: it.ARTIST || '未知歌手',
+            vod_pic: it.PICPATH ? base + it.PICPATH : '',
+            vod_remarks: (it.SONGNUM || '0') + '首歌'
+        });
         if (!prefix) {
+            // 「全部」无免鉴权接口：并发聚合 A-Z 每字母前5位歌手
+            let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            let results = await Promise.all(letters.map(l =>
+                request(`http://search.kuwo.cn/r.s?client=kt&all=${l}&pn=0&rn=5&vipver=1&ft=artist&encoding=utf8&rformat=json&mobi=1`)
+            ));
+            let videos = [];
+            let seen = new Set();
+            results.forEach(h => {
+                let json = safeJSONParse((h || '').replace(/'/g, '"'));
+                let base = json.BASEPICPATH || 'http://img1.kuwo.cn/star/starheads/';
+                (json.abslist || []).forEach(it => {
+                    let aid = (it.ARTISTID || it.DC_TARGETID || '').toString();
+                    if (aid && !seen.has(aid)) {
+                        seen.add(aid);
+                        videos.push(toVideo(it, base));
+                    }
+                });
+            });
             return JSON.stringify({
                 page: 1,
                 pagecount: 1,
-                limit: 30,
-                total: 0,
-                list: []
+                limit: videos.length,
+                total: videos.length,
+                list: videos
             });
         }
         let url = `http://search.kuwo.cn/r.s?client=kt&all=${encodeURIComponent(prefix)}&pn=${pg - 1}&rn=30&vipver=1&ft=artist&encoding=utf8&rformat=json&mobi=1`;
         let html = await request(url);
         let json = safeJSONParse((html || '').replace(/'/g, '"'));
         let base = json.BASEPICPATH || 'http://img1.kuwo.cn/star/starheads/';
-        let videos = (json.abslist || []).map(it => ({
-            vod_id: 'artist$' + (it.ARTISTID || it.DC_TARGETID || '') + '$' + (it.ARTIST || ''),
-            vod_name: it.ARTIST || '未知歌手',
-            vod_pic: it.PICPATH ? base + it.PICPATH : '',
-            vod_remarks: (it.SONGNUM || '0') + '首歌'
-        }));
+        let videos = (json.abslist || []).map(it => toVideo(it, base));
         let total = parseInt(json.TOTAL || 0);
         return JSON.stringify({
             page: parseInt(pg),

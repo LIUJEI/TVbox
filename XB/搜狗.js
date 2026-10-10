@@ -210,18 +210,49 @@ async function detail(ids) {
     });
 }
 
+// 内置解析回退链: 严格按顺序尝试, 第一个失效跳下一个
+const JX_APIS = [
+    "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
+    "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
+    "https://test1.12321app.com/daoliansiquanjia.php?url="
+];
+
+function isPlayUrl(u) {
+    return /^https?:\/\//.test(u || "") && /\.(m3u8|mp4|flv)(\?|$)/i.test(u || "");
+}
+
+async function jxFallback(pageUrl) {
+    const enc = encodeURIComponent(pageUrl);
+    for (const api of JX_APIS) {
+        try {
+            const r = await req(api + enc, { headers: { "User-Agent": PC_UA } });
+            const j = JSON.parse((r && r.content) || "{}");
+            const u = (j && (j.url || (j.result && j.result.url))) || "";
+            if (isPlayUrl(u)) return String(u);
+        } catch (e) {}
+    }
+    return "";
+}
+
 async function play(flag, id, flags) {
     let playUrl = id;
     if (!/^https?:\/\//.test(playUrl)) playUrl = VSG + (playUrl.startsWith("/") ? playUrl : "/" + playUrl);
     const html = await getHtml(playUrl, MOBILE_UA);
     const m = html.match(/window\.open\('(.*?)',/);
+    let rurl = "";
     if (m && m[1]) {
-        let rurl = m[1];
+        rurl = m[1];
         if (rurl.startsWith("//")) rurl = "https:" + rurl;
         else if (!/^https?:\/\//.test(rurl)) rurl = VSG + rurl;
-        return JSON.stringify({ parse: 1, url: rurl, header: { "User-Agent": MOBILE_UA, "Referer": VSG + "/" } });
+    } else {
+        rurl = playUrl;
     }
-    return JSON.stringify({ parse: 1, url: playUrl, header: { "User-Agent": MOBILE_UA, "Referer": VSG + "/" } });
+    // 内置解析链(麒麟→观潮→急速, 严格顺序) → 全失效交壳嗅探
+    const parsed = await jxFallback(rurl);
+    if (parsed) {
+        return JSON.stringify({ parse: 0, url: parsed, header: { "User-Agent": MOBILE_UA } });
+    }
+    return JSON.stringify({ parse: 1, url: rurl, header: { "User-Agent": MOBILE_UA, "Referer": VSG + "/" } });
 }
 
 async function search(wd, quick, pg) {

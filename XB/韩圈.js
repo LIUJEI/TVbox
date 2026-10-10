@@ -5,8 +5,9 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const HEADERS = { "User-Agent": UA, "Referer": HOST };
 
-function request(url) {
-    return req(url, { headers: HEADERS }).then(r => r.content || "");
+async function request(url) {
+    const r = await req(url, { headers: HEADERS });
+    return (r && r.content) || "";
 }
 
 function formatPic(pic) {

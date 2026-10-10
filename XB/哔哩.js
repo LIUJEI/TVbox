@@ -188,43 +188,6 @@ async function detail(ids) {
     });
 }
 
-// 内置解析回退链: playurl 解不了(大会员等)时依次尝试, 并发请求按优先级取第一个成功者
-const JX_APIS = [
-    "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
-    "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
-    "https://test1.12321app.com/daoliansiquanjia.php?url="
-];
-
-function isPlayUrl(u) {
-    return /^https?:\/\//.test(u || "") && /\.(m3u8|mp4|flv)(\?|$)/i.test(u || "");
-}
-
-async function checkPlayable(u) {
-    // 只深度校验 m3u8 (拉内容确认存在); mp4/flv 大文件不下载直接放行
-    if (!/\.m3u8(\?|$)/i.test(u)) return true;
-    try {
-        const r = await req(u, { headers: { "User-Agent": UA }, timeout: 5000 });
-        const c = (r && r.content) || "";
-        return c.indexOf("#EXTM3U") >= 0;
-    } catch (e) { return false; }
-}
-
-async function jxFallback(pageUrl) {
-    const enc = encodeURIComponent(pageUrl);
-    for (const api of JX_APIS) {
-        let u = "";
-        try {
-            const r = await req(api + enc, { headers: { "User-Agent": UA }, timeout: 8000 });
-            const j = JSON.parse((r && r.content) || "{}");
-            const cand = (j && (j.url || (j.result && j.result.url))) || "";
-            if (isPlayUrl(cand)) u = String(cand);
-        } catch (e) {}
-        // 直链可访问才算成功, 死链跳下一个解析
-        if (u && (await checkPlayable(u))) return u;
-    }
-    return "";
-}
-
 async function play(flag, id, flags) {
     // 网页线路: 交壳嗅探/解析
     if (/^http/.test(id)) {
@@ -248,12 +211,8 @@ async function play(flag, id, flags) {
             danmaku: danmaku
         });
     }
-    // B站解不了 → 内置解析链 → 仍不行交壳嗅探
+    // B站解不了: 交壳走全局 parses 解析链
     const page = "https://www.bilibili.com/bangumi/play/ep" + ids[0];
-    const parsed = await jxFallback(page);
-    if (parsed) {
-        return JSON.stringify({ parse: 0, url: parsed, header: { "User-Agent": PLAY_UA } });
-    }
     return JSON.stringify({ parse: 1, url: page, header: { "User-Agent": UA } });
 }
 

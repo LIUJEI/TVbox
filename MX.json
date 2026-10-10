@@ -245,6 +245,64 @@
     "api": "https://gitee.com/lyun_1_0/TS/raw/main/XB/壹影.py"
 },
 {
+    "key": "dr_枫林影视",
+    "name": "🍊枫林影视[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();",
+    "ext": "./js/影视/枫林影视.js"
+},
+{
+    "key": "dr_FROK",
+    "name": "🍊FROK[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "click": "document.querySelector(\"#playleft iframe\").contentWindow.document.querySelector(\"#start\").click();",
+    "ext": "./js/影视/FROK影视.js"
+},
+{
+    "key": "dr_王子TV",
+    "name": "🍊王子TV[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/影视/王子TV.js"
+},
+{
+    "key": "dr_蚂蚁影视",
+    "name": "🍊蚂蚁影视[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/影视/蚂蚁影视.js"
+},
+{
+    "key": "dr_青柠影院",
+    "name": "🍊青柠影院[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/影视/青柠影院.js"
+},
+{
+    "key": "dr_饭团影视",
+    "name": "🍊饭团影视[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/影视/饭团影视.js"
+},
+{
+    "key": "dr_片吧",
+    "name": "🍊片吧[影][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/影视/片吧.js"
+},
+{
+    "key": "dr_酷狗MV[音]",
+    "name": "🍈酷狗MV[音][DR]",
+    "type": 3,
+    "api": "./libs/drpy2.min.js",
+    "ext": "./js/音乐/酷狗MV[音].js"
+},
+{
     "key": "csp_py_爱奇艺",
     "name": "🆘┃奇艺┃PPY",
     "type": 3,

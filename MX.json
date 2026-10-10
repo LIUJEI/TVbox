@@ -282,47 +282,7 @@
     "type": 3,
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫林.py"
 },
-{
-    "key": "dr_FROK",
-    "name": "🆘┃芙蓉┃PPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芙蓉.py"
-},
-{
-    "key": "dr_王子TV",
-    "name": "🍊王子TV[影][DR]",
-    "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "ext": "./js/影视/王子TV.js"
-},
-{
-    "key": "dr_蚂蚁影视",
-    "name": "🍊蚂蚁影视[影][DR]",
-    "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "ext": "./js/影视/蚂蚁影视.js"
-},
-{
-    "key": "dr_青柠影院",
-    "name": "🍊青柠影院[影][DR]",
-    "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "ext": "./js/影视/青柠影院.js"
-},
-{
-    "key": "dr_饭团影视",
-    "name": "🍊饭团影视[影][DR]",
-    "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "ext": "./js/影视/饭团影视.js"
-},
-{
-    "key": "dr_酷狗MV[音]",
-    "name": "🍈酷狗MV[音][DR]",
-    "type": 3,
-    "api": "./libs/drpy2.min.js",
-    "ext": "./js/音乐/酷狗MV[音].js"
-},
+
 {
     "key": "dr_皮皮虾",
     "name": "🆘┃皮虾┃PPY",

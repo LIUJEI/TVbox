@@ -4,12 +4,6 @@ const APIHOST = "https://pbaccess.video.qq.com";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36";
 const HEADERS = { "User-Agent": UA, "origin": HOST, "referer": HOST + "/" };
 
-// 解析回退链: 严格按顺序, 第一个失效才跳下一个
-const JX_APIS = [
-    "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
-    "http://zxy-th1.jsszks.dpdns.org:8090/?url="
-];
-
 const DBODY = {
     page_params: {
         channel_id: "",
@@ -306,30 +300,12 @@ async function detail(ids) {
     return JSON.stringify({ list: [buildVod(vdata, actors, plist, ylist, names)] });
 }
 
-async function checkPlayable(u) {
-    // 只深度校验 m3u8 (拉内容确认存在); mp4/flv 大文件不下载直接放行
-    if (!/\.m3u8(\?|$)/i.test(u)) return true;
-    try {
-        const r = await req(u, { headers: { "User-Agent": UA }, timeout: 5000 });
-        const c = (r && r.content) || "";
-        return c.indexOf("#EXTM3U") >= 0;
-    } catch (e) { return false; }
-}
-
 async function play(flag, id, flags) {
     const parts = String(id).split("$").pop().split("@");
     const cid = parts[0];
     const vid = parts.length > 1 ? parts[1] : "";
     const coverUrl = HOST + "/x/cover/" + cid + "/" + vid + ".html";
-    // 解析链严格顺序: 麒麟→观潮, 死链跳下一个, 全失败交壳嗅探
-    const parsed = await jxFallback(coverUrl);
-    if (parsed) {
-        return JSON.stringify({
-            parse: 0,
-            url: parsed,
-            header: { "User-Agent": UA, "Referer": coverUrl }
-        });
-    }
+    // 交壳: 走全局 parses 解析链
     return JSON.stringify({
         parse: 1,
         url: coverUrl,

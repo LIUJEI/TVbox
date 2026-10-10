@@ -53,19 +53,17 @@ function mapList(j) {
 }
 
 const CLASSES = [
-    { type_id: "1", type_name: "番剧" },
-    { type_id: "4", type_name: "国创" },
+    { type_id: "4", type_name: "芸制" },
     { type_id: "2", type_name: "电影" },
     { type_id: "5", type_name: "电视剧" },
     { type_id: "3", type_name: "纪录片" },
     { type_id: "7", type_name: "综艺" },
-    { type_id: "all", type_name: "全部" },
-    { type_id: "timeline", type_name: "时间表" }
+    { type_id: "all", type_name: "全部" }
 ];
 
 const ALL_FILTERS = [
     { key: "tid", name: "分类", value: [
-        { n: "番剧", v: "1" }, { n: "国创", v: "4" }, { n: "电影", v: "2" },
+         { n: "芸制", v: "4" }, { n: "电影", v: "2" },
         { n: "电视剧", v: "5" }, { n: "纪录片", v: "3" }, { n: "综艺", v: "7" }] },
     { key: "order", name: "排序", value: [
         { n: "播放数量", v: "2" }, { n: "更新时间", v: "0" }, { n: "最高评分", v: "4" },
@@ -181,7 +179,7 @@ async function detail(ids) {
             vod_remarks: (r.new_ep && r.new_ep.desc) || "",
             vod_actor: status,
             vod_director: score,
-            vod_content: r.evaluate || "",
+            vod_content:"【琉🔹璃❤广告勿信👉剧情】📢" + r.evaluate || "",
             vod_play_from: "B站$$$网页",
             vod_play_url: eps1.join("#") + "$$$" + eps2.join("#")
         }]
@@ -189,31 +187,14 @@ async function detail(ids) {
 }
 
 async function play(flag, id, flags) {
-    // 网页线路: 交壳嗅探/解析
+    // 网页线路: 交壳走全局 parses
     if (/^http/.test(id)) {
-        return JSON.stringify({ parse: 1, url: id, header: { "User-Agent": UA } });
+        return JSON.stringify({ parse: 1, jx: 1, url: id, header: { "User-Agent": UA } });
     }
-    // B站线路: eid_cid
+    // B站线路: 不走 playurl 直链秒播(试看/低清), 统一交壳走全局 parses
     const ids = String(id).split("_");
-    const danmaku = API + "/x/v1/dm/list.so?oid=" + ids[1];
-    const j = await getJson(API + "/pgc/player/web/playurl?qn=116&ep_id=" + ids[0] + "&cid=" + ids[1]);
-    if (j && j.message === "success" && j.result && j.result.durl && j.result.durl.length) {
-        const durl = j.result.durl;
-        let maxSize = -1, pos = -1;
-        durl.forEach(function (d, i) {
-            if (maxSize < Number(d.size)) { maxSize = Number(d.size); pos = i; }
-        });
-        if (pos < 0) pos = 0;
-        return JSON.stringify({
-            parse: 0,
-            url: durl[pos].url,
-            header: { "User-Agent": PLAY_UA, "Referer": "https://www.bilibili.com/" },
-            danmaku: danmaku
-        });
-    }
-    // B站解不了: 交壳走全局 parses 解析链
     const page = "https://www.bilibili.com/bangumi/play/ep" + ids[0];
-    return JSON.stringify({ parse: 1, url: page, header: { "User-Agent": UA } });
+    return JSON.stringify({ parse: 1, jx: 1, url: page, header: { "User-Agent": UA } });
 }
 
 async function search(wd, quick, pg) {

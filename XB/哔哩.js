@@ -199,18 +199,29 @@ function isPlayUrl(u) {
     return /^https?:\/\//.test(u || "") && /\.(m3u8|mp4|flv)(\?|$)/i.test(u || "");
 }
 
+async function checkPlayable(u) {
+    // 只深度校验 m3u8 (拉内容确认存在); mp4/flv 大文件不下载直接放行
+    if (!/\.m3u8(\?|$)/i.test(u)) return true;
+    try {
+        const r = await req(u, { headers: { "User-Agent": UA }, timeout: 5000 });
+        const c = (r && r.content) || "";
+        return c.indexOf("#EXTM3U") >= 0;
+    } catch (e) { return false; }
+}
+
 async function jxFallback(pageUrl) {
     const enc = encodeURIComponent(pageUrl);
-    const results = await Promise.all(JX_APIS.map(async function (api) {
+    for (const api of JX_APIS) {
+        let u = "";
         try {
-            const r = await req(api + enc, { headers: { "User-Agent": UA } });
+            const r = await req(api + enc, { headers: { "User-Agent": UA }, timeout: 8000 });
             const j = JSON.parse((r && r.content) || "{}");
-            const u = j.url || (j.result && j.result.url) || "";
-            if (isPlayUrl(u)) return String(u);
+            const cand = (j && (j.url || (j.result && j.result.url))) || "";
+            if (isPlayUrl(cand)) u = String(cand);
         } catch (e) {}
-        return "";
-    }));
-    for (const u of results) { if (u) return u; }
+        // 直链可访问才算成功, 死链跳下一个解析
+        if (u && (await checkPlayable(u))) return u;
+    }
     return "";
 }
 

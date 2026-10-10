@@ -109,6 +109,18 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/芒果.py"
 },
 {
+    "key": "dr_哔哩视频",
+    "name": "🆚┃嗶哩┃ TV",
+    "type": 3,
+    "api": "https://testingcf.jsdelivr.net/gh/LIUJEI/TS@main/TS/bili.js"
+ },
+ {
+    "key": "dr_搜狗",
+    "name": "🆚┃搜狗┃ TV",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/SGtv.js"
+},
+{
    "key": "dr_duoduo",
    "name": "🆘┃多多┃PPY",
    "type": 3,

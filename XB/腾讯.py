@@ -1,477 +1,371 @@
-# coding=utf-8
-# !/usr/bin/python
-import json
-import sys
-import uuid
-import copy
-import requests
-import re
-import urllib.parse
-sys.path.append('..')
-from base.spider import Spider
-try:
-    from pyquery import PyQuery as pq
-except ImportError:
-    # TVBox Python 环境可能没装 pyquery, 仅 homeVideoContent 用到
-    def pq(x): return None
-from concurrent.futures import ThreadPoolExecutor, as_completed
+// 腾讯视频 (v.qq.com 官方API) - QuickJS 版
+const HOST = "https://v.qq.com";
+const APIHOST = "https://pbaccess.video.qq.com";
+const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36";
+const HEADERS = { "User-Agent": UA, "origin": HOST, "referer": HOST + "/" };
 
+// 解析回退链: 严格按顺序, 第一个失效才跳下一个
+const JX_APIS = [
+    "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
+    "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
+    "https://test1.12321app.com/daoliansiquanjia.php?url=",
+    "https://bfq.txnp.cn/excessive?url="
+];
 
-class Spider(Spider):
-
-    def init(self, extend=""):
-        self.dbody = {
-            "page_params": {
-                "channel_id": "",
-                "filter_params": "sort=75",
-                "page_type": "channel_operation",
-                "page_id": "channel_list_second_page"
-            }
-        }
-        self.body = self.dbody
-        pass
-
-    def getName(self):
-        pass
-
-    def isVideoFormat(self, url):
-        pass
-
-    def manualVideoCheck(self):
-        pass
-
-    def destroy(self):
-        pass
-
-    host = 'https://v.qq.com'
-
-    apihost = 'https://pbaccess.video.qq.com'
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36',
-        'origin': host,
-        'referer': f'{host}/'
+const DBODY = {
+    page_params: {
+        channel_id: "",
+        filter_params: "sort=75",
+        page_type: "channel_operation",
+        page_id: "channel_list_second_page"
     }
+};
 
-    def fetch(self, url, headers=None, params=None):
-        if headers is None:
-            headers = self.headers
-        try:
-            if params:
-                response = requests.get(url, headers=headers, params=params, timeout=15)
-            else:
-                response = requests.get(url, headers=headers, timeout=15)
-            response.raise_for_status()
-            return response
-        except Exception as e:
-            print(f"GET 请求失败: {url}, 错误: {e}")
-            return None
+// 分类分页状态 (page_context 跨调用保持, 与原版 self.body 一致)
+let catBody = null;
 
-    def post(self, url, json=None, data=None, headers=None, params=None):
-        if headers is None:
-            headers = self.headers
-        try:
-            if json:
-                response = requests.post(url, json=json, headers=headers, params=params, timeout=15)
-            elif data:
-                response = requests.post(url, data=data, headers=headers, params=params, timeout=15)
-            else:
-                response = requests.post(url, headers=headers, params=params, timeout=15)
-            response.raise_for_status()
-            return response
-        except Exception as e:
-            print(f"POST 请求失败: {url}, 错误: {e}")
-            return None
+function init(ext) {}
 
-    def cleanText(self, text):
-        if text is None:
-            return ''
-        text = re.sub(r'<script[^>]*>.*?</script>', '', text, flags=re.DOTALL)
-        text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL)
-        return text.strip()
+async function postJson(url, body) {
+    const r = await req(url, {
+        method: "POST",
+        headers: HEADERS,
+        body: body,
+        postType: "json"
+    });
+    try { return JSON.parse((r && r.content) || "{}"); } catch (e) { return null; }
+}
 
+function cleanText(t) {
+    if (!t) return "";
+    return String(t).replace(/<script[^>]*>[\s\S]*?<\/script>/g, "").replace(/<style[^>]*>[\s\S]*?<\/style>/g, "").trim();
+}
 
-    def homeContent(self, filter):
-        cdata = {
-            "电视剧": "100113",
-            "电影": "100173",
-            "综艺": "100109",
-            "纪录片": "100105",
-            "动漫": "100119",
-            "少儿": "100150",
-            "短剧": "110755"
+function paramsToStr(params) {
+    const q = [];
+    for (const k in params) q.push(k + "=" + params[k]);
+    return q.join("&");
+}
+
+// 解析 item_data 通用: 取 cid 视频
+function pickVideoItems(j) {
+    if (!j || !j.data || !j.data.module_list_datas) return [];
+    for (const mld of j.data.module_list_datas) {
+        for (const md of (mld.module_datas || [])) {
+            const items = (md.item_data_lists && md.item_data_lists.item_datas) || [];
+            const cids = items.filter(function (it) { return it.item_params && it.item_params.cid; });
+            if (cids.length) return cids;
         }
-        result = {}
-        classes = []
-        filters = {}
-        for k in cdata:
-            classes.append({
-                'type_name': k,
-                'type_id': cdata[k]
-            })
-        with ThreadPoolExecutor(max_workers=len(classes)) as executor:
-            futures = [executor.submit(self.get_filter_data, item['type_id']) for item in classes]
-            for future in futures:
-                cid, data = future.result()
-                if not data.get('data', {}).get('module_list_datas'):
-                    continue
-                filter_dict = {}
-                try:
-                    # 遍历找筛选模块 (筛选+视频混合)
-                    filter_items = []
-                    for mld in data['data'].get('module_list_datas', []):
-                        for md in mld.get('module_datas', []):
-                            fitems = md.get('item_data_lists', {}).get('item_datas', [])
-                            # 过滤: 只要有 index_item_key 的就是筛选项
-                            fkey_items = [it for it in fitems if it.get('item_params', {}).get('index_item_key')]
-                            if fkey_items:
-                                filter_items = fkey_items
-                                break
-                        if filter_items:
-                            break
-                    for item in filter_items:
-                        if not item.get('item_params', {}).get('index_item_key'):
-                            continue
-                        params = item['item_params']
-                        filter_key = params['index_item_key']
-                        if filter_key not in filter_dict:
-                            filter_dict[filter_key] = {
-                                'key': filter_key,
-                                'name': params['index_name'],
-                                'value': []
-                            }
-                        filter_dict[filter_key]['value'].append({
-                            'n': params['option_name'],
-                            'v': params['option_value']
-                        })
-                except (IndexError, KeyError):
-                    continue
-                filters[cid] = list(filter_dict.values())
-        result['class'] = classes
-        result['filters'] = filters
-        return result
+    }
+    return [];
+}
 
-    def homeVideoContent(self):
-        vlist = []
-        data = self.gethtml(self.host)
-        its = data('script')
-        s = None
-        for it in its.items():
-            if 'window.__INITIAL_STATE__' in it.text():
-                s = it.text()
-                break
-        if s:
-            index = s.find('=')
-            if index != -1:
-                sd = json.loads(s[index + 1:])
-                if sd.get('storeModulesData', {}).get('channelsModulesMap', {}).get('choice', {}).get('cardListData'):
-                    for its in sd['storeModulesData']['channelsModulesMap']['choice']['cardListData']:
-                        if its and its.get('children_list', {}).get('list', {}).get('cards'):
-                            for it in its['children_list']['list']['cards']:
-                                if it and it.get('params'):
-                                    p = it['params']
-                                    tag = json.loads(p.get('uni_imgtag', '{}') or p.get('imgtag', '{}') or '{}')
-                                    id = it.get('id') or p.get('cid')
-                                    name = p.get('mz_title') or p.get('title')
-                                    if name and 'http' not in id:
-                                        vlist.append({
-                                            'vod_id': id,
-                                            'vod_name': name,
-                                            'vod_pic': p.get('image_url'),
-                                            'vod_year': tag.get('tag_2', {}).get('text'),
-                                            'vod_remarks': tag.get('tag_4', {}).get('text')
-                                        })
-        return {'list': vlist}
+function parseTag(p) {
+    let t = {};
+    try { t = JSON.parse(p.uni_imgtag || p.imgtag || "{}") || {}; } catch (e) {}
+    return t;
+}
 
-    def categoryContent(self, tid, pg, filter, extend):
-        result = {}
-        params = {
-            "sort": extend.get('sort', '75'),
-            "attr": extend.get('attr', '-1'),
-            "itype": extend.get('itype', '-1'),
-            "ipay": extend.get('ipay', '-1'),
-            "iarea": extend.get('iarea', '-1'),
-            "iyear": extend.get('iyear', '-1'),
-            "theater": extend.get('theater', '-1'),
-            "award": extend.get('award', '-1'),
-            "recommend": extend.get('recommend', '-1')
+async function getFilterData(cid) {
+    const b = JSON.parse(JSON.stringify(DBODY));
+    b.page_params.channel_id = cid;
+    return postJson(APIHOST + "/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=1000005&vplatform=2&vversion_name=8.9.10&new_mark_label_enabled=1", b);
+}
+
+async function home(filter) {
+    const cdata = {
+        "电视剧": "100113",
+        "电影": "100173",
+        "综艺": "100109",
+        "纪录片": "100105",
+        "动漫": "100119",
+        "少儿": "100150",
+        "短剧": "110755"
+    };
+    const classes = [], filters = {};
+    const jobs = [];
+    const ids = [];
+    for (const k in cdata) {
+        classes.push({ type_name: k, type_id: cdata[k] });
+        ids.push(cdata[k]);
+        jobs.push(getFilterData(cdata[k]).catch(function () { return null; }));
+    }
+    const datas = await Promise.all(jobs);
+    datas.forEach(function (data, i) {
+        const cid = ids[i];
+        if (!data || !data.data || !data.data.module_list_datas) return;
+        let filterItems = [];
+        for (const mld of data.data.module_list_datas) {
+            for (const md of (mld.module_datas || [])) {
+                const fitems = (md.item_data_lists && md.item_data_lists.item_datas) || [];
+                const fkeys = fitems.filter(function (it) { return it.item_params && it.item_params.index_item_key; });
+                if (fkeys.length) { filterItems = fkeys; break; }
+            }
+            if (filterItems.length) break;
         }
-        if pg == '1':
-            self.body = self.dbody.copy()
-        self.body['page_params']['channel_id'] = tid
-        self.body['page_params']['filter_params'] = self.josn_to_params(params)
-        data = self.post(
-            f'{self.apihost}/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=1000005&vplatform=2&vversion_name=8.9.10&new_mark_label_enabled=1',
-            json=self.body, headers=self.headers).json()
-        ndata = data['data']
-        if ndata['has_next_page']:
-            result['pagecount'] = 9999
-            self.body['page_context'] = ndata['next_page_context']
-        else:
-            result['pagecount'] = int(pg)
-        vlist = []
-        # 遍历所有 module_datas 找视频 items (API结构可能变化, 筛选+视频混合)
-        video_items = []
-        for mld in ndata.get('module_list_datas', []):
-            for md in mld.get('module_datas', []):
-                items = md.get('item_data_lists', {}).get('item_datas', [])
-                # 过滤: 只要有 cid 的就是视频
-                cid_items = [it for it in items if it.get('item_params', {}).get('cid')]
-                if cid_items:
-                    video_items = cid_items
-                    break
-            if video_items:
-                break
-        for its in video_items:
-            id = its.get('item_params', {}).get('cid')
-            if id:
-                p = its['item_params']
-                tag = json.loads(p.get('uni_imgtag', '{}') or p.get('imgtag', '{}') or '{}')
-                name = p.get('mz_title') or p.get('title')
-                pic = p.get('new_pic_hz') or p.get('new_pic_vt')
-                vlist.append({
-                    'vod_id': id,
-                    'vod_name': name,
-                    'vod_pic': pic,
-                    'vod_year': tag.get('tag_2', {}).get('text'),
-                    'vod_remarks': tag.get('tag_4', {}).get('text')
-                })
-        result['list'] = vlist
-        result['page'] = pg
-        result['limit'] = 90
-        result['total'] = 999999
-        return result
-
-    def detailContent(self, ids):
-        vbody = {
-            "page_params": {
-                "req_from": "web",
-                "cid": ids[0],
-                "vid": "",
-                "lid": "",
-                "page_type": "detail_operation",
-                "page_id": "detail_page_introduction"
-            },
-            "has_cache": 1
+        const fd = {};
+        for (const item of filterItems) {
+            const params = item.item_params;
+            if (!params || !params.index_item_key) continue;
+            if (!fd[params.index_item_key]) {
+                fd[params.index_item_key] = {
+                    key: params.index_item_key,
+                    name: params.index_name,
+                    value: []
+                };
+            }
+            fd[params.index_item_key].value.push({
+                n: params.option_name,
+                v: params.option_value
+            });
         }
+        filters[cid] = Object.keys(fd).map(function (k) { return fd[k]; });
+    });
+    return JSON.stringify({ class: classes, filters: filters });
+}
 
-        body = {
-            "page_params": {
-                "req_from": "web_vsite",
-                "page_id": "vsite_episode_list",
-                "page_type": "detail_operation",
-                "id_type": "1",
-                "page_size": "",
-                "cid": ids[0],
-                "vid": "",
-                "lid": "",
-                "page_num": "",
-                "page_context": "",
-                "detail_page_type": "1"
-            },
-            "has_cache": 1
+async function homeVod() {
+    const list = [];
+    // v.qq.com 首页已无 __INITIAL_STATE__, 用电视剧分类第一页数据做推荐
+    try {
+        const b = JSON.parse(JSON.stringify(DBODY));
+        b.page_params.channel_id = "100113";
+        const data = await postJson(APIHOST + "/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=1000005&vplatform=2&vversion_name=8.9.10&new_mark_label_enabled=1", b);
+        for (const its of pickVideoItems(data)) {
+            const id = its.item_params.cid;
+            if (!id) continue;
+            const p = its.item_params;
+            const tag = parseTag(p);
+            list.push({
+                vod_id: id,
+                vod_name: p.mz_title || p.title,
+                vod_pic: p.new_pic_hz || p.new_pic_vt,
+                vod_year: tag.tag_2 && tag.tag_2.text,
+                vod_remarks: tag.tag_4 && tag.tag_4.text
+            });
         }
+    } catch (e) {}
+    return JSON.stringify({ list: list });
+}
 
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            future_detail = executor.submit(self.get_vdata, vbody)
-            future_episodes = executor.submit(self.get_vdata, body)
-            vdata = future_detail.result()
-            data = future_episodes.result()
+async function category(tid, pg, filter, extend) {
+    const page = parseInt(pg) || 1;
+    const ext = extend || {};
+    const params = {
+        sort: ext.sort || "75",
+        attr: ext.attr || "-1",
+        itype: ext.itype || "-1",
+        ipay: ext.ipay || "-1",
+        iarea: ext.iarea || "-1",
+        iyear: ext.iyear || "-1",
+        theater: ext.theater || "-1",
+        award: ext.award || "-1",
+        recommend: ext.recommend || "-1"
+    };
+    if (page === 1 || !catBody) catBody = JSON.parse(JSON.stringify(DBODY));
+    catBody.page_params.channel_id = tid;
+    catBody.page_params.filter_params = paramsToStr(params);
+    const data = await postJson(APIHOST + "/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=1000005&vplatform=2&vversion_name=8.9.10&new_mark_label_enabled=1", catBody);
+    const list = [];
+    let pagecount = page;
+    if (data && data.data) {
+        const ndata = data.data;
+        if (ndata.has_next_page) {
+            pagecount = 9999;
+            catBody.page_context = ndata.next_page_context;
+        } else {
+            pagecount = page;
+        }
+        for (const its of pickVideoItems(data)) {
+            const id = its.item_params.cid;
+            if (!id) continue;
+            const p = its.item_params;
+            const tag = parseTag(p);
+            const name = p.mz_title || p.title;
+            const pic = p.new_pic_hz || p.new_pic_vt;
+            list.push({
+                vod_id: id,
+                vod_name: name,
+                vod_pic: pic,
+                vod_year: tag.tag_2 && tag.tag_2.text,
+                vod_remarks: tag.tag_4 && tag.tag_4.text
+            });
+        }
+    }
+    return JSON.stringify({ list: list, page: page, pagecount: pagecount, limit: list.length, total: 999999 });
+}
 
-        pdata = self.process_tabs(data, body, ids)
-        if not pdata:
-            return self.handle_exception(None, "No pdata available")
+async function getVdata(body) {
+    try {
+        return await postJson(APIHOST + "/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=3000010&vplatform=2&vversion_name=8.2.96", body);
+    } catch (e) {
+        return { data: { module_list_datas: [] } };
+    }
+}
 
-        try:
-            star_list = vdata['data']['module_list_datas'][0]['module_datas'][0]['item_data_lists']['item_datas'][
-                0].get('sub_items', {}).get('star_list', {}).get('item_datas', [])
-            actors = [star['item_params']['name'] for star in star_list]
-            names = ['腾讯视频', '预告片']
-            plist, ylist = self.process_pdata(pdata, ids)
-            if not plist:
-                del names[0]
-            if not ylist:
-                del names[1]
-            vod = self.build_vod(vdata, actors, plist, ylist, names)
-            return {'list': [vod]}
-        except Exception as e:
-            return self.handle_exception(e, "Error processing detail")
-
-    def searchContent(self, key, quick, pg="1"):
-        body = {"version": "24072901", "clientType": 1, "filterValue": "", "uuid": str(uuid.uuid4()), "retry": 0,
-                "query": key, "pagenum": int(pg) - 1, "pagesize": 30, "queryFrom": 0, "searchDatakey": "",
-                "transInfo": "", "isneedQc": True, "preQid": "", "adClientInfo": "",
-                "extraInfo": {"isNewMarkLabel": "1", "multi_terminal_pc": "1"}}
-        data = self.post(f'{self.apihost}/trpc.videosearch.mobile_search.MultiTerminalSearch/MbSearch?vplatform=2',
-                         json=body, headers=self.headers).json()
-        vlist = []
-        for k in data['data']['areaBoxList'][-1]['itemList']:
-            if k.get('doc', {}).get('id'):
-                img_tag = k.get('videoInfo', {}).get('imgTag')
-                if img_tag is not None and isinstance(img_tag, str):
-                    try:
-                        tag = json.loads(img_tag)
-                    except json.JSONDecodeError as e:
-                        tag = {}
-                else:
-                    tag = {}
-                pic = k.get('videoInfo', {}).get('imgUrl')
-                vlist.append({
-                    'vod_id': k['doc']['id'],
-                    'vod_name': k['videoInfo']['title'],
-                    'vod_pic': pic,
-                    'vod_year': tag.get('tag_2', {}).get('text', ''),
-                    'vod_remarks': tag.get('tag_4', {}).get('text', '')
-                })
-        return {'list': vlist, 'page': pg}
-
-    # 解析接口列表 (按优先级排序, 逐个尝试)
-    parse_apis = [
-        ('jxapi', 'https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url='),
-        ('zxy',   'http://zxy-th1.jsszks.dpdns.org:8090/?url='),
-    ]
-
-    def playerContent(self, flag, id, vipFlags):
-        try:
-            # 先按 $ 分割取后半部分 (cid@vid), 再按 @ 分割
-            parts = id.split('$', 1)[-1].split('@')
-            cid = parts[0]
-            vid = parts[1] if len(parts) > 1 else ''
-            cover_url = f"{self.host}/x/cover/{cid}/{vid}.html"
-
-            # 依次尝试解析接口拿直链
-            for name, api_base in self.parse_apis:
-                try:
-                    api_url = api_base + urllib.parse.quote(cover_url, safe='')
-                    r = requests.get(api_url, timeout=8, headers={'User-Agent': 'Mozilla/5.0'})
-                    if r.status_code == 200:
-                        data = r.json()
-                        play_url = data.get('url', '')
-                        # 确认返回的是视频直链 (m3u8/mp4)
-                        if play_url and ('.m3u8' in play_url or '.mp4' in play_url):
-                            print(f"  [playerContent] {name} 解析成功: {play_url[:80]}...")
-                            return {
-                                'parse': 0,
-                                'url': play_url,
-                                'header': {
-                                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36',
-                                    'Referer': cover_url,
-                                }
-                            }
-                except Exception as e:
-                    print(f"  [playerContent] {name} 解析失败: {e}")
-                    continue
-
-            # 所有接口都失败, fallback 到嗅探模式
-            print(f"  [playerContent] 所有解析接口失败, fallback 到嗅探模式")
-            return {
-                'parse': 1,
-                'url': cover_url,
-                'jx': 1,
-                'header': {
-                    'User-Agent': self.headers.get('User-Agent', 'Mozilla/5.0'),
-                    'Referer': self.host + '/',
+async function processTabs(data, body) {
+    try {
+        const lastMld = data.data.module_list_datas[data.data.module_list_datas.length - 1];
+        const lastMd = lastMld.module_datas[lastMld.module_datas.length - 1];
+        let pdata = (lastMd.item_data_lists && lastMd.item_data_lists.item_datas) || [];
+        let tabs = lastMd.module_params && lastMd.module_params.tabs;
+        if (tabs) {
+            try { tabs = JSON.parse(tabs); } catch (e) { tabs = null; }
+            if (tabs && tabs.length) {
+                const tasks = [];
+                for (let i = 1; i < tabs.length; i++) {
+                    const nb = JSON.parse(JSON.stringify(body));
+                    nb.page_params.page_context = tabs[i].page_context;
+                    tasks.push(getVdata(nb));
+                }
+                const results = await Promise.all(tasks);
+                for (const result of results) {
+                    if (result && result.data && result.data.module_list_datas) {
+                        const mld = result.data.module_list_datas[result.data.module_list_datas.length - 1];
+                        const md = mld.module_datas[mld.module_datas.length - 1];
+                        const pd = (md.item_data_lists && md.item_data_lists.item_datas) || [];
+                        pdata = pdata.concat(pd);
+                    }
                 }
             }
-        except Exception as e:
-            print(f"playerContent error: {e}")
-            return {'parse': 1, 'url': self.host, 'header': ''}
-    def localProxy(self, param):
-        pass
-
-    def gethtml(self, url):
-        rsp = self.fetch(url, headers=self.headers)
-        rsp = self.cleanText(rsp.text)
-        return pq(rsp)
-
-    def get_filter_data(self, cid):
-        hbody = self.dbody.copy()
-        hbody['page_params']['channel_id'] = cid
-        data = self.post(
-            f'{self.apihost}/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=1000005&vplatform=2&vversion_name=8.9.10&new_mark_label_enabled=1',
-            json=hbody, headers=self.headers).json()
-        return cid, data
-
-    def get_vdata(self, body):
-        try:
-            vdata = self.post(
-                f'{self.apihost}/trpc.universal_backend_service.page_server_rpc.PageServer/GetPageData?video_appid=3000010&vplatform=2&vversion_name=8.2.96',
-                json=body, headers=self.headers
-            ).json()
-            # print(body)
-            return vdata
-        except Exception as e:
-            print(f"Error in get_vdata: {str(e)}")
-            return {'data': {'module_list_datas': []}}
-
-    def process_pdata(self, pdata, ids):
-        plist = []
-        ylist = []
-        for k in pdata:
-            if k.get('item_id'):
-                pid = f"{k['item_params']['union_title']}${ids[0]}@{k['item_id']}"
-                if '预告' in k['item_params']['union_title']:
-                    ylist.append(pid)
-                else:
-                    plist.append(pid)
-        return plist, ylist
-
-    def build_vod(self, vdata, actors, plist, ylist, names):
-        d = vdata['data']['module_list_datas'][0]['module_datas'][0]['item_data_lists']['item_datas'][0]['item_params']
-        urls = []
-        if plist:
-            urls.append('#'.join(plist))
-        if ylist:
-            urls.append('#'.join(ylist))
-        vod = {
-            'type_name': d.get('sub_genre', ''),
-            'vod_name': d.get('title', ''),
-            'vod_year': d.get('year', ''),
-            'vod_area': d.get('area_name', ''),
-            'vod_remarks': d.get('holly_online_time', '') or d.get('hotval', ''),
-            'vod_actor': ','.join(actors),
-            'vod_content':'【琉🔹璃❤广告勿信👉剧情】📢'+ d.get('cover_description', ''),
-            'vod_play_from': '$$$'.join(names),
-            'vod_play_url': '$$$'.join(urls)
         }
-        return vod
+        return pdata;
+    } catch (e) {
+        return [];
+    }
+}
 
-    def handle_exception(self, e, message):
-        print(f"{message}: {str(e)}")
-        return {'list': [{'vod_play_from': '哎呀翻车啦', 'vod_play_url': '翻车啦#555'}]}
+function buildVod(vdata, actors, plist, ylist, names) {
+    const d = vdata.data.module_list_datas[0].module_datas[0].item_data_lists.item_datas[0].item_params;
+    const urls = [];
+    if (plist.length) urls.push(plist.join("#"));
+    if (ylist.length) urls.push(ylist.join("#"));
+    return {
+        type_name: d.sub_genre || "",
+        vod_name: d.title || "",
+        vod_year: d.year || "",
+        vod_area: d.area_name || "",
+        vod_remarks: d.holly_online_time || d.hotval || "",
+        vod_actor: actors.join(","),
+        vod_content: "【琉🔹璃❤广告勿信👉剧情】📢" + (d.cover_description || ""),
+        vod_play_from: names.join("$$$"),
+        vod_play_url: urls.join("$$$")
+    };
+}
 
-    def process_tabs(self, data, body, ids):
-        try:
-            pdata = data['data']['module_list_datas'][-1]['module_datas'][-1]['item_data_lists']['item_datas']
-            tabs = data['data']['module_list_datas'][-1]['module_datas'][-1]['module_params'].get('tabs')
-            if tabs and len(json.loads(tabs)):
-                tabs = json.loads(tabs)
-                remaining_tabs = tabs[1:]
-                task_queue = []
-                for tab in remaining_tabs:
-                    nbody = copy.deepcopy(body)
-                    nbody['page_params']['page_context'] = tab['page_context']
-                    task_queue.append(nbody)
-                with ThreadPoolExecutor(max_workers=10) as executor:
-                    future_map = {executor.submit(self.get_vdata, task): idx for idx, task in enumerate(task_queue)}
-                    results = [None] * len(task_queue)
-                    for future in as_completed(future_map.keys()):
-                        idx = future_map[future]
-                        results[idx] = future.result()
-                    for result in results:
-                        if result:
-                            page_data = result['data']['module_list_datas'][-1]['module_datas'][-1]['item_data_lists'][
-                                'item_datas']
-                            pdata.extend(page_data)
-            return pdata
-        except Exception as e:
-            print(f"Error processing episodes: {str(e)}")
-            return []
+async function detail(ids) {
+    const cid = String(Array.isArray(ids) ? ids[0] : ids);
+    const vbody = {
+        page_params: {
+            req_from: "web",
+            cid: cid,
+            vid: "",
+            lid: "",
+            page_type: "detail_operation",
+            page_id: "detail_page_introduction"
+        },
+        has_cache: 1
+    };
+    const body = {
+        page_params: {
+            req_from: "web_vsite",
+            page_id: "vsite_episode_list",
+            page_type: "detail_operation",
+            id_type: "1",
+            page_size: "",
+            cid: cid,
+            vid: "",
+            lid: "",
+            page_num: "",
+            page_context: "",
+            detail_page_type: "1"
+        },
+        has_cache: 1
+    };
+    const pair = await Promise.all([getVdata(vbody), getVdata(body)]);
+    const vdata = pair[0], data = pair[1];
+    const pdata = await processTabs(data, body);
+    if (!pdata.length || !vdata || !vdata.data || !vdata.data.module_list_datas) {
+        return JSON.stringify({ list: [{ vod_play_from: "哎呀翻车啦", vod_play_url: "翻车啦#555" }] });
+    }
+    let actors = [];
+    try {
+        const stars = vdata.data.module_list_datas[0].module_datas[0].item_data_lists.item_datas[0].sub_items.star_list.item_datas || [];
+        actors = stars.map(function (s) { return s.item_params.name; });
+    } catch (e) {}
+    const names = ["腾讯视频", "预告片"];
+    const plist = [], ylist = [];
+    for (const k of pdata) {
+        if (k.item_id) {
+            const pid = k.item_params.union_title + "$" + cid + "@" + k.item_id;
+            if (String(k.item_params.union_title).indexOf("预告") >= 0) ylist.push(pid);
+            else plist.push(pid);
+        }
+    }
+    if (!plist.length) names.splice(names.indexOf("腾讯视频"), 1);
+    if (!ylist.length) names.splice(names.indexOf("预告片"), 1);
+    return JSON.stringify({ list: [buildVod(vdata, actors, plist, ylist, names)] });
+}
 
-    def josn_to_params(self, params, skip_empty=False):
-        query = []
-        for k, v in params.items():
-            if skip_empty and not v:
-                continue
-            query.append(f"{k}={v}")
-        return "&".join(query)
+async function play(flag, id, flags) {
+    const parts = String(id).split("$").pop().split("@");
+    const cid = parts[0];
+    const vid = parts.length > 1 ? parts[1] : "";
+    const coverUrl = HOST + "/x/cover/" + cid + "/" + vid + ".html";
+    // 解析链严格顺序: 麒麟→观潮, 全失败交壳嗅探
+    for (const api of JX_APIS) {
+        try {
+            const r = await req(api + encodeURIComponent(coverUrl), { headers: { "User-Agent": UA }, timeout: 8 });
+            const j = JSON.parse((r && r.content) || "{}");
+            const u = j.url || "";
+            if (u && (/\.m3u8/.test(u) || /\.mp4/.test(u))) {
+                return JSON.stringify({
+                    parse: 0,
+                    url: u,
+                    header: { "User-Agent": UA, "Referer": coverUrl }
+                });
+            }
+        } catch (e) {}
+    }
+    return JSON.stringify({
+        parse: 1,
+        url: coverUrl,
+        jx: 1,
+        header: { "User-Agent": UA, "Referer": HOST + "/" }
+    });
+}
+
+async function search(wd, quick, pg) {
+    const page = parseInt(pg) || 1;
+    const body = {
+        version: "24072901", clientType: 1, filterValue: "",
+        uuid: "tvbox-" + Date.now() + "-" + Math.floor(Math.random() * 1e6),
+        retry: 0, query: wd, pagenum: page - 1, pagesize: 30,
+        queryFrom: 0, searchDatakey: "", transInfo: "", isneedQc: true,
+        preQid: "", adClientInfo: "",
+        extraInfo: { isNewMarkLabel: "1", multi_terminal_pc: "1" }
+    };
+    const data = await postJson(APIHOST + "/trpc.videosearch.mobile_search.MultiTerminalSearch/MbSearch?vplatform=2", body);
+    const list = [];
+    if (data && data.data && data.data.areaBoxList && data.data.areaBoxList.length) {
+        const items = data.data.areaBoxList[data.data.areaBoxList.length - 1].itemList || [];
+        for (const k of items) {
+            if (!k.doc || !k.doc.id) continue;
+            let tag = {};
+            const it = k.videoInfo && k.videoInfo.imgTag;
+            if (it && typeof it === "string") {
+                try { tag = JSON.parse(it); } catch (e) {}
+            }
+            list.push({
+                vod_id: k.doc.id,
+                vod_name: k.videoInfo && k.videoInfo.title,
+                vod_pic: k.videoInfo && k.videoInfo.imgUrl,
+                vod_year: (tag.tag_2 && tag.tag_2.text) || "",
+                vod_remarks: (tag.tag_4 && tag.tag_4.text) || ""
+            });
+        }
+    }
+    return JSON.stringify({ list: list, page: page });
+}
+
+export default { init, home, homeVod, category, detail, play, search };

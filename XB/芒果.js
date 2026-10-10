@@ -7,13 +7,6 @@ const SHOST = "https://mobileso.bz.mgtv.com";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.61 Chrome/126.0.6478.61 Not/A)Brand/8  Safari/537.36";
 const HEADERS = { "User-Agent": UA, "origin": RHOST, "referer": RHOST + "/" };
 
-// 解析回退链: 严格按顺序, 第一个失效才跳下一个
-const JX_APIS = [
-    "https://api.jxapi.cc/api/?key=e0df4139f1e7f09375e864cc4937570e&url=",
-    "http://zxy-th1.jsszks.dpdns.org:8090/?url=",
-    "https://test1.12321app.com/daoliansiquanjia.php?url="
-];
-
 function init(ext) {}
 
 function qs(params) {
@@ -28,35 +21,6 @@ function qs(params) {
 async function getJson(url) {
     const r = await req(url, { headers: HEADERS });
     try { return JSON.parse((r && r.content) || "{}"); } catch (e) { return null; }
-}
-
-function isPlayUrl(u) {
-    return /^https?:\/\//.test(u || "") && /\.(m3u8|mp4|flv)(\?|$)/i.test(u || "");
-}
-
-async function checkPlayable(u) {
-    // 只深度校验 m3u8 (拉内容确认存在); mp4/flv 大文件不下载直接放行
-    if (!/\.m3u8(\?|$)/i.test(u)) return true;
-    try {
-        const r = await req(u, { headers: { "User-Agent": UA }, timeout: 5000 });
-        const c = (r && r.content) || "";
-        return c.indexOf("#EXTM3U") >= 0;
-    } catch (e) { return false; }
-}
-
-async function jxFallback(pageUrl) {
-    for (const api of JX_APIS) {
-        let u = "";
-        try {
-            const r = await req(api + encodeURIComponent(pageUrl), { headers: { "User-Agent": UA }, timeout: 8000 });
-            const j = JSON.parse((r && r.content) || "{}");
-            const cand = (j && (j.url || (j.result && j.result.url))) || "";
-            if (isPlayUrl(cand)) u = String(cand);
-        } catch (e) {}
-        // 直链可访问才算成功, 死链跳下一个解析
-        if (u && (await checkPlayable(u))) return u;
-    }
-    return "";
 }
 
 async function home(filter) {
@@ -202,11 +166,7 @@ async function play(flag, id, flags) {
     let fullUrl = String(id);
     if (fullUrl.indexOf("$") >= 0) fullUrl = fullUrl.split("$").pop();
     if (!/^http/.test(fullUrl)) fullUrl = RHOST + fullUrl;
-    // 解析链严格顺序: 麒麟→观潮→急速, 全失败交壳嗅探
-    const parsed = await jxFallback(fullUrl);
-    if (parsed) {
-        return JSON.stringify({ parse: 0, url: parsed, header: { "User-Agent": UA } });
-    }
+    // 交壳: 走全局 parses 解析链
     return JSON.stringify({
         jx: 1,
         parse: 1,

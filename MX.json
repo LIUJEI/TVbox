@@ -109,6 +109,12 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/人人.js"
 },
 {
+    "key": "dr_真狼视频",
+    "name": "🆘┃真狼┃RJS",
+    "type": 3,
+    "api": "https://gitee.com/kevin0973/lc/raw/master/lib/真狼影视.py"
+},
+{
     "key": "dr_maple",
     "name": "🆘┃枫叶┃RJS",
     "type": 3,

@@ -163,6 +163,18 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/星辰.js"
 },
 {
+    "key": "bajieyingshi",
+    "name": "🆘┃八戒┃PPY ",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/八戒.js"
+},
+{
+    "key": "hanxiaoquan",
+    "name": "🆘┃韩圈┃PPY ",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/韩圈.js"
+},
+{
     "key": "dr_4K影视",
     "name": "🆘┃蓝光┃PPY",
     "type": 3,
@@ -594,19 +606,6 @@
     "type" : 3,
     "api" : "csp_XBPQ",
     "ext" : "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XYQ/零七.php"
-},
-{
-    "key": "bajieyingshi",
-    "name": "💞┃影視┃八戒 ",
-    "type": 3,
-    "api": "http://xn--oev29b.top/files/py/loader.py",
-    "ext": "{\"site\": \"bajieyingshi\", \"base\": \"http://xn--oev29b.top/files/enc\", \"name\": \"枫斗十三线\"}"
-},
-{
-    "key": "hanxiaoquan",
-    "name": "💞┃影視┃韩圈 ",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/韩圈.js"
 },
 {
     "key": "ConfigCenter",

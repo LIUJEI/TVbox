@@ -93,7 +93,7 @@ async function category(tid, pg, filter, extend) {
 }
 
 async function detail(ids) {
-    const id = ids[0];
+    let id = Array.isArray(ids) ? ids[0] : ids;
     let url = id;
     if (!url.startsWith("http")) url = HOST + url;
     const html = await request(url);

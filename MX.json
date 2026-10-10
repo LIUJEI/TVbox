@@ -77,13 +77,13 @@
     "key": "dr_maple0",
     "name": "🆘┃枫叶┃PPY",
     "type": 3,
-    "api": "https://gitee.com/lyun_1_0/TS/raw/main/TS/maple.js"
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js"
 },
 {
     "key": "dr_maple",
     "name": "🆘┃枫叶┃PPY",
-    "type": 2,
-    "api": "https://gitee.com/lyun_1_0/TS/raw/main/TS/maple.js",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/枫叶.js",
     "ext": {
     "sites": [
     "https://www.zzztool.com",

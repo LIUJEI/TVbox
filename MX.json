@@ -427,6 +427,20 @@
     "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/妞妞.py"
 },
 {
+    "key":"dr_酷狗",
+    "name":"🆘┃酷狗┃音乐",
+    "type":3,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷狗.js",
+    "changeable":0
+},
+{
+    "key":"dr_酷我音乐",
+    "name":"🆘┃酷我┃音乐",
+    "type":3,
+    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷我.js",
+    "changeable":0
+},
+{
     "key": "dr_tinghyy",
     "name": "🆘┃听海┃音乐",
     "type": 3,
@@ -445,20 +459,6 @@
     "name":"🆘┃聚合┃音乐",
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/聚合[听].js",
-    "changeable":0
-},
-{
-    "key":"dr_酷狗",
-    "name":"🆘┃酷狗┃音乐",
-    "type":3,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷狗.js",
-    "changeable":0
-},
-{
-    "key":"dr_酷我音乐",
-    "name":"🆘┃酷我┃音乐",
-    "type":3,
-    "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/酷我.js",
     "changeable":0
 },
 {

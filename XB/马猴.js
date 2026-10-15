@@ -1,4 +1,5 @@
-// 大马猴影视 dmhyy.com —— 由 马猴.py 移植为 qjs 单文件（与 LiuLi.js 同引擎：export default + 全局 req）
+// 大马猴影视 dmhyy.com 
+//作者  琉芸  js版
 // 纯 JSON API：分类(23/22/24/25) + 聚合直链线路优先
 const host0 = 'https://dmhyy.com';
 const DESC_PREFIX = '【琉🔹璃❤广告勿信👉剧情】📢';

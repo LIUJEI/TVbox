@@ -24,55 +24,6 @@
     "indexs": 0
 },
 {
-    "key":"csp_影探",
-    "name":"🈚┃影探┃C4K",
-    "type":4,
-    "api":"http://8.134.205.252:39466/pz/sx4k.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key":"csp_未来",
-    "name":"🈚┃未来┃C4K",
-    "type":1,
-    "api":"http://110.42.66.100:12678/api.php",
-    "playUrl":"json:http://110.42.66.100:5666/api/?key=c31bfd818ac47875ab4922f03834afcc&url=",
-    "indexs": 0
-},
-{
-    "key": "csp_xcm",
-    "name": "🈚┃熊大┃C4K",
-    "type": 4,
-    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key": "csp_CO4K",
-    "name": "🈚┃咖啡┃C4K",
-    "type": 4,
-    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
-    "indexs": 0
-},
-{
-    "key":"spider_2097848346373787648",
-    "name":"🆘┃热播┃C4T",
-    "type":4,
-    "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848346373787648?token=banye666",
-    "filterable":0
-},
-{
-    "key":"spider_2097848347502055424",
-    "name":"🆘┃天堂┃C4T",
-    "type":4,
-    "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848347502055424?token=banye666",
-    "filterable":0
-},
-{
-    "key": "dr_爱奇艺",
-    "name": "🆘┃奇艺┃RJS",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.js"
-},
-{
     "key": "dr_txvm",
     "name": "🆘┃腾讯┃RJS",
     "type": 3,
@@ -346,16 +297,6 @@
     "ext": "http://154.94.224.56:8762"
 },
 {
-    "key": "dr_欣欣影视",
-    "name": "🆑┃欣欣┃RPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/新界.py",
-    "ext": {
-    "host": "usv46c9uRCE/PugcvJY1Pc/BM6KQv8vKYzpgVFmTPv8wdb18jQRMx9ElUPtnlHCd",
-    "key": "505cab36b1111416",
-    "iv": "0e832063ac451b27"}
-},
-{
     "key": "dr_看客TV",
     "name": "🆑┃看客┃RPY",
     "type": 3,
@@ -406,21 +347,6 @@
     "package": "com.qingtangxiaozhuan.xyz",
     "buildNumber": "2002",
     "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"}
-},
-{
-    "key": "dr_听心999",
-    "name": "🆑┃听心┃RPY",
-    "type": 3,
-    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/app99.py",
-    "ext": {
-    "host": "https://api.12321app.com/api",
-    "LoginPath": "/app/log",
-    "appkey": "a0a18659a9977a47e53442cd084b536c",
-    "versionName": "2.8.1",
-    "name": "听心视频",
-    "package": "com.iksp.adsys.jjsp",
-    "buildNumber": "2001",
-    "buildSignature": "03DD38CE4C3D62D0F0DEFACC06768D14EB382C7BD77A05B2EBF4D66E154A0D47"}
 },
 {
     "key" : "dr_小酷短剧", 
@@ -523,6 +449,55 @@
     "type": 3,
     "api":"https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/轻音乐.py",
     "changeable":0
+},
+{
+    "key":"csp_影探",
+    "name":"🈚┃影探┃C4K",
+    "type":4,
+    "api":"http://8.134.205.252:39466/pz/sx4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"csp_未来",
+    "name":"🈚┃未来┃C4K",
+    "type":1,
+    "api":"http://110.42.66.100:12678/api.php",
+    "playUrl":"json:http://110.42.66.100:5666/api/?key=c31bfd818ac47875ab4922f03834afcc&url=",
+    "indexs": 0
+},
+{
+    "key": "csp_xcm",
+    "name": "🈚┃熊大┃C4K",
+    "type": 4,
+    "api": "http://sy.xuntuyun.cn:20394/ctyx.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key": "csp_CO4K",
+    "name": "🈚┃咖啡┃C4K",
+    "type": 4,
+    "api": "http://8.134.205.252:39466/pz/co4k.php/api.php/provide/vod/?ac=list",
+    "indexs": 0
+},
+{
+    "key":"spider_2097848346373787648",
+    "name":"🆘┃热播┃C4T",
+    "type":4,
+    "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848346373787648?token=banye666",
+    "filterable":0
+},
+{
+    "key":"spider_2097848347502055424",
+    "name":"🆘┃天堂┃C4T",
+    "type":4,
+    "api":"https://banyeomni.780420.xyz:17777/api/tvbox/source/2097848347502055424?token=banye666",
+    "filterable":0
+},
+{
+    "key": "dr_爱奇艺",
+    "name": "🆘┃奇艺┃RJS",
+    "type": 3,
+    "api": "https://cnb.cool/my-liuyun/TVbox/-/git/raw/main/XB/爱奇艺.js"
 },
 {
     "key": "csp_xBPQ_饭团",
